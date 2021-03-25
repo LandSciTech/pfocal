@@ -1,7 +1,7 @@
 #include "p_focal.h"
 
 #include <Rcpp.h>
-//using namespace Rcpp;
+using namespace p_focal;
 
 // [[Rcpp::plugins(cpp2a)]]
 
@@ -39,10 +39,20 @@ Rcpp::CharacterVector get_fun_list_cpp(){
 
 
 // [[Rcpp::export(.p_focal_cpp)]]
-std::vector<double> p_focal_cpp(Rcpp::NumericMatrix data, std::vector<double> kernel, size_t k_rows, size_t k_cols, size_t k_lays, int transform_fun, int reduce_fun){
-    if(!(transform_fun || reduce_fun)){
-        return {};
-    }
+Rcpp::NumericMatrix p_focal_cpp(const Rcpp::NumericMatrix& data, const std::vector<double>& kernel, const size_t k_rows, const size_t k_cols, const size_t k_lays, const int transform_fun, const int reduce_fun, const double default_value){
 
-    return {};
+    //std::cerr << "d_col:"<< data.ncol() << ", drow:" <<  data.nrow() << ", ecol:" <<  k_cols/2 << ", erow:" <<  k_rows/2 << ", default:" <<  default_value << "\n";
+    expanded_aligned_data<> e1(&data[0], data.ncol(), data.nrow(), k_cols/2, k_rows/2, default_value);
+
+
+    expanded_aligned_data<> e2(          data.ncol(), data.nrow(), k_cols/2, k_rows/2, default_value);
+
+    p_conv<TRANSFORM::MULTIPLY, REDUCE::SUM, STRATEGY::BASIC>(e1, e2, &kernel[0], k_cols, k_rows);
+
+    Rcpp::NumericMatrix out(data.nrow(), data.ncol());
+
+    e2.copy_out(&out[0]);
+    return out;
 }
+
+

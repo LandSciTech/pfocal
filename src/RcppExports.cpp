@@ -37,19 +37,20 @@ BEGIN_RCPP
 END_RCPP
 }
 // p_focal_cpp
-std::vector<double> p_focal_cpp(Rcpp::NumericMatrix data, std::vector<double> kernel, size_t k_rows, size_t k_cols, size_t k_lays, int transform_fun, int reduce_fun);
-RcppExport SEXP _dwsR_p_focal_cpp(SEXP dataSEXP, SEXP kernelSEXP, SEXP k_rowsSEXP, SEXP k_colsSEXP, SEXP k_laysSEXP, SEXP transform_funSEXP, SEXP reduce_funSEXP) {
+Rcpp::NumericMatrix p_focal_cpp(const Rcpp::NumericMatrix& data, const std::vector<double>& kernel, const size_t k_rows, const size_t k_cols, const size_t k_lays, const int transform_fun, const int reduce_fun, const double default_value);
+RcppExport SEXP _dwsR_p_focal_cpp(SEXP dataSEXP, SEXP kernelSEXP, SEXP k_rowsSEXP, SEXP k_colsSEXP, SEXP k_laysSEXP, SEXP transform_funSEXP, SEXP reduce_funSEXP, SEXP default_valueSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type data(dataSEXP);
-    Rcpp::traits::input_parameter< std::vector<double> >::type kernel(kernelSEXP);
-    Rcpp::traits::input_parameter< size_t >::type k_rows(k_rowsSEXP);
-    Rcpp::traits::input_parameter< size_t >::type k_cols(k_colsSEXP);
-    Rcpp::traits::input_parameter< size_t >::type k_lays(k_laysSEXP);
-    Rcpp::traits::input_parameter< int >::type transform_fun(transform_funSEXP);
-    Rcpp::traits::input_parameter< int >::type reduce_fun(reduce_funSEXP);
-    rcpp_result_gen = Rcpp::wrap(p_focal_cpp(data, kernel, k_rows, k_cols, k_lays, transform_fun, reduce_fun));
+    Rcpp::traits::input_parameter< const Rcpp::NumericMatrix& >::type data(dataSEXP);
+    Rcpp::traits::input_parameter< const std::vector<double>& >::type kernel(kernelSEXP);
+    Rcpp::traits::input_parameter< const size_t >::type k_rows(k_rowsSEXP);
+    Rcpp::traits::input_parameter< const size_t >::type k_cols(k_colsSEXP);
+    Rcpp::traits::input_parameter< const size_t >::type k_lays(k_laysSEXP);
+    Rcpp::traits::input_parameter< const int >::type transform_fun(transform_funSEXP);
+    Rcpp::traits::input_parameter< const int >::type reduce_fun(reduce_funSEXP);
+    Rcpp::traits::input_parameter< const double >::type default_value(default_valueSEXP);
+    rcpp_result_gen = Rcpp::wrap(p_focal_cpp(data, kernel, k_rows, k_cols, k_lays, transform_fun, reduce_fun, default_value));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -58,7 +59,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_dwsR_openmp_self_test_cpp", (DL_FUNC) &_dwsR_openmp_self_test_cpp, 0},
     {"_dwsR_get_weight_fun_list_cpp", (DL_FUNC) &_dwsR_get_weight_fun_list_cpp, 0},
     {"_dwsR_get_fun_list_cpp", (DL_FUNC) &_dwsR_get_fun_list_cpp, 0},
-    {"_dwsR_p_focal_cpp", (DL_FUNC) &_dwsR_p_focal_cpp, 7},
+    {"_dwsR_p_focal_cpp", (DL_FUNC) &_dwsR_p_focal_cpp, 8},
     {NULL, NULL, 0}
 };
 
