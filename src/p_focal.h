@@ -1,13 +1,12 @@
-#ifndef _P_FOCAL_H_
-#define _P_FOCAL_H_
+#ifndef P_FOCAL_H_
+#define P_FOCAL_H_
 
 #ifdef _OPENMP
 #include <omp.h>
 // [[Rcpp::plugins(openmp)]]
 #define _P_FOCAL_OPENMP_ENADLED 1
 #else
-#define _OPENMP_ENADLED 0
-#define _P_FOCAL_ALLIGNMENT
+#define _P_FOCAL_OPENMP_ENADLED 0
 #endif
 
 #define _P_FOCAL_ALLIGNMENT 64
@@ -21,6 +20,7 @@
 #include <cstring>
 
 #include <iostream>
+#include <cassert>
 
 namespace p_focal{
 
@@ -84,7 +84,7 @@ namespace p_focal{
             const size_t block_size = alignment()/sizeof(double);
             this->block_size = block_size;
 
-            this->left_cols  = std::max(extra_col, (size_t)1);
+            this->left_cols  = extra_col +(size_t)(extra_row != 0);
             this->right_cols = extra_col;
 
 
@@ -98,8 +98,8 @@ namespace p_focal{
             this->data_size = (this->left_cols + this->n_col + this->right_cols)*this->col_size;
 
 
-
-            std::cerr   << "--------------------------------------------------------------------------\n"
+            /*
+            std::out   << "--------------------------------------------------------------------------\n"
                         << "alignment     :byte alighment of allocation and columns                  :" << alignment()          << "\n"
                         << "sizeof(double):size of the data element type                             :" << sizeof(double)       << "\n"
                         << "block_size    :How many elements per alignment block                     :" << this->block_size     << "\n"
@@ -112,7 +112,7 @@ namespace p_focal{
                         << "extra_rows    :# of rows of default between each column of data          :" << this->extra_rows     << "\n"
                         << "data_size     :# of indexes allocated                                    :" << this->data_size      << "\n"
                         << "--------------------------------------------------------------------------\n";
-
+            */
             double* data = (double*)std::aligned_alloc(alignment(), this->data_size*sizeof(double));
             if(!data){
                 std::cerr << "Out of memory\n";
@@ -185,7 +185,7 @@ namespace p_focal{
 
             #pragma omp parallel for
             for(size_t col = 0; col<n_col; col++){
-                const auto* c_data = data+col*col_size;
+                const double* c_data = data+col*col_size;
                 #pragma simd aligned(c_data:block_size)
                 for(size_t row=0; row<n_row; row++){
                     output[col*n_row+row] = c_data[row];
@@ -196,7 +196,7 @@ namespace p_focal{
     };
 
     template<size_t DATA_ALIGNMENT>
-    void swap(expanded_aligned_data<DATA_ALIGNMENT>& lhs, expanded_aligned_data<DATA_ALIGNMENT>& rhs) noexcept{
+    inline void swap(expanded_aligned_data<DATA_ALIGNMENT>& lhs, expanded_aligned_data<DATA_ALIGNMENT>& rhs) noexcept{
         lhs.swap(rhs);
     }
 
@@ -210,14 +210,11 @@ namespace p_focal{
 
     enum class TRANSFORM : size_t{
         MULTIPLY=0,
-        DIVIDE,
         ADD,
-        L_EXP,
         R_EXP,
+        L_EXP,
         SIZE
     };
-    constexpr std::array<const char*, (size_t)TRANSFORM::SIZE> TRANSFORM_FUNCTION_LIST{"*","/","+","x^w","w^x"};
-    static_assert(TRANSFORM_FUNCTION_LIST.back(), "TRANSFORM_FUNCTION_LIST has more space than it has values, fix it's template paramiter");
 
     enum class REDUCE : size_t{
         SUM=0,
@@ -225,50 +222,137 @@ namespace p_focal{
         MIN,
         MAX,
         MEAN,
+        VARIANCE,
         SIZE
     };
-    constexpr std::array<const char*, (size_t)REDUCE::SIZE> REDUCE_FUNCTION_LIST{"sum","product","min","max","mean"};
-    static_assert(REDUCE_FUNCTION_LIST.back(), "REDUCE_FUNCTION_LIST has more space than it has values, fix it's template paramiter");
 
-    enum class STRATEGY : size_t{
-        BASIC,
-        NAIVE,
-        SIZE
-    };
-    constexpr std::array<const char*, (size_t)STRATEGY::SIZE> STRATEGY_LIST{"naive","naive_p"};
-    static_assert(STRATEGY_LIST.back(), "STRATEGY_LIST has more space than it has values, fix it's template paramiter");
-
-
-
-    template<TRANSFORM TRANSFORM_FUNCTION, REDUCE REDUCE_FUNCTION, STRATEGY STRAT, size_t ALIGNMENT=_P_FOCAL_ALLIGNMENT>
-    void p_conv(const expanded_aligned_data<ALIGNMENT>& src, expanded_aligned_data<ALIGNMENT>& dest, const double* const kernel, const size_t k_cols, const size_t k_rows){
+    template<TRANSFORM TRANSFORM_FUNCTION, REDUCE REDUCE_FUNCTION, size_t ALIGNMENT=_P_FOCAL_ALLIGNMENT>
+    void p_conv(const expanded_aligned_data<ALIGNMENT>& src, const expanded_aligned_data<ALIGNMENT>& kernel, double* dest_p, bool open_mp_enabled){
         static_assert(TRANSFORM_FUNCTION < TRANSFORM::SIZE, "TRANSFORM_FUNCTION out of range");
         static_assert(REDUCE_FUNCTION < REDUCE::SIZE, "REDUCE_FUNCTION out of range");
-        constinit static const size_t block_size = expanded_aligned_data<ALIGNMENT>::alignment();
+        if(open_mp_enabled && !_P_FOCAL_OPENMP_ENADLED){std::cerr << "You are asking for open_mp, but it was not enabled at compile time\n";};
 
+        constinit static const size_t ALIGNMENT_BYTES = expanded_aligned_data<ALIGNMENT>::alignment();
+
+        const double* const data_p = src.data;
+        const double* const k_p = kernel.data;
+
+        const size_t s_col_size = src.col_size;
+        const size_t k_col_size = kernel.col_size;
+
+        const ptrdiff_t s_start_position = src.start_position;
+
+        const size_t s_cols = src.n_col;
+        const size_t s_rows = src.n_row;
+        const size_t k_cols = kernel.n_col;
+        const size_t k_rows = kernel.n_row;
 
         //for each column within the output space
-        for(size_t col = 0; col<dest.n_col; col++){
+        #pragma omp parallel if(open_mp_enabled)
+        for(size_t s_col = 0; s_col<s_cols; s_col++){
             //for each row within the output space
-            for(size_t row = 0; row<dest.n_row; row++){
-                double acc = 0;
+            const double* const data_col_p = data_p+(s_start_position+s_col*s_col_size);
+            double* const dest_col_p = dest_p+s_col*s_rows;
+
+            #pragma omp simd aligned(data_p:ALIGNMENT_BYTES) aligned(k_p:ALIGNMENT_BYTES) aligned(data_col_p:ALIGNMENT_BYTES)
+            for(size_t s_row = 0; s_row<s_rows; s_row++){
+                double acc;
+
+                if constexpr(REDUCE_FUNCTION == REDUCE::SUM || REDUCE_FUNCTION == REDUCE::MEAN || REDUCE_FUNCTION == REDUCE::VARIANCE){
+                    acc = 0;
+                }else if constexpr(REDUCE_FUNCTION == REDUCE::PRODUCT){
+                    acc = 1;
+                }else if constexpr(REDUCE_FUNCTION == REDUCE::MIN){
+                    acc = std::numeric_limits<double>::max();
+                }else if constexpr(REDUCE_FUNCTION == REDUCE::MAX){
+                    acc = std::numeric_limits<double>::min();
+                }else{
+                    static_assert((size_t)REDUCE_FUNCTION & 0);
+                }
 
                 //for each column in the kernel
+                #pragma omp simd aligned(data_p:ALIGNMENT_BYTES) aligned(k_p:ALIGNMENT_BYTES) aligned(data_col_p:ALIGNMENT_BYTES)
                 for(size_t k_col = 0; k_col<k_cols; k_col++){
                     //for each row in the kernel
-                    for(size_t k_row = 0; k_row<k_rows; k_row++){
-                        acc += src.data[src.start_position + (col+k_col-k_cols/2)*src.col_size + row+k_row-k_rows/2 ]*kernel[k_col*k_rows+k_row];
+                    const double* k_col_p = k_p+(k_col*k_col_size);
+
+                    #pragma omp simd aligned(data_p:ALIGNMENT_BYTES) aligned(k_p:ALIGNMENT_BYTES) aligned(data_col_p:ALIGNMENT_BYTES) aligned(k_col_p:ALIGNMENT_BYTES)
+                    for(size_t k_row = 0; k_row<k_cols; k_row++){
+
+                        const double k_val = k_col_p[k_row];
+                        const double s_val = data_col_p[(k_col-k_cols/2)*s_col_size + k_row-k_rows/2];
+
+                        double p;
+
+                        if constexpr(TRANSFORM_FUNCTION == TRANSFORM::MULTIPLY){
+                            p = k_val * s_val;
+                        }else if constexpr(TRANSFORM_FUNCTION == TRANSFORM::ADD){
+                            p = k_val + s_val;
+                        }else if constexpr(TRANSFORM_FUNCTION == TRANSFORM::R_EXP){
+                            p = pow(s_val, k_val);
+                        }else if constexpr(TRANSFORM_FUNCTION == TRANSFORM::L_EXP){
+                            p = pow(k_val, s_val);
+                        }else{
+                            static_assert((size_t)TRANSFORM_FUNCTION & 0);
+                        }
+
+                        if constexpr(REDUCE_FUNCTION == REDUCE::SUM || REDUCE_FUNCTION == REDUCE::MEAN || REDUCE_FUNCTION == REDUCE::VARIANCE){
+                            acc += p;
+                        }else if constexpr(REDUCE_FUNCTION == REDUCE::PRODUCT){
+                            acc *= p;
+                        }else if constexpr(REDUCE_FUNCTION == REDUCE::MIN){
+                            acc = std::min(acc, p);
+                        }else if constexpr(REDUCE_FUNCTION == REDUCE::MAX){
+                            acc = std::max(acc, p);
+                        }else{
+                            static_assert((size_t)REDUCE_FUNCTION & 0);
+                        }
                     }
                 }
 
-                dest.data[dest.start_position + (col*dest.col_size) + row] = acc;
+                if constexpr(REDUCE_FUNCTION == REDUCE::SUM || REDUCE_FUNCTION == REDUCE::PRODUCT || REDUCE_FUNCTION == REDUCE::MAX || REDUCE_FUNCTION == REDUCE::MIN){
+                    dest_col_p[s_row] = acc;
+                }else if constexpr(REDUCE_FUNCTION == REDUCE::MEAN){
+                    dest_col_p[s_row] = acc/((double)(k_rows*k_cols));
+                }else if constexpr(REDUCE_FUNCTION == REDUCE::VARIANCE){
+                    double mean = acc/((double)(k_rows*k_cols));
+                    double acc2 = 0;
+
+                    #pragma omp simd aligned(data_p:ALIGNMENT_BYTES) aligned(k_p:ALIGNMENT_BYTES) aligned(data_col_p:ALIGNMENT_BYTES)
+                    for(size_t k_col = 0; k_col<k_cols; k_col++){
+                        const double* k_col_p = k_p+(k_col*k_col_size);
+
+                        #pragma omp simd aligned(data_p:ALIGNMENT_BYTES) aligned(k_p:ALIGNMENT_BYTES) aligned(data_col_p:ALIGNMENT_BYTES) aligned(k_col_p:ALIGNMENT_BYTES)
+                        for(size_t k_row = 0; k_row<k_cols; k_row++){
+
+                            const double k_val = k_col_p[k_row];
+                            const double s_val = data_col_p[(k_col-k_cols/2)*s_col_size + k_row-k_rows/2];
+
+                            double p;
+
+                            if constexpr(TRANSFORM_FUNCTION == TRANSFORM::MULTIPLY){
+                                p = k_val * s_val;
+                            }else if constexpr(TRANSFORM_FUNCTION == TRANSFORM::ADD){
+                                p = k_val + s_val;
+                            }else if constexpr(TRANSFORM_FUNCTION == TRANSFORM::R_EXP){
+                                p = pow(s_val, k_val);
+                            }else if constexpr(TRANSFORM_FUNCTION == TRANSFORM::L_EXP){
+                                p = pow(k_val, s_val);
+                            }else{
+                                static_assert((size_t)TRANSFORM_FUNCTION & 0);
+                            }
+
+                            acc2 += (p-mean)*(p-mean);
+                        }
+                    }
+                    dest_col_p[s_row] = acc2/((double)(k_rows*k_cols));
+
+                }else{
+                    static_assert((size_t)REDUCE_FUNCTION & 0);
+                }
             }
         }
-
     }
 }
 
-
-
-
-#endif // _P_FOCAL_H_
+#endif // P_FOCAL_H_

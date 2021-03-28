@@ -5,15 +5,7 @@
     .Call(`_dwsR_openmp_self_test_cpp`)
 }
 
-.get_weight_fun_list_cpp <- function() {
-    .Call(`_dwsR_get_weight_fun_list_cpp`)
-}
-
-.get_fun_list_cpp <- function() {
-    .Call(`_dwsR_get_fun_list_cpp`)
-}
-
-.p_focal_cpp <- function(data, kernel, k_rows, k_cols, k_lays, transform_fun, reduce_fun, default_value) {
-    .Call(`_dwsR_p_focal_cpp`, data, kernel, k_rows, k_cols, k_lays, transform_fun, reduce_fun, default_value)
+.p_focal_cpp <- function(data, kernel, default_value, transform_fun, reduce_fun, open_mp) {
+    .Call(`_dwsR_p_focal_cpp`, data, kernel, default_value, transform_fun, reduce_fun, open_mp)
 }
 

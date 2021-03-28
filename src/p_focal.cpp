@@ -1,4 +1,5 @@
 #include "p_focal.h"
+#include "p_focal_switch_wall.h"
 
 #include <Rcpp.h>
 using namespace p_focal;
@@ -20,39 +21,41 @@ Rcpp::List openmp_self_test_cpp() {
     return z ;
 }
 
-
-// [[Rcpp::export(.get_weight_fun_list_cpp)]]
-Rcpp::CharacterVector get_weight_fun_list_cpp(){
-    Rcpp::CharacterVector cv(TRANSFORM_FUNCTION_LIST.size());
-    std::copy(TRANSFORM_FUNCTION_LIST.begin(), TRANSFORM_FUNCTION_LIST.end(), cv.begin());
-    return cv;
-}
-
-
-// [[Rcpp::export(.get_fun_list_cpp)]]
-Rcpp::CharacterVector get_fun_list_cpp(){
-    Rcpp::CharacterVector cv(REDUCE_FUNCTION_LIST.size());
-    std::copy(REDUCE_FUNCTION_LIST.begin(), REDUCE_FUNCTION_LIST.end(), cv.begin());
-    return cv;
-}
-
-
-
 // [[Rcpp::export(.p_focal_cpp)]]
-Rcpp::NumericMatrix p_focal_cpp(const Rcpp::NumericMatrix& data, const std::vector<double>& kernel, const size_t k_rows, const size_t k_cols, const size_t k_lays, const int transform_fun, const int reduce_fun, const double default_value){
+Rcpp::NumericMatrix p_focal_cpp(const Rcpp::NumericMatrix& data, const Rcpp::NumericMatrix& kernel, const double default_value, const size_t transform_fun, const size_t reduce_fun, const bool open_mp){
+    TRANSFORM tf((TRANSFORM)transform_fun);
+    REDUCE rf((REDUCE)reduce_fun);
 
-    //std::cerr << "d_col:"<< data.ncol() << ", drow:" <<  data.nrow() << ", ecol:" <<  k_cols/2 << ", erow:" <<  k_rows/2 << ", default:" <<  default_value << "\n";
-    expanded_aligned_data<> e1(&data[0], data.ncol(), data.nrow(), k_cols/2, k_rows/2, default_value);
+    bool good = true;
 
+    if(tf >= TRANSFORM::SIZE){
+        std::cerr << "\n"
+            << "The transform function, ie: 'weight_fun', is not a valid value.\n"
+            << "It is " << ((size_t)tf) << " when it must be in the range [0, " << ((size_t)TRANSFORM::SIZE) << ")\n";
+        good = false;
+    }
+    if(rf >= REDUCE::SIZE){
+        std::cerr << "\n"
+            << "The reduce function, ie: 'fun', is not a valid value.\n"
+            << "It is " << ((size_t)rf) << " when it must be in the range [0, " << ((size_t)REDUCE::SIZE) << ")\n";
+        good = false;
+    }
 
-    expanded_aligned_data<> e2(          data.ncol(), data.nrow(), k_cols/2, k_rows/2, default_value);
+    if(!good){
+        return (0,0);
+    }else{
 
-    p_conv<TRANSFORM::MULTIPLY, REDUCE::SUM, STRATEGY::BASIC>(e1, e2, &kernel[0], k_cols, k_rows);
+        expanded_aligned_data<> src(&data[0], data.ncol(), data.nrow(), kernel.ncol()/2, kernel.nrow()/2, default_value);
+        expanded_aligned_data<> k(&kernel[0], kernel.ncol(), kernel.nrow(), 0, 0, 0);
 
-    Rcpp::NumericMatrix out(data.nrow(), data.ncol());
+        Rcpp::NumericMatrix dest(data.nrow(), data.ncol());
 
-    e2.copy_out(&out[0]);
-    return out;
+        p_focal_switch_wall(src, k, &dest[0], tf, rf, open_mp);
+    //    p_conv<TRANSFORM::MULTIPLY, REDUCE::SUM, STRATEGY::BASIC>(src, k, &dest[0]);
+
+        return dest;
+    }
 }
+
 
 
