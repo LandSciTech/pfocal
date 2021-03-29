@@ -44,7 +44,7 @@ Rcpp::NumericMatrix p_focal_cpp(const Rcpp::NumericMatrix& data, const Rcpp::Num
     if(!good){
         return (0,0);
     }else{
-
+        //std::cout << ((size_t)tf) << ", " << ((size_t)rf) << "\n";
         expanded_aligned_data<> src(&data[0], data.ncol(), data.nrow(), kernel.ncol()/2, kernel.nrow()/2, default_value);
         expanded_aligned_data<> k(&kernel[0], kernel.ncol(), kernel.nrow(), 0, 0, 0);
 

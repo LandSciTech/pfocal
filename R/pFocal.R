@@ -100,7 +100,7 @@ pFocal_fun_list <- function(){
   t_fun <- .pFocal_weight_fun_narrow(weight_fun)
   r_fun <- .pFocal_fun_narrow(fun)
   
-  print(c(t_fun, r_fun))
+  #print(c(t_fun, r_fun))
   
   focal_func <- .p_focal_cpp
   if(debug_use_r_implementation){
@@ -110,7 +110,7 @@ pFocal_fun_list <- function(){
   
   #We flip the kernel here instead of making the c++ iterate over it backwards
   k <- matrix(rev(w), nrow(w), ncol(w))
-  
+  #print(k)
   t_fun_index <- 0;
   r_fun_index <- 0;
   
@@ -132,13 +132,17 @@ pFocal_fun_list <- function(){
   
   if(pFocal_fun_list()[r_fun] %in% c("SUM", "PRODUCT", "MIN", "MAX", "MEAN", "VARIANCE")){
     r_fun_index <- r_fun
-    print(debug_use_r_implementation)
     return(focal_func(x, k, default, t_fun_index-1, r_fun_index-1, mp))
     
   }else if(pFocal_fun_list()[r_fun] == "STANDARD_DEVIATION"){
     r_fun_index <- match("VARIANCE", pFocal_fun_list())[1]
     
-    return(sqrt(focal_func(x, k, default, t_fun_index-1, r_fun_index-1, mp)))
+    v = focal_func(x, k, default, t_fun_index-1, r_fun_index-1, mp)
+    v[is.na(v)]=0
+    #print(v)
+    sd = sqrt(v)
+    sd[is.na(v)]=NA
+    return(sd)
     
   }else if(pFocal_fun_list()[r_fun] == "RANGE"){
     r_fun_index_1 <- match("MAX", pFocal_fun_list())[1]
@@ -207,7 +211,7 @@ pFocal_fun_list <- function(){
         output[row, col] <- sum(acc)/length(k)
       }else if(r_fun == 5){
         m <- sum(acc)/length(k)
-        output[row, col] <- sum((acc-m)^2)/length(k)
+        output[row, col] <- sum((acc-m)*(acc-m))/length(k)
       }
     }
   }
@@ -288,10 +292,10 @@ pFocal_chain <- function(x, w, fun = "SUM", weight_fun = "MULTIPLY", mask = FALS
 }
 
 .pFocal_compare <- function(x, w, fun = "SUM", weight_fun = "MULTIPLY", mask = FALSE, na_flag = NA, mp=TRUE){
-  return(abs(
-    pFocal(x, w, fun, weight_fun, mask, na_flag, mp, debug_use_r_implementation=FALSE)-
-    pFocal(x, w, fun, weight_fun, mask, na_flag, mp, debug_use_r_implementation=TRUE)
-  ))
+  cpp_run <- abs(pFocal(x, w, fun, weight_fun, mask, na_flag, mp, debug_use_r_implementation=FALSE))
+  r_run <- abs(pFocal(x, w, fun, weight_fun, mask, na_flag, mp, debug_use_r_implementation=TRUE))
+  
+  return((r_run-cpp_run)/(r_run+cpp_run))
 }
 
 .pFocal_compare_sweep <- function(x, w, mask = FALSE, na_flag = NA, mp=TRUE){
@@ -301,13 +305,15 @@ pFocal_chain <- function(x, w, fun = "SUM", weight_fun = "MULTIPLY", mask = FALS
     for(r in pFocal_fun_list()){
       print(paste(t,r, sep = ', '))
       this_count <- .pFocal_compare(x, w, r, t, mask, na_flag, mp)
-      print(this_count)
-      running_count <- max(running_count, this_count)
+      print(min(c(abs(this_count[!is.na(this_count)]), c())))
+      
+      #print(max(this_count))
+      #running_count <- max(running_count, this_count)
     }
   }
-  print("Largest difference")
-  print(running_count)
-  return(running_count)
+  #print("Largest difference")
+  #print(running_count)
+  #return(running_count)
 }
 
 
