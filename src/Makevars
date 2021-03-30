@@ -1,4 +1,4 @@
-CXX_STD = CXX20
+CXX_STD = CXX17
 #PKG_LIBS = ''
 #PKG_LIBS = '-ltbb'
 #PKG_CPPFLAGS = -funsafe-math-optimizations -fno-math-errno -fopenmp -I'../inst/include/'

@@ -11,6 +11,8 @@
 
 #define _P_FOCAL_ALLIGNMENT 64
 
+
+
 #include <tuple>
 #include <array>
 #include <cstddef>
@@ -22,7 +24,6 @@
 #include <iostream>
 #include <cassert>
 #include <memory>
-
 
 namespace p_focal{
 
@@ -59,19 +60,19 @@ namespace p_focal{
         size_t right_cols;
         size_t extra_rows;
 
-        static consteval size_t alignment(){return std::max(DATA_ALIGNMENT, alignof(double));}
+        static constexpr size_t alignment(){return std::max(DATA_ALIGNMENT, alignof(double));}
 
         void copy_in(const double* const incomming_data){
             const size_t n_col = this->n_col;
             const size_t n_row = this->n_row;
             const size_t start_position = this->start_position;
             const size_t col_size = this->col_size;
-            double* data = std::assume_aligned<alignment()>(this->data);
+            double* data = (double*)__builtin_assume_aligned((this->data), alignment());
 
 
             #pragma omp parallel for simd aligned(data:alignment())
             for(size_t col = 0; col<n_col; col++){
-                double* col_start = std::assume_aligned<alignment()>(data+start_position+(col_size*col));
+                double* col_start = (double*)__builtin_assume_aligned((data+start_position+(col_size*col)), alignment());
                 memcpy(col_start, incomming_data+(n_row*col), n_row*sizeof(double));
             }
         }
@@ -227,14 +228,15 @@ namespace p_focal{
         static_assert(REDUCE_FUNCTION < REDUCE::SIZE, "REDUCE_FUNCTION out of range");
         if(open_mp_requested && !_P_FOCAL_OPENMP_ENADLED){std::cerr << "You are asking for open_mp, but it was not enabled at compile time\n";};
 
-        const bool open_mp_enabled = _P_FOCAL_OPENMP_ENADLED && open_mp_requested;
+        static const size_t ALIGNMENT_BYTES = expanded_aligned_data<ALIGNMENT>::alignment();
+        static const double ACC_INITIAL_VALUE = ((std::array<double, (size_t)REDUCE::SIZE>){0, 1, std::numeric_limits<double>::max(), std::numeric_limits<double>::min(), 0, 0})[(size_t)REDUCE_FUNCTION];
 
-        constinit static const size_t ALIGNMENT_BYTES = expanded_aligned_data<ALIGNMENT>::alignment();
+        const bool open_mp_enabled = _P_FOCAL_OPENMP_ENADLED && open_mp_requested;
 
         const size_t s_start_position = src.start_position;
 
-        const double* const d_p = std::assume_aligned<ALIGNMENT_BYTES>(src.data+s_start_position);
-        const double* const k_p = std::assume_aligned<ALIGNMENT_BYTES>(kernel.data);
+        const double* const d_p = (double*)__builtin_assume_aligned((src.data+s_start_position), ALIGNMENT_BYTES);
+        const double* const k_p = (double*)__builtin_assume_aligned((kernel.data), ALIGNMENT_BYTES);
 
         const size_t d_col_size = src.col_size;
         const size_t k_col_size = kernel.col_size;
@@ -246,17 +248,16 @@ namespace p_focal{
 
         #pragma omp parallel if(open_mp_enabled)
         for(size_t d_col=0; d_col<d_cols; d_col++){
-            const double* const d_col_p   = std::assume_aligned<ALIGNMENT_BYTES>(d_p+d_col*d_col_size);
-                  double* const out_col_p =                                    out_p+d_col*d_rows;
+            const double* const d_col_p   = (double*)__builtin_assume_aligned((d_p+d_col*d_col_size), ALIGNMENT_BYTES);
+                  double* const out_col_p =                         out_p+d_col*d_rows;
 
             for(size_t d_row=0; d_row<d_rows; d_row++){
 
-                constinit static const double ACC_INITIAL_VALUE = ((std::array<double, (size_t)REDUCE::SIZE>){0, 1, std::numeric_limits<double>::max(), std::numeric_limits<double>::min(), 0, 0})[(size_t)REDUCE_FUNCTION];
                 double acc = ACC_INITIAL_VALUE;
 
                 for(size_t k_col=0; k_col<k_cols; k_col++){
-                    const double* const k_col_p     = std::assume_aligned<ALIGNMENT_BYTES>(k_p    + k_col          *k_col_size);
-                    const double* const d_col_p_off = std::assume_aligned<ALIGNMENT_BYTES>(d_col_p+(k_col-k_cols/2)*d_col_size);
+                    const double* const k_col_p     = (double*)__builtin_assume_aligned((k_p    + k_col          *k_col_size), ALIGNMENT_BYTES);
+                    const double* const d_col_p_off = (double*)__builtin_assume_aligned((d_col_p+(k_col-k_cols/2)*d_col_size), ALIGNMENT_BYTES);
 
                     for(size_t k_row=0; k_row < k_rows; k_row++){
 
@@ -300,8 +301,8 @@ namespace p_focal{
                     double acc2 = 0;
 
                     for(size_t k_col=0; k_col<k_cols; k_col++){
-                        const double* const k_col_p     = std::assume_aligned<ALIGNMENT_BYTES>(k_p    + k_col          *k_col_size);
-                        const double* const d_col_p_off = std::assume_aligned<ALIGNMENT_BYTES>(d_col_p+(k_col-k_cols/2)*d_col_size);
+                        const double* const k_col_p     = (double*)__builtin_assume_aligned((k_p    + k_col          *k_col_size), ALIGNMENT_BYTES);
+                        const double* const d_col_p_off = (double*)__builtin_assume_aligned((d_col_p+(k_col-k_cols/2)*d_col_size), ALIGNMENT_BYTES);
 
                         for(size_t k_row=0; k_row < k_rows; k_row++){
 
@@ -332,10 +333,7 @@ namespace p_focal{
                 }
             }
         }
-
-
     }
-
 }
 
 #endif // P_FOCAL_H_

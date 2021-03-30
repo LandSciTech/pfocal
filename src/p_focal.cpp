@@ -4,7 +4,8 @@
 #include <Rcpp.h>
 using namespace p_focal;
 
-// [[Rcpp::plugins(cpp2a)]]
+/* [[Rcpp::plugins(cpp2a)]] */
+// [[Rcpp::plugins(cpp17)]]
 
 // [[Rcpp::export(.openmp_self_test_cpp)]]
 Rcpp::List openmp_self_test_cpp() {
