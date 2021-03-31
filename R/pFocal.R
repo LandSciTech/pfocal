@@ -321,9 +321,7 @@ pFocal_mean_policy_list <- function(){
           for(k_row in 1:nrow(k)){
           
           #calculate the value for this part of the kernel at this part of the data
-          p <- if(is.na(sub_data[k_row, k_col]) || is.na(k[k_row, k_col])){
-            NA
-          }else if(tf_name == "MULTIPLY"){
+          p <- if(tf_name == "MULTIPLY"){
             sub_data[k_row, k_col]*k[k_row, k_col]
           }else if(tf_name == "ADD"){
             sub_data[k_row, k_col]+k[k_row, k_col]
@@ -336,32 +334,34 @@ pFocal_mean_policy_list <- function(){
           }
           
           #update the mean_divisor value by policy
-          if(mean_pol_name == "KERNEL_SIZE"){
-            #do nothing
-          }else if(mean_pol_name == "SUM_NON_NAN_KERNEL_VALUES"){
+          if(mean_pol_name == "SUM_NON_NAN_KERNEL_VALUES"){
             if(!is.na(k[k_row, k_col])){
               mean_divisor = mean_divisor+k[k_row, k_col]
             }
-          }else if(mean_pol_name == "MUL_NON_NAN_KERNEL_VALUES"){
+          }
+          
+          if(mean_pol_name == "MUL_NON_NAN_KERNEL_VALUES"){
             if(!is.na(k[k_row, k_col])){
               mean_divisor = mean_divisor*k[k_row, k_col]
             }
-          }else if(mean_pol_name == "COUNT_NON_NAN_KERNEL_VALUES"){
+          }
+          
+          if(mean_pol_name == "COUNT_NON_NAN_KERNEL_VALUES"){
             if(!is.na(k[k_row, k_col])){
               mean_divisor = mean_divisor+1
             }
-          }else if(mean_pol_name == "COUNT_NON_NAN_INTERMEDIATE_VALUES"){
-            if(!is.na(p)){
-              mean_divisor = mean_divisor+1
-            }
-          }else{
-            stop()
           }
           
           #if we do not skip this result by policy, we update the accumulator
           if((!((na_pol_name %in% c("SKIP_NAN_IN_KERNEL", "SKIP_NAN_IN_KERNEL_OR_DATA")) && (is.na(k[k_row, k_col])))) && 
              (!((na_pol_name %in% c("SKIP_NAN_IN_DATA",   "SKIP_NAN_IN_KERNEL_OR_DATA")) && (is.na(sub_data[k_row, k_col])))) &&
              (!((na_pol_name ==     "SKIP_NAN_IN_INTERMEDIATE")                          && (is.na(p))))){
+            
+            if(mean_pol_name == "COUNT_NON_NAN_INTERMEDIATE_VALUES"){
+              if(!is.na(p)){
+                mean_divisor = mean_divisor+1
+              }
+            }
             
             acc <- if(rf_name %in% c("SUM", "MEAN", "VARIANCE")){
               acc+p
@@ -402,9 +402,7 @@ pFocal_mean_policy_list <- function(){
         for(k_col in 1:ncol(k)){
           for(k_row in 1:nrow(k)){
             #calculate the value for this part of the kernel at this part of the data
-            p <- if(is.na(sub_data[k_row, k_col]) || is.na(k[k_row, k_col])){
-              NA
-            }else if(tf_name == "MULTIPLY"){
+            p <- if(tf_name == "MULTIPLY"){
               sub_data[k_row, k_col]*k[k_row, k_col]
             }else if(tf_name == "ADD"){
               sub_data[k_row, k_col]+k[k_row, k_col]
@@ -518,7 +516,7 @@ pFocal_chain <- function(x, w, fun = "SUM", weight_fun = "MULTIPLY", na_policy="
   rel_dif <- abs((r_run-cpp_run)/(run_sum))
   max_rel_dif <- max(rel_dif[!is.na(rel_dif)], 0)
   #print(max_dif)
-  return(c(max_dif, max_rel_dif, sum(is.na(r_run)!=is.na(cpp_run))))
+  return(c(sum(is.na(r_run)!=is.na(cpp_run)), max_dif, max_rel_dif))
   #if(bad_count){
   #  print("cpp")
   #  print(cpp_run)
@@ -542,8 +540,8 @@ pFocal_chain <- function(x, w, fun = "SUM", weight_fun = "MULTIPLY", na_policy="
         for(m in pFocal_mean_policy_list()){
           
           output <- .pFocal_compare(x, w, r, t, n, m, na_flag, mp)
-          if(output[2]){
-            print(paste(output[2], output[3], (count/total),r,t,n,m, sep = ', '))
+          if(output[1] || output[2] > (1e-12)){
+            print(paste(output[1], output[2], output[3], (count/total),r,t,n,m, sep = ', '))
           }
           count <- count+1
           #print(output)
