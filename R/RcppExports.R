@@ -5,7 +5,7 @@
     .Call(`_dwsR_openmp_self_test_cpp`)
 }
 
-.p_focal_cpp <- function(data, kernel, default_value, transform_fun, reduce_fun, open_mp) {
-    .Call(`_dwsR_p_focal_cpp`, data, kernel, default_value, transform_fun, reduce_fun, open_mp)
+.p_focal_cpp <- function(data, kernel, default_value, transform_fun, reduce_fun, nan_policy, mean_policy, open_mp) {
+    .Call(`_dwsR_p_focal_cpp`, data, kernel, default_value, transform_fun, reduce_fun, nan_policy, mean_policy, open_mp)
 }
 
