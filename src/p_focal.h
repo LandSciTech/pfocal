@@ -347,7 +347,7 @@ namespace p_focal{
 
 
         //For non-dynamic divisors, calculate them once
-        double mean_divider_temp;
+        double mean_divider_temp __attribute__((unused));
 
         if constexpr(MEAN_D == MEAN_DIVISOR::ONE){
             mean_divider_temp = 1;
@@ -395,7 +395,7 @@ namespace p_focal{
             mean_divider_temp = std::abs(mean_divider_temp);
         }
 
-        const double mean_divider = mean_divider_temp;
+        const double mean_divider __attribute__((unused)) = mean_divider_temp;
 
         //start the main loops
 
@@ -408,7 +408,7 @@ namespace p_focal{
 
                 double acc = ACC_INITIAL_VALUE;
                 //if we are taking a product, we start with 1, otherwise we start with 0
-                double local_mean_divider_temp = +(
+                double local_mean_divider_temp __attribute__((unused)) = +(
                         MEAN_D == MEAN_DIVISOR::DYNAMIC_PROD       ||
                         MEAN_D == MEAN_DIVISOR::DYNAMIC_ABS_PROD   ||
                         MEAN_D == MEAN_DIVISOR::DYNAMIC_DATA_PROD  ||
@@ -535,7 +535,7 @@ namespace p_focal{
                 }
 
                 //combine the global or the local divider
-                double mean_d_temp;
+                double mean_d_temp __attribute__((unused));;
                 if constexpr(
                         MEAN_D == MEAN_DIVISOR::ONE            ||
                         MEAN_D == MEAN_DIVISOR::KERNEL_SIZE    ||
@@ -548,7 +548,7 @@ namespace p_focal{
                 }else{
                     mean_d_temp = local_mean_divider_temp;
                 }
-                const double mean_d = mean_d_temp;
+                const double mean_d __attribute__((unused)) = mean_d_temp;
 
                 if constexpr(VARIANCE){
                     //we want the variance, not the value
