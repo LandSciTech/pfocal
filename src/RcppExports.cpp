@@ -16,28 +16,84 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// p_focal_transform_info_cpp
+Rcpp::List p_focal_transform_info_cpp();
+RcppExport SEXP _dwsR_p_focal_transform_info_cpp() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(p_focal_transform_info_cpp());
+    return rcpp_result_gen;
+END_RCPP
+}
+// p_focal_reduce_info_cpp
+Rcpp::List p_focal_reduce_info_cpp();
+RcppExport SEXP _dwsR_p_focal_reduce_info_cpp() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(p_focal_reduce_info_cpp());
+    return rcpp_result_gen;
+END_RCPP
+}
+// p_focal_nan_policy_info_cpp
+Rcpp::List p_focal_nan_policy_info_cpp();
+RcppExport SEXP _dwsR_p_focal_nan_policy_info_cpp() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(p_focal_nan_policy_info_cpp());
+    return rcpp_result_gen;
+END_RCPP
+}
+// p_focal_mean_divisor_info_cpp
+Rcpp::List p_focal_mean_divisor_info_cpp();
+RcppExport SEXP _dwsR_p_focal_mean_divisor_info_cpp() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(p_focal_mean_divisor_info_cpp());
+    return rcpp_result_gen;
+END_RCPP
+}
+// p_focal_variance_info_cpp
+Rcpp::List p_focal_variance_info_cpp();
+RcppExport SEXP _dwsR_p_focal_variance_info_cpp() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(p_focal_variance_info_cpp());
+    return rcpp_result_gen;
+END_RCPP
+}
 // p_focal_cpp
-Rcpp::NumericMatrix p_focal_cpp(const Rcpp::NumericMatrix& data, const Rcpp::NumericMatrix& kernel, const double default_value, const size_t transform_fun, const size_t reduce_fun, const size_t nan_policy, const size_t mean_policy, const bool open_mp);
-RcppExport SEXP _dwsR_p_focal_cpp(SEXP dataSEXP, SEXP kernelSEXP, SEXP default_valueSEXP, SEXP transform_funSEXP, SEXP reduce_funSEXP, SEXP nan_policySEXP, SEXP mean_policySEXP, SEXP open_mpSEXP) {
+Rcpp::NumericMatrix p_focal_cpp(const Rcpp::NumericMatrix& data, const Rcpp::NumericMatrix& kernel, const double edge_value, const size_t transform_fun, const size_t reduce_fun, const size_t nan_policy, const size_t mean_divisor, const bool variance, const bool open_mp);
+RcppExport SEXP _dwsR_p_focal_cpp(SEXP dataSEXP, SEXP kernelSEXP, SEXP edge_valueSEXP, SEXP transform_funSEXP, SEXP reduce_funSEXP, SEXP nan_policySEXP, SEXP mean_divisorSEXP, SEXP varianceSEXP, SEXP open_mpSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const Rcpp::NumericMatrix& >::type data(dataSEXP);
     Rcpp::traits::input_parameter< const Rcpp::NumericMatrix& >::type kernel(kernelSEXP);
-    Rcpp::traits::input_parameter< const double >::type default_value(default_valueSEXP);
+    Rcpp::traits::input_parameter< const double >::type edge_value(edge_valueSEXP);
     Rcpp::traits::input_parameter< const size_t >::type transform_fun(transform_funSEXP);
     Rcpp::traits::input_parameter< const size_t >::type reduce_fun(reduce_funSEXP);
     Rcpp::traits::input_parameter< const size_t >::type nan_policy(nan_policySEXP);
-    Rcpp::traits::input_parameter< const size_t >::type mean_policy(mean_policySEXP);
+    Rcpp::traits::input_parameter< const size_t >::type mean_divisor(mean_divisorSEXP);
+    Rcpp::traits::input_parameter< const bool >::type variance(varianceSEXP);
     Rcpp::traits::input_parameter< const bool >::type open_mp(open_mpSEXP);
-    rcpp_result_gen = Rcpp::wrap(p_focal_cpp(data, kernel, default_value, transform_fun, reduce_fun, nan_policy, mean_policy, open_mp));
+    rcpp_result_gen = Rcpp::wrap(p_focal_cpp(data, kernel, edge_value, transform_fun, reduce_fun, nan_policy, mean_divisor, variance, open_mp));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
     {"_dwsR_openmp_self_test_cpp", (DL_FUNC) &_dwsR_openmp_self_test_cpp, 0},
-    {"_dwsR_p_focal_cpp", (DL_FUNC) &_dwsR_p_focal_cpp, 8},
+    {"_dwsR_p_focal_transform_info_cpp", (DL_FUNC) &_dwsR_p_focal_transform_info_cpp, 0},
+    {"_dwsR_p_focal_reduce_info_cpp", (DL_FUNC) &_dwsR_p_focal_reduce_info_cpp, 0},
+    {"_dwsR_p_focal_nan_policy_info_cpp", (DL_FUNC) &_dwsR_p_focal_nan_policy_info_cpp, 0},
+    {"_dwsR_p_focal_mean_divisor_info_cpp", (DL_FUNC) &_dwsR_p_focal_mean_divisor_info_cpp, 0},
+    {"_dwsR_p_focal_variance_info_cpp", (DL_FUNC) &_dwsR_p_focal_variance_info_cpp, 0},
+    {"_dwsR_p_focal_cpp", (DL_FUNC) &_dwsR_p_focal_cpp, 9},
     {NULL, NULL, 0}
 };
 

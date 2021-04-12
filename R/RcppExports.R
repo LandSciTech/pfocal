@@ -5,7 +5,27 @@
     .Call(`_dwsR_openmp_self_test_cpp`)
 }
 
-.p_focal_cpp <- function(data, kernel, default_value, transform_fun, reduce_fun, nan_policy, mean_policy, open_mp) {
-    .Call(`_dwsR_p_focal_cpp`, data, kernel, default_value, transform_fun, reduce_fun, nan_policy, mean_policy, open_mp)
+.p_focal_transform_info_cpp <- function() {
+    .Call(`_dwsR_p_focal_transform_info_cpp`)
+}
+
+.p_focal_reduce_info_cpp <- function() {
+    .Call(`_dwsR_p_focal_reduce_info_cpp`)
+}
+
+.p_focal_nan_policy_info_cpp <- function() {
+    .Call(`_dwsR_p_focal_nan_policy_info_cpp`)
+}
+
+.p_focal_mean_divisor_info_cpp <- function() {
+    .Call(`_dwsR_p_focal_mean_divisor_info_cpp`)
+}
+
+.p_focal_variance_info_cpp <- function() {
+    .Call(`_dwsR_p_focal_variance_info_cpp`)
+}
+
+.p_focal_cpp <- function(data, kernel, edge_value, transform_fun, reduce_fun, nan_policy, mean_divisor, variance, open_mp) {
+    .Call(`_dwsR_p_focal_cpp`, data, kernel, edge_value, transform_fun, reduce_fun, nan_policy, mean_divisor, variance, open_mp)
 }
 

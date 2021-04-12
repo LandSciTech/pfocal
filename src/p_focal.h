@@ -73,7 +73,7 @@ namespace p_focal{
             double* data = (double*)__builtin_assume_aligned((this->data), alignment());
 
 
-    #pragma omp parallel for simd aligned(data:alignment())
+            #pragma omp parallel for simd aligned(data:alignment())
             for(size_t col = 0; col<n_col; col++){
                 double* col_start = (double*)__builtin_assume_aligned((data+start_position+(col_size*col)), alignment());
                 memcpy(col_start, incomming_data+(n_row*col), n_row*sizeof(double));
@@ -196,7 +196,6 @@ namespace p_focal{
             #pragma omp parallel for
             for(size_t col = 0; col<n_col; col++){
                 const double* c_data = data+col*col_size;
-                #pragma simd aligned(c_data:block_size)
                 for(size_t row=0; row<n_row; row++){
                     output[col*n_row+row] = c_data[row];
                 }
@@ -210,11 +209,11 @@ namespace p_focal{
         lhs.swap(rhs);
     }
 
-    std::tuple<int, int, int> openmp_self_test(void) noexcept{
+    std::tuple<bool, int, int> openmp_self_test(void) noexcept{
         if constexpr(_P_FOCAL_OPENMP_ENADLED){
-            return {1, _OPENMP, omp_get_max_threads()};
+            return {true, _OPENMP, omp_get_max_threads()};
         }else{
-            return {0,0,1};
+            return {false, 0, 1};
         }
     }
 
@@ -226,46 +225,110 @@ namespace p_focal{
         SIZE
     };
 
+    const std::array<const std::tuple<const size_t, const char*, const char*>, static_cast<size_t>(TRANSFORM::SIZE)> TRANSFORM_DESCRIPTION {
+        std::tuple<const size_t, const char*, const char*>{static_cast<size_t>(TRANSFORM::MULTIPLY), "MULTIPLY", "For data value 'd' and kernal value 'k', intermediate_value = (d * k)"},
+        std::tuple<const size_t, const char*, const char*>{static_cast<size_t>(TRANSFORM::ADD),      "ADD",      "For data value 'd' and kernal value 'k', intermediate_value = (d + k)"},
+        std::tuple<const size_t, const char*, const char*>{static_cast<size_t>(TRANSFORM::R_EXP),    "R_EXP",    "For data value 'd' and kernal value 'k', intermediate_value = (d ^ k)"},
+        std::tuple<const size_t, const char*, const char*>{static_cast<size_t>(TRANSFORM::L_EXP),    "L_EXP",    "For data value 'd' and kernal value 'k', intermediate_value = (k ^ d)"}
+    };
+
     enum class REDUCE : size_t{
         SUM=0,
+        ABS_SUM,
         PRODUCT,
+        ABS_PRODUCT,
         MIN,
         MAX,
-        MEAN,
-        VARIANCE,
         SIZE
+    };
+
+    const std::array<const std::tuple<const size_t, const char*, const char*>, static_cast<size_t>(REDUCE::SIZE)> REDUCE_DESCRIPTION {
+        std::tuple<const size_t, const char*, const char*>{static_cast<size_t>(REDUCE::SUM),         "SUM",         "Accumulator starts at 0. For each intermediate value, in no particular order, acc = ( acc + iv )"                            },
+        std::tuple<const size_t, const char*, const char*>{static_cast<size_t>(REDUCE::ABS_SUM),     "ABS_SUM",     "Accumulator starts at 0. For each intermediate value, in no particular order, acc = ( acc + abs(iv) )"                       },
+        std::tuple<const size_t, const char*, const char*>{static_cast<size_t>(REDUCE::PRODUCT),     "PRODUCT",     "Accumulator starts at 1. For each intermediate value, in no particular order, acc = ( acc * iv )"                            },
+        std::tuple<const size_t, const char*, const char*>{static_cast<size_t>(REDUCE::ABS_PRODUCT), "ABS_PRODUCT", "Accumulator starts at 1. For each intermediate value, in no particular order, acc = ( acc * abs(iv) )"                       },
+        std::tuple<const size_t, const char*, const char*>{static_cast<size_t>(REDUCE::MIN),         "MIN",         "Accumulator starts at the highest possible value. For each intermediate value, in no particular order, acc = min( acc , iv )"},
+        std::tuple<const size_t, const char*, const char*>{static_cast<size_t>(REDUCE::MAX),         "MAX",         "Accumulator starts at the lowest possible value. For each intermediate value, in no particular order, acc = max( acc , iv )" }
     };
 
     enum class NAN_POLICY : size_t{
-        NOTHING_SPECIAL=0,
-        SKIP_NAN_IN_KERNEL,
-        SKIP_NAN_IN_DATA,
-        SKIP_NAN_IN_KERNEL_OR_DATA,
-        SKIP_NAN_IN_INTERMEDIATE,
+        FAST=0,
+        NA_RM_FALSE,
+        NA_RM_TRUE,
         SIZE
     };
 
-    enum class MEAN_POLICY : size_t{
-        KENEL_SIZE=0,
-        SUM_NON_NAN_KERNEL_VALUES,
-        MUL_NON_NAN_KERNEL_VALUES,
-        COUNT_NON_NAN_KERNEL_VALUES,
-        COUNT_NON_NAN_INTERMEDIATE_VALUES,
+    const std::array<const std::tuple<const size_t, const char*, const char*>, static_cast<size_t>(NAN_POLICY::SIZE)> NAN_POLICY_DESCRIPTION {
+        std::tuple<const size_t, const char*, const char*>{static_cast<size_t>(NAN_POLICY::FAST),        "FAST",        "Assume that there will be no NAN values. Will not crash if it is given a NAN, but makes no garuntee other than that."},
+        std::tuple<const size_t, const char*, const char*>{static_cast<size_t>(NAN_POLICY::NA_RM_FALSE), "NA_RM_FALSE", "Will propagate NANs aggressively."                                                                                   },
+        std::tuple<const size_t, const char*, const char*>{static_cast<size_t>(NAN_POLICY::NA_RM_TRUE),  "NA_RM_TRUE",  "Will discard NAN values early."                                                                                      }
+    };
+
+    enum class MEAN_DIVISOR : size_t{
+        ONE=0,
+        KERNEL_SIZE,
+        KERNEL_COUNT,
+        KERNEL_SUM,
+        KERNEL_ABS_SUM,
+        KERNEL_PROD,
+        KERNEL_ABS_PROD,
+        DYNAMIC_COUNT,
+        DYNAMIC_SUM,
+        DYNAMIC_ABS_SUM,
+        DYNAMIC_PROD,
+        DYNAMIC_ABS_PROD,
+        DYNAMIC_DATA_SUM,
+        DYNAMIC_DATA_ABS_SUM,
+        DYNAMIC_DATA_PROD,
+        DYNAMIC_DATA_ABS_PROD,
         SIZE
     };
 
-    template<TRANSFORM TRANSFORM_FUNCTION, REDUCE REDUCE_FUNCTION, NAN_POLICY NAN_P, MEAN_POLICY MEAN_P, size_t ALIGNMENT=_P_FOCAL_ALLIGNMENT>
-    void p_conv(const expanded_aligned_data<ALIGNMENT>& src, const expanded_aligned_data<ALIGNMENT>& kernel, double* out_p, bool open_mp_requested){
-        static_assert(TRANSFORM_FUNCTION < TRANSFORM::SIZE,   "TRANSFORM_FUNCTION out of range");
-        static_assert(REDUCE_FUNCTION    < REDUCE::SIZE,      "REDUCE_FUNCTION out of range");
-        static_assert(NAN_P              < NAN_POLICY::SIZE,  "NAN_POLICY out of range");
-        static_assert(MEAN_P             < MEAN_POLICY::SIZE, "MEAN_POLICY out of range");
+    const std::array<const std::tuple<const size_t, const char*, const char*>, static_cast<size_t>(MEAN_DIVISOR::SIZE)> MEAN_DIVISOR_DESCRIPTION {
+        std::tuple<const size_t, const char*, const char*>{static_cast<size_t>(MEAN_DIVISOR::ONE),                     "ONE",                     "Does not divide the final value by anything"                                                                                   },
+        std::tuple<const size_t, const char*, const char*>{static_cast<size_t>(MEAN_DIVISOR::KERNEL_SIZE),             "KERNEL_SIZE",             "Divide the final value at each point by nrow(k)*ncol(k)"                                                                       },
+        std::tuple<const size_t, const char*, const char*>{static_cast<size_t>(MEAN_DIVISOR::KERNEL_COUNT),            "KERNEL_COUNT",            "Divide the final value at each point by sum(+!is.na(k))"                                                                        },
+        std::tuple<const size_t, const char*, const char*>{static_cast<size_t>(MEAN_DIVISOR::KERNEL_SUM),              "KERNEL_SUM",              "Divide the final value at each point by sum(k[!is.na(k)])"                                                                     },
+        std::tuple<const size_t, const char*, const char*>{static_cast<size_t>(MEAN_DIVISOR::KERNEL_ABS_SUM),          "KERNEL_ABS_SUM",          "Divide the final value at each point by sum(abs(k[!is.na(k)]))"                                                                },
+        std::tuple<const size_t, const char*, const char*>{static_cast<size_t>(MEAN_DIVISOR::KERNEL_PROD),             "KERNEL_PROD",             "Divide the final value at each point by prod(k[!is.na(k)])"                                                                    },
+        std::tuple<const size_t, const char*, const char*>{static_cast<size_t>(MEAN_DIVISOR::KERNEL_ABS_PROD),         "KERNEL_ABS_PROD",         "Divide the final value at each point by prod(abs(k[!is.na(k)]))"                                                               },
+        std::tuple<const size_t, const char*, const char*>{static_cast<size_t>(MEAN_DIVISOR::DYNAMIC_COUNT),           "DYNAMIC_COUNT",           "Divide the final value at each point by sum(!is.na( intermediate_data )), recalculated at every point"                         },
+        std::tuple<const size_t, const char*, const char*>{static_cast<size_t>(MEAN_DIVISOR::DYNAMIC_SUM),             "DYNAMIC_SUM",             "Divide the final value at each point by sum(intermediate_data[!is.na( intermediate_data )]), recalculated at every point"      },
+        std::tuple<const size_t, const char*, const char*>{static_cast<size_t>(MEAN_DIVISOR::DYNAMIC_ABS_SUM),         "DYNAMIC_ABS_SUM",         "Divide the final value at each point by sum(abs(intermediate_data[!is.na( intermediate_data )])), recalculated at every point" },
+        std::tuple<const size_t, const char*, const char*>{static_cast<size_t>(MEAN_DIVISOR::DYNAMIC_PROD),            "DYNAMIC_PROD",            "Divide the final value at each point by prod(intermediate_data[!is.na( intermediate_data )]), recalculated at every point"     },
+        std::tuple<const size_t, const char*, const char*>{static_cast<size_t>(MEAN_DIVISOR::DYNAMIC_ABS_PROD),        "DYNAMIC_ABS_PROD",        "Divide the final value at each point by prod(abs(intermediate_data[!is.na( intermediate_data )])), recalculated at every point"},
+        std::tuple<const size_t, const char*, const char*>{static_cast<size_t>(MEAN_DIVISOR::DYNAMIC_DATA_SUM),        "DYNAMIC_DATA_SUM",        "Divide the final value at each point by sum(local_data[!is.na( intermediate_data )]), recalculated at every point"             },
+        std::tuple<const size_t, const char*, const char*>{static_cast<size_t>(MEAN_DIVISOR::DYNAMIC_DATA_ABS_SUM),    "DYNAMIC_DATA_ABS_SUM",    "Divide the final value at each point by sum(abs(local_data[!is.na( intermediate_data )])), recalculated at every point"        },
+        std::tuple<const size_t, const char*, const char*>{static_cast<size_t>(MEAN_DIVISOR::DYNAMIC_DATA_PROD),       "DYNAMIC_DATA_PROD",       "Divide the final value at each point by prod(local_data[!is.na( intermediate_data )]), recalculated at every point"            },
+        std::tuple<const size_t, const char*, const char*>{static_cast<size_t>(MEAN_DIVISOR::DYNAMIC_DATA_ABS_PROD),   "DYNAMIC_DATA_ABS_PROD",   "Divide the final value at each point by prod(abs(local_data[!is.na( intermediate_data )])), recalculated at every point"       }
+    };
+
+
+    template<TRANSFORM TRANSFORM_FUNCTION, REDUCE REDUCE_FUNCTION, NAN_POLICY NAN_P, MEAN_DIVISOR MEAN_D, bool VARIANCE, size_t ALIGNMENT=_P_FOCAL_ALLIGNMENT>
+    void p_conv(const expanded_aligned_data<ALIGNMENT>& src, const expanded_aligned_data<ALIGNMENT>& kernel, double* dest, const bool open_mp_requested){
+
+        static_assert(TRANSFORM_FUNCTION < TRANSFORM::SIZE,    "TRANSFORM_FUNCTION out of range");
+        static_assert(REDUCE_FUNCTION    < REDUCE::SIZE,       "REDUCE_FUNCTION out of range");
+        static_assert(NAN_P              < NAN_POLICY::SIZE,   "NAN_POLICY out of range");
+        static_assert(MEAN_D             < MEAN_DIVISOR::SIZE, "MEAN_D out of range");
+
 
         if(!_P_FOCAL_OPENMP_ENADLED && open_mp_requested){std::cerr << "You are asking for open_mp, but it was not enabled at compile time\n";};
 
+        //set up compile time values
         static const size_t ALIGNMENT_BYTES = expanded_aligned_data<ALIGNMENT>::alignment();
-        static const double ACC_INITIAL_VALUE = ((std::array<double, (size_t)REDUCE::SIZE>){0, 1, std::numeric_limits<double>::max(), std::numeric_limits<double>::min(), 0, 0})[(size_t)REDUCE_FUNCTION];
 
+        static const double ACC_INITIAL_VALUE =
+            std::array<const double, static_cast<size_t>(REDUCE::SIZE)>({
+                0,                                  //SUM
+                0,                                  //ABS_SUM
+                1,                                  //PRODUCT
+                1,                                  //ABS_PRODUCT
+                std::numeric_limits<double>::max(), //MIN
+                std::numeric_limits<double>::min()  //MAX
+            })[static_cast<size_t>(REDUCE_FUNCTION)];
+
+        //set up once per call values
         const bool open_mp_enabled = _P_FOCAL_OPENMP_ENADLED && open_mp_requested;
 
         const size_t s_start_position = src.start_position;
@@ -281,184 +344,332 @@ namespace p_focal{
         const size_t k_cols = kernel.n_col;
         const size_t k_rows = kernel.n_row;
 
-        //work out what the divider should be if we were to use the mean for something
+
+
+        //For non-dynamic divisors, calculate them once
         double mean_divider_temp;
-        if constexpr(MEAN_P == MEAN_POLICY::KENEL_SIZE){
+
+        if constexpr(MEAN_D == MEAN_DIVISOR::ONE){
+            mean_divider_temp = 1;
+
+        }else if constexpr(MEAN_D == MEAN_DIVISOR::KERNEL_SIZE){
             mean_divider_temp = k_cols * k_rows;
-        }else if constexpr(MEAN_P == MEAN_POLICY::SUM_NON_NAN_KERNEL_VALUES || MEAN_P == MEAN_POLICY::MUL_NON_NAN_KERNEL_VALUES || MEAN_P == MEAN_POLICY::COUNT_NON_NAN_KERNEL_VALUES){
-            mean_divider_temp = !!(MEAN_P == MEAN_POLICY::MUL_NON_NAN_KERNEL_VALUES);
+
+        }else if constexpr(
+                MEAN_D ==  MEAN_DIVISOR::KERNEL_COUNT   ||
+                MEAN_D ==  MEAN_DIVISOR::KERNEL_SUM     ||
+                MEAN_D ==  MEAN_DIVISOR::KERNEL_ABS_SUM ||
+                MEAN_D ==  MEAN_DIVISOR::KERNEL_PROD    ||
+                MEAN_D ==  MEAN_DIVISOR::KERNEL_ABS_PROD){
+
+            //If we are taking a product, we start at 1, and otherwise we must be taking a sum so we start at 0
+            mean_divider_temp = +(MEAN_D ==  MEAN_DIVISOR::KERNEL_PROD || MEAN_D ==  MEAN_DIVISOR::KERNEL_ABS_PROD);
             for(size_t k_col=0; k_col<k_cols; k_col++){
                 const double* const k_col_p     = (double*)__builtin_assume_aligned((k_p + k_col*k_col_size), ALIGNMENT_BYTES);
+
                 for(size_t k_row=0; k_row < k_rows; k_row++){
                     if(!std::isnan(k_col_p[k_row])){
-                        if constexpr(MEAN_P == MEAN_POLICY::SUM_NON_NAN_KERNEL_VALUES){
+                        if constexpr(MEAN_D == MEAN_DIVISOR::KERNEL_COUNT){
+                            mean_divider_temp += 1;
+
+                        }else if constexpr(MEAN_D == MEAN_DIVISOR::KERNEL_SUM){
                             mean_divider_temp += k_col_p[k_row];
-                        }else if constexpr(MEAN_P == MEAN_POLICY::MUL_NON_NAN_KERNEL_VALUES){
+
+                        }else if constexpr(MEAN_D == MEAN_DIVISOR::KERNEL_ABS_SUM){
+                            mean_divider_temp += std::abs(k_col_p[k_row]);
+
+                        }else if constexpr(MEAN_D == MEAN_DIVISOR::KERNEL_PROD || MEAN_D == MEAN_DIVISOR::KERNEL_ABS_PROD){ //do abs at the end
                             mean_divider_temp *= k_col_p[k_row];
-                        }else if constexpr(MEAN_P == MEAN_POLICY::COUNT_NON_NAN_KERNEL_VALUES){
-                            mean_divider_temp++;
+
                         }else{
-                            static_assert((size_t)MEAN_P & 0);
+                            static_assert((size_t)MEAN_D & 0);
                         }
                     }
                 }
             }
-        }else if constexpr(MEAN_P == MEAN_POLICY::COUNT_NON_NAN_INTERMEDIATE_VALUES){
-            mean_divider_temp = 0;
         }else{
-            static_assert((size_t)MEAN_P & 0);
+            mean_divider_temp = 0;
         }
+
+        if constexpr(MEAN_D ==  MEAN_DIVISOR::KERNEL_ABS_PROD){
+            mean_divider_temp = std::abs(mean_divider_temp);
+        }
+
         const double mean_divider = mean_divider_temp;
 
+        //start the main loops
 
         #pragma omp parallel if(open_mp_enabled)
         for(size_t d_col=0; d_col<d_cols; d_col++){
             const double* const d_col_p = (double*)__builtin_assume_aligned((d_p+d_col*d_col_size), ALIGNMENT_BYTES);
-             double* const out_col_p = out_p+d_col*d_rows;
+            double* const dest_col_p = dest+d_col*d_rows;
 
             for(size_t d_row=0; d_row<d_rows; d_row++){
 
                 double acc = ACC_INITIAL_VALUE;
-                double local_mean_divider = 0;
+                //if we are taking a product, we start with 1, otherwise we start with 0
+                double local_mean_divider_temp = +(
+                        MEAN_D == MEAN_DIVISOR::DYNAMIC_PROD       ||
+                        MEAN_D == MEAN_DIVISOR::DYNAMIC_ABS_PROD   ||
+                        MEAN_D == MEAN_DIVISOR::DYNAMIC_DATA_PROD  ||
+                        MEAN_D == MEAN_DIVISOR::DYNAMIC_DATA_ABS_PROD);
 
                 for(size_t k_col=0; k_col<k_cols; k_col++){
+                    //if NA_RM_FALSE, NAN will always win, so we can stop early
+                    if constexpr(NAN_P == NAN_POLICY::NA_RM_FALSE){
+                        if(std::isnan(acc)){
+                            continue;
+                        }
+                    }
+
                     const double* const k_col_p     = (double*)__builtin_assume_aligned((k_p    + k_col          *k_col_size), ALIGNMENT_BYTES);
                     const double* const d_col_p_off = (double*)__builtin_assume_aligned((d_col_p+(k_col-k_cols/2)*d_col_size), ALIGNMENT_BYTES);
 
                     for(size_t k_row=0; k_row < k_rows; k_row++){
+                        //if NA_RM_FALSE, NAN will always win, so we can stop early
+                        if constexpr(NAN_P == NAN_POLICY::NA_RM_FALSE){
+                            if(std::isnan(acc)){
+                                continue;
+                            }
+                        }
 
+                        //fetch the kernel value at this point
                         const double k_val = k_col_p[k_row];
-                        if constexpr(NAN_P == NAN_POLICY::SKIP_NAN_IN_KERNEL || NAN_P == NAN_POLICY::SKIP_NAN_IN_KERNEL_OR_DATA){
+                        if constexpr(NAN_P == NAN_POLICY::NA_RM_TRUE){
                             if(std::isnan(k_val)){
                                 continue;
                             }
                         }
 
+                        //fetch the data value at this point
                         const double d_val = d_col_p_off[d_row+k_row-k_rows/2];
-                        if constexpr(NAN_P == NAN_POLICY::SKIP_NAN_IN_DATA || NAN_P == NAN_POLICY::SKIP_NAN_IN_KERNEL_OR_DATA){
+                        if constexpr(NAN_P == NAN_POLICY::NA_RM_TRUE){
                             if(std::isnan(d_val)){
                                 continue;
                             }
                         }
 
-                        double p;
+                        //calculate the intermediate value at this point
+                        double intermediate;
 
                         if constexpr(TRANSFORM_FUNCTION == TRANSFORM::MULTIPLY){
-                            p = k_val * d_val;
+                            intermediate = d_val * k_val;
+
                         }else if constexpr(TRANSFORM_FUNCTION == TRANSFORM::ADD){
-                            p = k_val + d_val;
+                            intermediate = d_val + k_val;
+
                         }else if constexpr(TRANSFORM_FUNCTION == TRANSFORM::R_EXP){
-                            p = pow(d_val, k_val);
+                            intermediate = std::pow(d_val, k_val);
+
                         }else if constexpr(TRANSFORM_FUNCTION == TRANSFORM::L_EXP){
-                            p = pow(k_val, d_val);
+                            intermediate = std::pow(k_val, d_val);
+
                         }else{
                             static_assert((size_t)TRANSFORM_FUNCTION & 0);
                         }
 
-                        if constexpr(NAN_P == NAN_POLICY::SKIP_NAN_IN_INTERMEDIATE){
-                            if(std::isnan(p)){
+                        if constexpr(NAN_P == NAN_POLICY::NA_RM_FALSE){
+                            if(std::isnan(intermediate)){
+                                acc = std::numeric_limits<double>::quiet_NaN();
+                                continue;
+                            }
+                        }else if constexpr(NAN_P == NAN_POLICY::NA_RM_TRUE){
+                            if(std::isnan(intermediate)){
                                 continue;
                             }
                         }
 
-                        if constexpr(REDUCE_FUNCTION == REDUCE::SUM || REDUCE_FUNCTION == REDUCE::MEAN || REDUCE_FUNCTION == REDUCE::VARIANCE){
-                            acc += p;
-                        }else if constexpr(REDUCE_FUNCTION == REDUCE::PRODUCT){
-                            acc *= p;
+                        //if we get here, run the reduce function
+
+                        if constexpr(REDUCE_FUNCTION == REDUCE::SUM){
+                            acc += intermediate;
+
+                        }else if constexpr(REDUCE_FUNCTION == REDUCE::ABS_SUM){
+                            acc += std::abs(intermediate);
+
+                        }else if constexpr(REDUCE_FUNCTION == REDUCE::PRODUCT || REDUCE_FUNCTION == REDUCE::ABS_PRODUCT){ //do the abs at the end
+                            acc *= intermediate;
+
                         }else if constexpr(REDUCE_FUNCTION == REDUCE::MIN){
-                            //std::cout << d_col << ", " << d_row << ", " << k_col << ", " << k_row << ", " << p << ", " << acc;
-                            acc = std::fmin(p, acc);
-                            //std::cout << ", " << acc << "\n";
+                            acc = std::min(acc, intermediate);
+
                         }else if constexpr(REDUCE_FUNCTION == REDUCE::MAX){
-                            acc = std::fmax(p, acc);
+                            acc = std::max(acc, intermediate);
+
                         }else{
                             static_assert((size_t)REDUCE_FUNCTION & 0);
+
                         }
 
-                        if constexpr(MEAN_P == MEAN_POLICY::COUNT_NON_NAN_INTERMEDIATE_VALUES){
-                            local_mean_divider += !(std::isnan(p));
+                        //if we are doing a dynamic divider, update it
+                        if constexpr(MEAN_D == MEAN_DIVISOR::DYNAMIC_COUNT){
+                            local_mean_divider_temp += 1;
+
+                        }else if constexpr(MEAN_D == MEAN_DIVISOR::DYNAMIC_SUM){
+                            local_mean_divider_temp += intermediate;
+
+                        }else if constexpr(MEAN_D == MEAN_DIVISOR::DYNAMIC_ABS_SUM){
+                            local_mean_divider_temp += std::abs(intermediate);
+
+                        }else if constexpr(MEAN_D == MEAN_DIVISOR::DYNAMIC_PROD || MEAN_D == MEAN_DIVISOR::DYNAMIC_ABS_PROD){ //do the abs at the end
+                            local_mean_divider_temp *= intermediate;
+
+                        }else if constexpr(MEAN_D == MEAN_DIVISOR::DYNAMIC_DATA_SUM){
+                            local_mean_divider_temp += d_val;
+
+                        }else if constexpr(MEAN_D == MEAN_DIVISOR::DYNAMIC_DATA_ABS_SUM){
+                            local_mean_divider_temp += std::abs(d_val);
+
+                        }else if constexpr(MEAN_D == MEAN_DIVISOR::DYNAMIC_DATA_PROD || MEAN_D == MEAN_DIVISOR::DYNAMIC_DATA_ABS_PROD){ //do the abs at the end
+                            local_mean_divider_temp *= d_val;
                         }
-                    }
+                    }//kernel values
+                }//kernel cols
+
+                //do the defered abs for foo_abs_product
+                if constexpr(REDUCE_FUNCTION == REDUCE::ABS_PRODUCT){
+                    acc = std::abs(acc);
                 }
-                if constexpr(REDUCE_FUNCTION == REDUCE::SUM || REDUCE_FUNCTION == REDUCE::PRODUCT || REDUCE_FUNCTION == REDUCE::MAX || REDUCE_FUNCTION == REDUCE::MIN){
-                    out_col_p[d_row] = acc;
-                }else if constexpr(REDUCE_FUNCTION == REDUCE::MEAN){
-                    if constexpr(MEAN_P == MEAN_POLICY::COUNT_NON_NAN_INTERMEDIATE_VALUES){
-                        out_col_p[d_row] = acc/local_mean_divider;
-                    }else{
-                        out_col_p[d_row] = acc/mean_divider;
-                    }
-                }else if constexpr(REDUCE_FUNCTION == REDUCE::VARIANCE){
-                    //We now know the mean, we need to re-run finding the square of the difference. We can't do this in one pass
-                    double mean_div_temp;
+                if constexpr(MEAN_D == MEAN_DIVISOR::DYNAMIC_ABS_PROD || MEAN_D == MEAN_DIVISOR::DYNAMIC_DATA_ABS_PROD){
+                    local_mean_divider_temp = std::abs(local_mean_divider_temp);
+                }
 
-                    if constexpr(MEAN_P == MEAN_POLICY::COUNT_NON_NAN_INTERMEDIATE_VALUES){
-                        mean_div_temp = local_mean_divider;
-                    }else{
-                        mean_div_temp = mean_divider;
-                    }
-                    const double mean_div = mean_div_temp;
+                //combine the global or the local divider
+                double mean_d_temp;
+                if constexpr(
+                        MEAN_D == MEAN_DIVISOR::ONE            ||
+                        MEAN_D == MEAN_DIVISOR::KERNEL_SIZE    ||
+                        MEAN_D == MEAN_DIVISOR::KERNEL_COUNT   ||
+                        MEAN_D == MEAN_DIVISOR::KERNEL_SUM     ||
+                        MEAN_D == MEAN_DIVISOR::KERNEL_ABS_SUM ||
+                        MEAN_D == MEAN_DIVISOR::KERNEL_PROD    ||
+                        MEAN_D == MEAN_DIVISOR::KERNEL_ABS_PROD){
+                    mean_d_temp = mean_divider;
+                }else{
+                    mean_d_temp = local_mean_divider_temp;
+                }
+                const double mean_d = mean_d_temp;
 
-                    const double mean = acc/mean_div;
+                if constexpr(VARIANCE){
+                    //we want the variance, not the value
+                    const double mean = acc/mean_d;
 
-                    //std::cout << d_col << ", " << d_row << ", " << mean_div << ", " << acc << ", " << mean;
-
-                    double acc2 = 0;
+                    acc = ACC_INITIAL_VALUE;
 
                     for(size_t k_col=0; k_col<k_cols; k_col++){
+                        //if NA_RM_FALSE, NAN will always win, so we can stop early
+                        if constexpr(NAN_P == NAN_POLICY::NA_RM_FALSE){
+                            if(std::isnan(acc)){
+                                continue;
+                            }
+                        }
+
                         const double* const k_col_p     = (double*)__builtin_assume_aligned((k_p    + k_col          *k_col_size), ALIGNMENT_BYTES);
                         const double* const d_col_p_off = (double*)__builtin_assume_aligned((d_col_p+(k_col-k_cols/2)*d_col_size), ALIGNMENT_BYTES);
 
                         for(size_t k_row=0; k_row < k_rows; k_row++){
+                            //if NA_RM_FALSE, NAN will always win, so we can stop early
+                            if constexpr(NAN_P == NAN_POLICY::NA_RM_FALSE){
+                                if(std::isnan(acc)){
+                                    continue;
+                                }
+                            }
 
+                            //fetch the kernel value at this point
                             const double k_val = k_col_p[k_row];
-                            if constexpr(NAN_P == NAN_POLICY::SKIP_NAN_IN_KERNEL || NAN_P == NAN_POLICY::SKIP_NAN_IN_KERNEL_OR_DATA){
+                            if constexpr(NAN_P == NAN_POLICY::NA_RM_TRUE){
                                 if(std::isnan(k_val)){
                                     continue;
                                 }
                             }
 
+                            //fetch the data value at this point
                             const double d_val = d_col_p_off[d_row+k_row-k_rows/2];
-                            if constexpr(NAN_P == NAN_POLICY::SKIP_NAN_IN_DATA || NAN_P == NAN_POLICY::SKIP_NAN_IN_KERNEL_OR_DATA){
+                            if constexpr(NAN_P == NAN_POLICY::NA_RM_TRUE){
                                 if(std::isnan(d_val)){
                                     continue;
                                 }
                             }
 
-                            double p;
+                            //calculate the intermediate value at this point
+                            double intermediate;
 
                             if constexpr(TRANSFORM_FUNCTION == TRANSFORM::MULTIPLY){
-                                p = k_val * d_val;
+                                intermediate = d_val * k_val;
+
                             }else if constexpr(TRANSFORM_FUNCTION == TRANSFORM::ADD){
-                                p = k_val + d_val;
+                                intermediate = d_val + k_val;
+
                             }else if constexpr(TRANSFORM_FUNCTION == TRANSFORM::R_EXP){
-                                p = pow(d_val, k_val);
+                                intermediate = std::pow(d_val, k_val);
+
                             }else if constexpr(TRANSFORM_FUNCTION == TRANSFORM::L_EXP){
-                                p = pow(k_val, d_val);
+                                intermediate = std::pow(k_val, d_val);
+
                             }else{
                                 static_assert((size_t)TRANSFORM_FUNCTION & 0);
                             }
-                            //std::cout << ", " << k_col << ", " << k_row << ", " << p;
-                            if constexpr(NAN_P == NAN_POLICY::SKIP_NAN_IN_INTERMEDIATE){
-                                if(std::isnan(p)){
+
+                            if constexpr(NAN_P == NAN_POLICY::NA_RM_FALSE){
+                                if(std::isnan(intermediate)){
+                                    acc = std::numeric_limits<double>::quiet_NaN();
+                                    continue;
+                                }
+                            }else if constexpr(NAN_P == NAN_POLICY::NA_RM_TRUE){
+                                if(std::isnan(intermediate)){
                                     continue;
                                 }
                             }
-                            acc2 += (p-mean)*(p-mean);
-                        }
-                    }
 
+                            intermediate = (intermediate-mean)*(intermediate-mean);
 
-                    out_col_p[d_row] = acc2/mean_div;
+                            //if we get here, run the reduce function
 
+                            if constexpr(REDUCE_FUNCTION == REDUCE::SUM || REDUCE_FUNCTION == REDUCE::ABS_SUM){//intermediate is positive
+                                acc += intermediate;
 
-                    //std::cout << ", " << acc2 << ", " << acc2/mean_div << "\n";
+                            }else if constexpr(REDUCE_FUNCTION == REDUCE::PRODUCT || REDUCE_FUNCTION == REDUCE::ABS_PRODUCT){ //intermediate is positive
+                                acc *= intermediate;
 
+                            }else if constexpr(REDUCE_FUNCTION == REDUCE::MIN){
+                                acc = std::min(acc, intermediate);
+
+                            }else if constexpr(REDUCE_FUNCTION == REDUCE::MAX){
+                                acc = std::max(acc, intermediate);
+
+                            }else{
+                                static_assert((size_t)REDUCE_FUNCTION & 0);
+
+                            }
+
+                        }//kernel values
+                    }//kernel cols
+                }//variance
+                if constexpr(MEAN_D == MEAN_DIVISOR::ONE){
+                    dest_col_p[d_row] = acc;
                 }else{
-                    static_assert((size_t)REDUCE_FUNCTION & 0);
+                    dest_col_p[d_row] = acc/mean_d;
+                    /*
+                    if constexpr(NAN_P == NAN_POLICY::FAST){
+                        dest_col_p[d_row] = acc/mean_d;
+                    }else if constexpr(NAN_P == NAN_POLICY::NA_RM_TRUE){
+                        if(mean_d){
+                            dest_col_p[d_row] = acc/mean_d;
+                        }else{
+                            dest_col_p[d_row] = acc;
+                        }
+                    }else if constexpr(NAN_P == NAN_POLICY::NA_RM_FALSE){
+                        if(mean_d){
+                            dest_col_p[d_row] = acc/mean_d;
+                        }else{
+                            dest_col_p[d_row] = NAN;
+                        }
+                    }else{
+                        static_assert((size_t)NAN_P & 0);
+                    }*/
                 }
-            }
-        }
+            }//data vals
+        }//data cols
     }
 }
 
