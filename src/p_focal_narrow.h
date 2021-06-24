@@ -75,7 +75,7 @@ namespace p_focal{
                 p_conv<TRANSFORM_FUNCTION, REDUCE_FUNCTION, NAN_P, MEAN_DIVISOR::DYNAMIC_DATA_ABS_PROD>(src, kernel, dest, open_mp_requested, variance);
 
 
-            break; default: Rcout << "bad mean divisor\n";exit(64);
+            break; default: stop("bad mean divisor\n");
         }
     }
 
@@ -93,7 +93,7 @@ namespace p_focal{
             break;case NAN_POLICY::NA_RM_TRUE:
                 p_conv<TRANSFORM_FUNCTION, REDUCE_FUNCTION, NAN_POLICY::NA_RM_TRUE> (src, kernel, dest, open_mp_requested, mean_d, variance);
 
-            break; default: Rcout << "bad nan policy\n";exit(64);
+            break; default: stop("bad nan policy\n");
         }
 
     }
@@ -121,7 +121,7 @@ namespace p_focal{
             break;case REDUCE::MAX:
                 p_conv<TRANSFORM_FUNCTION, REDUCE::MAX>        (src, kernel, dest, open_mp_requested, nan_p, mean_d, variance);
 
-            break; default: Rcout << "bad reduce function\n";exit(64);
+            break; default: stop("bad reduce function\n");
         }
     }
 
@@ -142,7 +142,7 @@ namespace p_focal{
             break;case TRANSFORM::L_EXP:
                 p_conv<TRANSFORM::L_EXP>   (src, kernel, dest, open_mp_requested, reduce_function, nan_p, mean_d, variance);
 
-            break; default: Rcout << "bad transform function\n";exit(64);
+            break; default: stop("bad transform function\n");
         }
     }
 
