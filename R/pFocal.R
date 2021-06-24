@@ -1,6 +1,6 @@
 #' Fast, parallel implementation of raster focal calculations
 #' 
-#' A fast and pluralized implementation of focal and convolutionnal calculation
+#' A fast and pluralized implementation of focal and conventional calculation
 #' on raster-type data (matrices and other grid based objects).
 #' 
 #' @param data **\[matrix-type\]** Grid to compute onto.

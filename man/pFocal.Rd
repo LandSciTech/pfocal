@@ -45,7 +45,7 @@ pFocal(
 The updated matrix-type object.
 }
 \description{
-A fast and pluralized implementation of focal and convolutionnal calculation
+A fast and pluralized implementation of focal and conventional calculation
 on raster-type data (matrices and other grid based objects).
 }
 \examples{
