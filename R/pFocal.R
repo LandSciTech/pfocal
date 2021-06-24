@@ -71,10 +71,7 @@ pFocal.stars <- function(data, ...){
   #some code from github.com/michaeldorman/starsExtra R/focal2.R:focal2
   template <- data
   
-  data = starsExtra::check_one_attribute(data)
-  data = starsExtra::check_2d(data)
-  
-  input = starsExtra::layer_to_matrix(template, check = FALSE)
+  input = starsExtra::layer_to_matrix(template, check = TRUE)
   
   output <- pFocal.matrix(input, ...)
   
