@@ -1,7 +1,9 @@
 
 
-
-.pFocal <- function(data, kernel, edge_value = NA, transform_function = "MULTIPLY", reduce_function = "SUM", mean_divider = "ONE", variance=FALSE, na.rm = NA, mp=TRUE, debug_use_r_implementation=FALSE){
+#' @export
+.pFocal <- function(data, kernel, edge_value = NA, transform_function = "MULTIPLY", 
+                    reduce_function = "SUM", mean_divider = "ONE", variance=FALSE, 
+                    na.rm = NA, mp=TRUE, debug_use_r_implementation=FALSE){
   
   pFocal_f <- if(debug_use_r_implementation){.p_focal_r}else{.p_focal_cpp}
   
@@ -20,8 +22,11 @@
   v_index <- pFocal_narrow_variance(variance)
   
   if(is.na(v_index)){stop("variance must be logical or 'TRUE' or 'FALSE'")}
-  if(is.na(m_index)){stop("Unknown mean_divider. If you don't want to divide the output, leave this set to 'ONE'")}
-  if(is.na(n_index)){stop("Unknown na.rm value. It must be logical, or NA if you want more speed and don't care about how NA is handeled")}
+  if(is.na(m_index)){stop(paste0("Unknown mean_divider. If you don't want to ",
+                                 "divide the output, leave this set to 'ONE'"))}
+  if(is.na(n_index)){stop(paste0("Unknown na.rm value. It must be logical, or NA",
+                                 " if you want more speed and don't care about",
+                                 " how NA is handeled"))}
   
   if(is.na(t_index)){
     #special transform cases
@@ -44,14 +49,17 @@
   
   if(is.na(r_index)){
     if(toupper(reduce_function) == "RANGE"){
-      return(pFocal_f(data, kernel, edge_value, t_index, pFocal_narrow_reduce("MAX"), n_index, m_index, v_index, mp)-
-               pFocal_f(data, kernel, edge_value, t_index, pFocal_narrow_reduce("MIN"), n_index, m_index, v_index, mp))
+      return(pFocal_f(data, kernel, edge_value, t_index, pFocal_narrow_reduce("MAX"), 
+                      n_index, m_index, v_index, mp)-
+               pFocal_f(data, kernel, edge_value, t_index, pFocal_narrow_reduce("MIN"), 
+                        n_index, m_index, v_index, mp))
     }else{
       stop("Unknown reduce_function")
     }
   }
   
-  pf = pFocal_f(data, kernel, edge_value, t_index, r_index, n_index, m_index, v_index, mp)
+  pf = pFocal_f(data, kernel, edge_value, t_index, r_index, n_index, m_index, 
+                v_index, mp)
   
   pf[is.nan(pf)] <- NA
   pf[is.infinite(pf)] <- Inf
@@ -60,12 +68,17 @@
   
 }
 
+pFocal.matrix <- function(data, kernel, edge_value = NA, transform_function = "MULTIPLY", 
+                          reduce_function = "SUM", mean_divider = "ONE", variance=FALSE, 
+                          na.rm = NA, mp=TRUE, debug_use_r_implementation=FALSE, ...) {
+  .pFocal(data, kernel, edge_value, transform_function, reduce_function, mean_divider, 
+          variance, na.rm, mp, debug_use_r_implementation)
+}
 
-pFocal.matrix <- function(data, kernel, edge_value = NA, transform_function = "MULTIPLY", reduce_function = "SUM", mean_divider = "ONE", variance=FALSE, na.rm = NA, mp=TRUE, debug_use_r_implementation=FALSE, ...) .pFocal(data, kernel, edge_value, transform_function, reduce_function, mean_divider, variance, na.rm, mp, debug_use_r_implementation)
+# pFocal.stars <- function(x, w, fun = "SUM", weight_fun = "MULTIPLY", 
+#                          na_policy="NOTHING_SPECIAL", mean_policy="KERNEL_SIZE", 
+#                          na_flag = NA, mp=TRUE, debug_use_r_implementation=FALSE){
 
-
-
-#pFocal.stars <- function(x, w, fun = "SUM", weight_fun = "MULTIPLY", na_policy="NOTHING_SPECIAL", mean_policy="KERNEL_SIZE", na_flag = NA, mp=TRUE, debug_use_r_implementation=FALSE){
 pFocal.stars <- function(data, ...){
   
   #some code from github.com/michaeldorman/starsExtra R/focal2.R:focal2
@@ -84,14 +97,18 @@ pFocal.stars <- function(data, ...){
   return(template)
 }
 
-pFocal <- function(data, kernel, edge_value = 0, transform_function = "MULTIPLY", reduce_function = "SUM", mean_divider = "ONE", variance=FALSE, na.rm = NA, mp=TRUE, debug_use_r_implementation=FALSE, ...){
+pFocal <- function(data, kernel, edge_value = 0, transform_function = "MULTIPLY", 
+                   reduce_function = "SUM", mean_divider = "ONE", variance=FALSE, 
+                   na.rm = NA, mp=TRUE, debug_use_r_implementation=FALSE, ...){
   if(methods::is(data, "matrix")){
-    return(pFocal.matrix(data, kernel, edge_value, transform_function, reduce_function, mean_divider, variance, na.rm, mp, debug_use_r_implementation, ...))
+    return(pFocal.matrix(data, kernel, edge_value, transform_function, 
+                         reduce_function, mean_divider, variance, 
+                         na.rm, mp, debug_use_r_implementation, ...))
   }else if(methods::is(data, "stars")){
-    return(pFocal.stars(data, kernel, edge_value, transform_function, reduce_function, mean_divider, variance, na.rm, mp, debug_use_r_implementation, ...))
+    return(pFocal.stars(data, kernel, edge_value, transform_function, 
+                        reduce_function, mean_divider, variance, 
+                        na.rm, mp, debug_use_r_implementation, ...))
   }else{
     stop('unsupported type, x must be a "matrix" or a "stars"')
   }
 }
-
-
