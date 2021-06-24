@@ -159,4 +159,3 @@ Rcpp::NumericMatrix p_focal_cpp(
         return dest;
     }
 }
-
