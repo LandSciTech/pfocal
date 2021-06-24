@@ -1,4 +1,29 @@
-
+#' Fast, parallel implementation of raster focal calculations
+#' 
+#' A fast and pluralized implementation of focal and convolutionnal calculation
+#' on raster-type data (matrices and other grid based objects).
+#' 
+#' @param data **\[matrix-type\]** Grid to compute onto.
+#' @param kernel **\[matrix\]** Computation kernel (neighborhood).
+#' @param edge_value **\[numeric\]** TBD, default to 0.
+#' @param transform_function **\[character\]** TBD, default to "MULTIPLY".
+#' @param reduce_function **\[character\]** TBD, default to "SUM".
+#' @param mean_divider **\[character\]** TBD, default to "ONE".
+#' @param variance **\[logical\]** TBD, default to FALSE.
+#' @param na.rm **\[NA OR logical\]** TBD, default to NA.
+#' @param mp **\[logical\]** TBD, default to TRUE.
+#' @param debug_use_r_implementation **\[logical\]** TDB, default to FALSE.
+#' @param ... TDB.
+#' 
+#' @return 
+#' The updated matrix-type object.
+#' 
+#' @examples 
+#' 
+#' data <- matrix(nrow = 10, ncol = 10, data = runif(10*10))
+#' kernel <- matrix(1/9,nrow=3,ncol=3)
+#' pFocal(data = data, kernel = kernel)
+#' 
 #' @export
 pFocal <- function(data, kernel, edge_value = 0, transform_function = "MULTIPLY", 
                    reduce_function = "SUM", mean_divider = "ONE", variance=FALSE, 
@@ -16,6 +41,8 @@ pFocal <- function(data, kernel, edge_value = 0, transform_function = "MULTIPLY"
   }
 }
 
+# Matrix routine ----------------------------------------------------------
+
 pFocal.matrix <- function(data, kernel, edge_value = NA, transform_function = "MULTIPLY", 
                           reduce_function = "SUM", mean_divider = "ONE", variance=FALSE, 
                           na.rm = NA, mp=TRUE, debug_use_r_implementation=FALSE, ...) {
@@ -23,16 +50,18 @@ pFocal.matrix <- function(data, kernel, edge_value = NA, transform_function = "M
           variance, na.rm, mp, debug_use_r_implementation)
 }
 
+# Stars object routine ----------------------------------------------------
+
 # pFocal.stars <- function(x, w, fun = "SUM", weight_fun = "MULTIPLY", 
 #                          na_policy="NOTHING_SPECIAL", mean_policy="KERNEL_SIZE", 
 #                          na_flag = NA, mp=TRUE, debug_use_r_implementation=FALSE){
 
 pFocal.stars <- function(data, ...){
   
-  #some code from github.com/michaeldorman/starsExtra R/focal2.R:focal2
+  # Code from github.com/michaeldorman/starsExtra R/focal2.R:focal2
   template <- data
   
-  input = starsExtra::layer_to_matrix(template, check = TRUE)
+  input <- starsExtra::layer_to_matrix(template, check = TRUE)
   
   output <- pFocal.matrix(input, ...)
   
@@ -44,6 +73,8 @@ pFocal.stars <- function(data, ...){
   # Return
   return(template)
 }
+
+# General routine ---------------------------------------------------------
 
 .pFocal <- function(data, kernel, edge_value = NA, transform_function = "MULTIPLY", 
                     reduce_function = "SUM", mean_divider = "ONE", variance=FALSE, 
