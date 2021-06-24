@@ -8,7 +8,9 @@ Maintainer: Griffin Barrett <griffin-barrett@outlook.com>
 Description: Takes a matrix of numeric data and a kernel, 
   and convolves the data using the matrix.
 License: GPL-3 + file LICENSE
-Imports: Rcpp (>= 1.0.5)
+Imports: 
+    Rcpp (>= 1.0.5),
+    stats
 LinkingTo: Rcpp
 Suggests: 
     testthat
