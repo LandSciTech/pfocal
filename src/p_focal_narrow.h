@@ -1,9 +1,12 @@
 #ifndef P_FOCAL_NARROW_H
 #define P_FOCAL_NARROW_H
 
+#include <cstdlib>
+
+#include <Rcpp.h>
 #include "p_focal.h"
 
-#include <cstdlib>
+using namespace Rcpp;
 
 namespace p_focal{
 
@@ -72,7 +75,7 @@ namespace p_focal{
                 p_conv<TRANSFORM_FUNCTION, REDUCE_FUNCTION, NAN_P, MEAN_DIVISOR::DYNAMIC_DATA_ABS_PROD>(src, kernel, dest, open_mp_requested, variance);
 
 
-            break; default: std::cerr << "bad mean divisor\n";exit(64);
+            break; default: Rcout << "bad mean divisor\n";exit(64);
         }
     }
 
@@ -90,7 +93,7 @@ namespace p_focal{
             break;case NAN_POLICY::NA_RM_TRUE:
                 p_conv<TRANSFORM_FUNCTION, REDUCE_FUNCTION, NAN_POLICY::NA_RM_TRUE> (src, kernel, dest, open_mp_requested, mean_d, variance);
 
-            break; default: std::cerr << "bad nan policy\n";exit(64);
+            break; default: Rcout << "bad nan policy\n";exit(64);
         }
 
     }
@@ -118,7 +121,7 @@ namespace p_focal{
             break;case REDUCE::MAX:
                 p_conv<TRANSFORM_FUNCTION, REDUCE::MAX>        (src, kernel, dest, open_mp_requested, nan_p, mean_d, variance);
 
-            break; default: std::cerr << "bad reduce function\n";exit(64);
+            break; default: Rcout << "bad reduce function\n";exit(64);
         }
     }
 
@@ -139,7 +142,7 @@ namespace p_focal{
             break;case TRANSFORM::L_EXP:
                 p_conv<TRANSFORM::L_EXP>   (src, kernel, dest, open_mp_requested, reduce_function, nan_p, mean_d, variance);
 
-            break; default: std::cerr << "bad transform function\n";exit(64);
+            break; default: Rcout << "bad transform function\n";exit(64);
         }
     }
 
