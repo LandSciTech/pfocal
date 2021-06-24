@@ -31,10 +31,10 @@
     function(acc, v){max(acc, v)}  #MAX
   )[[reduce_fun+1]]
   
-  m_init <- do.call(c(
+  m_init <- c(
     #static mean divider values
     function(...){1},                    #ONE
-    function(k){length(c(k))},           #KERNEL_SIZE
+    function(k){length(c(k))},        #KERNEL_SIZE
     function(k){sum(+!is.na(k))},        #KERNEL_COUNT
     function(k){sum(k[!is.na(k)])},      #KERNEL_SUM
     function(k){sum(abs(k[!is.na(k)]))}, #KERNEL_ABS_SUM
@@ -50,7 +50,7 @@
     function(...){0}, #DYNAMIC_DATA_ABS_SUM
     function(...){1}, #DYNAMIC_DATA_PROD
     function(...){1}  #DYNAMIC_DATA_ABS_PROD
-  )[[mean_divisor+1]], args = list(k = k))
+  )[[mean_divisor+1]](k)
   
   mf <- c(
     #Static mean dividers do not change per value
