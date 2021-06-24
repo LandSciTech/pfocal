@@ -9,10 +9,13 @@ Description: Takes a matrix of numeric data and a kernel,
   and convolves the data using the matrix.
 License: GPL-3 + file LICENSE
 Imports: 
-    Rcpp (>= 1.0.5),
+    Rcpp,
     stats,
-    methods, 
+    methods,
     starsExtra
 LinkingTo: Rcpp
 Suggests:
     testthat
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+Encoding: UTF-8
