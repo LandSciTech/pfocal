@@ -1,5 +1,4 @@
 
-
 #' @export
 .pFocal <- function(data, kernel, edge_value = NA, transform_function = "MULTIPLY", 
                     reduce_function = "SUM", mean_divider = "ONE", variance=FALSE, 
