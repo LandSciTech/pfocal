@@ -12,7 +12,8 @@ WIP](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.o
 [![R-CMD-check](https://github.com/LandSciTech/dwsR/workflows/R-CMD-check/badge.svg)](https://github.com/LandSciTech/dwsR/actions)
 <!-- badges: end -->
 
-The goal of `dwsR` is to implement fast parallel convolution.
+The goal of `dwsR` is to implement fast parallel convolution. R version
+&gt;= 3.5 is required.
 
 ## Installation
 
