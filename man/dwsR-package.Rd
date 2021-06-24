@@ -11,4 +11,14 @@
 Takes a matrix of numeric data and a kernel, 
   and convolves the data using the matrix.
 }
+\author{
+\strong{Maintainer}: Griffin Barrett \email{griffin-barrett@outlook.com}
+
+Authors:
+\itemize{
+  \item Josie Hughes \email{josie.hughes@canada.ca}
+  \item Valentin Lucet \email{valentin.lucet@gmail.com}
+}
+
+}
 \keyword{internal}

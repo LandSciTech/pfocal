@@ -3,8 +3,13 @@ Type: Package
 Title: Provide Fast Convolution of Matrixes of Numbers
 Version: 0.0.0.1
 Date: 2021-02-26
-Author: Griffin Barrett
-Maintainer: Griffin Barrett <griffin-barrett@outlook.com>
+Authors@R: c(  
+    person("Griffin", "Barrett", email = "griffin-barrett@outlook.com", 
+           role = c("aut", "cre")), 
+    person("Josie", "Hughes", email = "josie.hughes@canada.ca", 
+           role = c("aut")), 
+    person("Valentin", "Lucet", email = "valentin.lucet@gmail.com", 
+           role = c("aut")))
 Description: Takes a matrix of numeric data and a kernel, 
   and convolves the data using the matrix.
 License: GPL-3 + file LICENSE
