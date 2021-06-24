@@ -10,7 +10,8 @@ Description: Takes a matrix of numeric data and a kernel,
 License: GPL-3 + file LICENSE
 Imports: 
     Rcpp (>= 1.0.5),
-    stats
+    stats,
+    methods
 LinkingTo: Rcpp
 Suggests: 
     testthat

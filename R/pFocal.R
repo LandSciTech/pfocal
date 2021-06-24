@@ -94,9 +94,9 @@ pFocal.stars <- function(data, ...){
 }
 
 pFocal <- function(data, kernel, edge_value = 0, transform_function = "MULTIPLY", reduce_function = "SUM", mean_divider = "ONE", variance=FALSE, na.rm = NA, mp=TRUE, debug_use_r_implementation=FALSE, ...){
-  if(is(data, "matrix")){
+  if(methods::is(data, "matrix")){
     return(pFocal.matrix(data, kernel, edge_value, transform_function, reduce_function, mean_divider, variance, na.rm, mp, debug_use_r_implementation, ...))
-  }else if(is(data, "stars")){
+  }else if(methods::is(data, "stars")){
     return(pFocal.stars(data, kernel, edge_value, transform_function, reduce_function, mean_divider, variance, na.rm, mp, debug_use_r_implementation, ...))
   }else{
     stop('unsupported type, x must be a "matrix" or a "stars"')
