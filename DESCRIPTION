@@ -11,7 +11,8 @@ License: GPL-3 + file LICENSE
 Imports: 
     Rcpp (>= 1.0.5),
     stats,
-    methods
+    methods, 
+    starsExtra
 LinkingTo: Rcpp
-Suggests: 
+Suggests:
     testthat

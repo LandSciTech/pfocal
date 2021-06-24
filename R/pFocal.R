@@ -45,7 +45,7 @@
   if(is.na(r_index)){
     if(toupper(reduce_function) == "RANGE"){
       return(pFocal_f(data, kernel, edge_value, t_index, pFocal_narrow_reduce("MAX"), n_index, m_index, v_index, mp)-
-             pFocal_f(data, kernel, edge_value, t_index, pFocal_narrow_reduce("MIN"), n_index, m_index, v_index, mp))
+               pFocal_f(data, kernel, edge_value, t_index, pFocal_narrow_reduce("MIN"), n_index, m_index, v_index, mp))
     }else{
       stop("Unknown reduce_function")
     }
@@ -62,35 +62,29 @@
 
 
 pFocal.matrix <- function(data, kernel, edge_value = NA, transform_function = "MULTIPLY", reduce_function = "SUM", mean_divider = "ONE", variance=FALSE, na.rm = NA, mp=TRUE, debug_use_r_implementation=FALSE, ...) .pFocal(data, kernel, edge_value, transform_function, reduce_function, mean_divider, variance, na.rm, mp, debug_use_r_implementation)
-  
+
 
 
 #pFocal.stars <- function(x, w, fun = "SUM", weight_fun = "MULTIPLY", na_policy="NOTHING_SPECIAL", mean_policy="KERNEL_SIZE", na_flag = NA, mp=TRUE, debug_use_r_implementation=FALSE){
 pFocal.stars <- function(data, ...){
   
   #some code from github.com/michaeldorman/starsExtra R/focal2.R:focal2
-  if(requireNamespace("starsExtra", quietly = TRUE)){
-    
-    template <- data
-    
-    data = starsExtra::check_one_attribute(data)
-    data = starsExtra::check_2d(data)
-    
-    input = layer_to_matrix(template, check = FALSE)
-    
-    output <- pFocal.matrix(input, ...)
-    
-    # Back to 'stars'
-    
-    output = t(output)
-    template[[1]] = output
-    
-    # Return
-    return(template)
-    
-  }else{
-    stop("We require package 'starsExtra' to process stars data")
-  }
+  template <- data
+  
+  data = starsExtra::check_one_attribute(data)
+  data = starsExtra::check_2d(data)
+  
+  input = starsExtra::layer_to_matrix(template, check = FALSE)
+  
+  output <- pFocal.matrix(input, ...)
+  
+  # Back to 'stars'
+  
+  output = t(output)
+  template[[1]] = output
+  
+  # Return
+  return(template)
 }
 
 pFocal <- function(data, kernel, edge_value = 0, transform_function = "MULTIPLY", reduce_function = "SUM", mean_divider = "ONE", variance=FALSE, na.rm = NA, mp=TRUE, debug_use_r_implementation=FALSE, ...){
