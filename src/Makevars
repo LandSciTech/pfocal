@@ -1,7 +1,2 @@
 CXX_STD = CXX17
-
-#STD=c++17
-#PKG_LIBS = ''
-#PKG_LIBS = '-ltbb'
-#PKG_CPPFLAGS = -funsafe-math-optimizations -fno-math-errno -fopenmp -I'../inst/include/'
 PKG_CPPFLAGS = -fopenmp -lgomp -I'../inst/include/'
