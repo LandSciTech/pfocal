@@ -74,6 +74,15 @@ jobs:
           pak::local_system_requirements(execute = TRUE)
           pak::pkg_system_requirements("rcmdcheck", execute = TRUE)
         shell: Rscript {0}
+      
+      - name: Install llvm (mac only)
+        if: runner.os == 'macOS'
+        run: |
+          brew install llvm
+          touch ~/.R/Makevars
+          echo "C=/usr/local/opt/llvm/bin/clang" >> ~/.R/Makevars
+          echo "CXX=/usr/local/opt/llvm/bin/clang++" >> ~/.R/Makevars
+        shell: bash
 
       - name: Install dependencies
         run: |
