@@ -120,25 +120,25 @@ Rcpp::NumericMatrix p_focal_cpp(
     bool good = true;
 
     if(tf >= TRANSFORM::SIZE){
-        Rcout << "\n"
+        Rcerr << "\n"
                   << "The transform function, ie: 'weight_fun', is not a valid value.\n"
                   << "It is " << ((size_t)tf) << " when it must be in the range [0, " << ((size_t)TRANSFORM::SIZE) << ")\n";
         good = false;
     }
     if(rf >= REDUCE::SIZE){
-        Rcout << "\n"
+        Rcerr << "\n"
                   << "The reduce function, ie: 'fun', is not a valid value.\n"
                   << "It is " << ((size_t)rf) << " when it must be in the range [0, " << ((size_t)REDUCE::SIZE) << ")\n";
         good = false;
     }
     if(nf >= NAN_POLICY::SIZE){
-        Rcout << "\n"
+        Rcerr << "\n"
                   << "The nan policy is not a valid value.\n"
                   << "It is " << ((size_t)nf) << " when it must be in the range [0, " << ((size_t)NAN_POLICY::SIZE) << ")\n";
         good = false;
     }
     if(md >= MEAN_DIVISOR::SIZE){
-        Rcout << "\n"
+        Rcerr << "\n"
                   << "The mean policy is not a valid value.\n"
                   << "It is " << ((size_t)md) << " when it must be in the range [0, " << ((size_t)MEAN_DIVISOR::SIZE) << ")\n";
         good = false;

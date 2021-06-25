@@ -117,7 +117,7 @@ namespace p_focal{
 
             this->buffer = (double*)malloc(this->data_size*sizeof(double)+alignment());
             if(!(this->buffer)){
-                Rcout << "Out of memory\n";
+                Rcerr << "Out of memory\n";
                 throw "Out of memory";
             }
             //take the first aligned pointer into the buffer
@@ -148,7 +148,7 @@ namespace p_focal{
 
             this->buffer = (double*)malloc(this->data_size*sizeof(double)+alignment());
             if(!(this->buffer)){
-                Rcout << "Out of memory\n";
+                Rcerr << "Out of memory\n";
                 throw "Out of memory";
             }
             //take the first aligned pointer into the buffer
@@ -315,7 +315,7 @@ namespace p_focal{
         static_assert(MEAN_D             < MEAN_DIVISOR::SIZE, "MEAN_D out of range");
 
 
-        if(!_P_FOCAL_OPENMP_ENADLED && open_mp_requested){Rcout << "You are asking for open_mp, but it was not enabled at compile time\n";};
+        if(!_P_FOCAL_OPENMP_ENADLED && open_mp_requested){Rcerr << "You are asking for open_mp, but it was not enabled at compile time\n";};
 
         //set up compile time values
         static const size_t ALIGNMENT_BYTES = expanded_aligned_data<ALIGNMENT>::alignment();
