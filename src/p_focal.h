@@ -72,13 +72,14 @@ namespace p_focal{
             const size_t n_row = this->n_row;
             const size_t start_position = this->start_position;
             const size_t col_size = this->col_size;
-            double* data = (double*)__builtin_assume_aligned((this->data), alignment());
+            double* data = this->data;
 
 #ifdef _OPENMP
-            #pragma omp parallel for simd aligned(data:alignment())
+            #pragma omp parallel for
 #endif
             for(size_t col = 0; col<n_col; col++){
-                double* col_start = (double*)__builtin_assume_aligned((data+start_position+(col_size*col)), alignment());
+                
+                double* col_start = (data+start_position+(col_size*col));
                 memcpy(col_start, incomming_data+(n_row*col), n_row*sizeof(double));
             }
         }
@@ -122,9 +123,7 @@ namespace p_focal{
                 throw "Out of memory";
             }
             //take the first aligned pointer into the buffer
-            this->data = (double*)__builtin_assume_aligned((double*)(
-                (((uintptr_t)(this->buffer))+alignment()-1) & ~(alignment()-1)
-            ), alignment());
+            this->data = (double*)((((uintptr_t)(this->buffer))+alignment()-1) & ~(alignment()-1));
 
             std::fill_n(data, data_size, default_value);
         }
@@ -153,9 +152,7 @@ namespace p_focal{
                 throw "Out of memory";
             }
             //take the first aligned pointer into the buffer
-            this->data = (double*)__builtin_assume_aligned((double*)(
-                    (((uintptr_t)(this->buffer))+alignment()-1) & ~(alignment()-1)
-                ), alignment());
+            this->data = (((uintptr_t)(this->buffer))+alignment()-1) & ~(alignment()-1);
 
             double* tdata = this->data;
             const double* odata = other.data;
@@ -337,8 +334,8 @@ namespace p_focal{
 
         const size_t s_start_position = src.start_position;
 
-        const double* const d_p = (double*)__builtin_assume_aligned((src.data+s_start_position), ALIGNMENT_BYTES);
-        const double* const k_p = (double*)__builtin_assume_aligned((kernel.data), ALIGNMENT_BYTES);
+        const double* const d_p = (src.data+s_start_position);
+        const double* const k_p = (kernel.data);
 
         const size_t d_col_size = src.col_size;
         const size_t k_col_size = kernel.col_size;
@@ -369,7 +366,7 @@ namespace p_focal{
             //If we are taking a product, we start at 1, and otherwise we must be taking a sum so we start at 0
             mean_divider_temp = +(MEAN_D ==  MEAN_DIVISOR::KERNEL_PROD || MEAN_D ==  MEAN_DIVISOR::KERNEL_ABS_PROD);
             for(size_t k_col=0; k_col<k_cols; k_col++){
-                const double* const k_col_p     = (double*)__builtin_assume_aligned((k_p + k_col*k_col_size), ALIGNMENT_BYTES);
+                const double* const k_col_p     = (k_p + k_col*k_col_size);
 
                 for(size_t k_row=0; k_row < k_rows; k_row++){
                     if(!std::isnan(k_col_p[k_row])){
@@ -406,7 +403,7 @@ namespace p_focal{
         #pragma omp parallel if(open_mp_enabled)
 #endif
         for(size_t d_col=0; d_col<d_cols; d_col++){
-            const double* const d_col_p = (double*)__builtin_assume_aligned((d_p+d_col*d_col_size), ALIGNMENT_BYTES);
+            const double* const d_col_p = (d_p+d_col*d_col_size);
             double* const dest_col_p = dest+d_col*d_rows;
 
             for(size_t d_row=0; d_row<d_rows; d_row++){
@@ -427,8 +424,8 @@ namespace p_focal{
                         }
                     }
 
-                    const double* const k_col_p     = (double*)__builtin_assume_aligned((k_p    + k_col          *k_col_size), ALIGNMENT_BYTES);
-                    const double* const d_col_p_off = (double*)__builtin_assume_aligned((d_col_p+(k_col-k_cols/2)*d_col_size), ALIGNMENT_BYTES);
+                    const double* const k_col_p     = (k_p    + k_col          *k_col_size);
+                    const double* const d_col_p_off = (d_col_p+(k_col-k_cols/2)*d_col_size);
 
                     for(size_t k_row=0; k_row < k_rows; k_row++){
                         //if NA_RM_FALSE, NAN will always win, so we can stop early
@@ -569,8 +566,8 @@ namespace p_focal{
                             }
                         }
 
-                        const double* const k_col_p     = (double*)__builtin_assume_aligned((k_p    + k_col          *k_col_size), ALIGNMENT_BYTES);
-                        const double* const d_col_p_off = (double*)__builtin_assume_aligned((d_col_p+(k_col-k_cols/2)*d_col_size), ALIGNMENT_BYTES);
+                        const double* const k_col_p     = (k_p    + k_col          *k_col_size);
+                        const double* const d_col_p_off = (d_col_p+(k_col-k_cols/2)*d_col_size);
 
                         for(size_t k_row=0; k_row < k_rows; k_row++){
                             //if NA_RM_FALSE, NAN will always win, so we can stop early
