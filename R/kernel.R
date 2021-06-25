@@ -46,13 +46,14 @@ kernel_flip_both <- function(k){
   k[c(nrow(k):1), c(ncol(k):1), drop = FALSE]
 }
 
-
 # A normalized kernel is one that, if given a data matrix that is all 1s, will result in 1
 # This function applies a scalier multiple to the kernel to make it normalized, if possible.
 # Otherwise, it optionally warns and returns the input kernel
 normalize_kernel <- function(k, warning_enabled = TRUE){
+  
   if(!is.logical(warning_enabled)){
-    stop('warning_enabled must be logical. If true, and if the kernal cannot be normalized (ex: it sums to 0) then a warning will be generated')
+    stop(paste0("warning_enabled must be logical. If true, and if the kernal ",
+                "cannot be normalized (ex: it sums to 0) then a warning will be generated"))
   }
   
   s <- sum(k, na.rm=TRUE)
