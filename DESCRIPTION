@@ -1,6 +1,6 @@
 Package: dwsR
 Type: Package
-Title: Provide Fast Convolution of Matrixes of Numbers
+Title: Fast Convolution of Matrixes of Numbers
 Version: 0.0.0.1
 Date: 2021-02-26
 Authors@R: c(  
@@ -11,8 +11,9 @@ Authors@R: c(
     person("Valentin", "Lucet", email = "valentin.lucet@gmail.com", 
            role = c("aut")))
 Description: Takes a matrix of numeric data and a kernel, 
-  and convolves the data using the matrix.
+    and convolves the data using the matrix.
 License: GPL-3 + file LICENSE
+Depends: R (>= 4.0.0)
 Imports: 
     Rcpp,
     stats,
