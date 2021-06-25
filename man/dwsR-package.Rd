@@ -4,12 +4,12 @@
 \name{dwsR-package}
 \alias{dwsR}
 \alias{dwsR-package}
-\title{dwsR: Provide Fast Convolution of Matrixes of Numbers}
+\title{dwsR: Fast Convolution of Matrixes of Numbers}
 \description{
 \if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
 
 Takes a matrix of numeric data and a kernel, 
-  and convolves the data using the matrix.
+    and convolves the data using the matrix.
 }
 \author{
 \strong{Maintainer}: Griffin Barrett \email{griffin-barrett@outlook.com}
