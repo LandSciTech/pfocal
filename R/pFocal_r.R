@@ -31,10 +31,6 @@
     function(acc, v){max(acc, v)}  #MAX
   )[[reduce_fun+1]]
   
-  k = NULL
-  if(mean_divisor %in% 2:6){
-    warning("k value was set to NULL")
-  }
   m_init <- c(
     #static mean divider values
     function(...){1},                    #ONE
@@ -54,7 +50,7 @@
     function(...){0}, #DYNAMIC_DATA_ABS_SUM
     function(...){1}, #DYNAMIC_DATA_PROD
     function(...){1}  #DYNAMIC_DATA_ABS_PROD
-  )[[mean_divisor+1]](k)
+  )[[mean_divisor+1]](kernel)
   
   mf <- c(
     #Static mean dividers do not change per value
