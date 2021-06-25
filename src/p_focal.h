@@ -74,8 +74,9 @@ namespace p_focal{
             const size_t col_size = this->col_size;
             double* data = (double*)__builtin_assume_aligned((this->data), alignment());
 
-
+#ifdef _OPENMP
             #pragma omp parallel for simd aligned(data:alignment())
+#endif
             for(size_t col = 0; col<n_col; col++){
                 double* col_start = (double*)__builtin_assume_aligned((data+start_position+(col_size*col)), alignment());
                 memcpy(col_start, incomming_data+(n_row*col), n_row*sizeof(double));
@@ -194,8 +195,9 @@ namespace p_focal{
             const size_t col_size = this->col_size;
             const size_t n_col = this->n_col;
             const size_t n_row = this->n_row;
-
+#ifdef _OPENMP
             #pragma omp parallel for
+#endif
             for(size_t col = 0; col<n_col; col++){
                 const double* c_data = data+col*col_size;
                 for(size_t row=0; row<n_row; row++){
@@ -212,11 +214,11 @@ namespace p_focal{
     }
 
     std::tuple<bool, int, int> openmp_self_test(void) noexcept{
-        if constexpr(_P_FOCAL_OPENMP_ENADLED){
+#ifdef _OPENMP
             return {true, _OPENMP, omp_get_max_threads()};
-        }else{
+#else
             return {false, 0, 1};
-        }
+#endif
     }
 
     enum class TRANSFORM : size_t{
@@ -400,8 +402,9 @@ namespace p_focal{
         const double mean_divider __attribute__((unused)) = mean_divider_temp;
 
         //start the main loops
-
+#ifdef _OPENMP
         #pragma omp parallel if(open_mp_enabled)
+#endif
         for(size_t d_col=0; d_col<d_cols; d_col++){
             const double* const d_col_p = (double*)__builtin_assume_aligned((d_p+d_col*d_col_size), ALIGNMENT_BYTES);
             double* const dest_col_p = dest+d_col*d_rows;
