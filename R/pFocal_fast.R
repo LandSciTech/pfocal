@@ -3,10 +3,10 @@
 #' Methods wrapping [pFocal] to implement common kernel computations with 
 #' default argument values
 #' 
-#' @param vertical_radious **\[numeric\]** Vertical radius for the kernel.
+#' @param vertical_radius **\[numeric\]** Vertical radius for the kernel.
 #' @param vertical_sd **\[numeric\]** TODO
 #' @param vertical_r0 **\[numeric\]**
-#' @param horizontal_radious **\[numeric\]**
+#' @param horizontal_radius **\[numeric\]**
 #' @param horizontal_sd **\[numeric\]**
 #' @param horizontal_r0 **\[numeric\]**
 #' @param tail_included **\[logical\]**
@@ -19,9 +19,9 @@
 
 #' @export
 #' @rdname pFocal-methods
-fast_gaussian_radious_pFocal <- 
-  function(data, vertical_radious, vertical_sd = 1, 
-           horizontal_radious = vertical_radious, horizontal_sd = vertical_sd, 
+fast_gaussian_radius_pFocal <- 
+  function(data, vertical_radius, vertical_sd = 1, 
+           horizontal_radius = vertical_radius, horizontal_sd = vertical_sd, 
            tail_included = TRUE, na.rm = NA, mp = TRUE, debug_use_r_implementation = FALSE,
            ..., transform_function = "MULTIPLY", reduce_function = "SUM", 
            mean_divider = "ONE", variance = FALSE){
@@ -33,9 +33,9 @@ fast_gaussian_radious_pFocal <-
     
     fast_seperated_pFocal(
       data, list(
-        gaussian_kernel_radious(vertical_radious,   vertical_sd,   0, 1, 
+        gaussian_kernel_radius(vertical_radius,   vertical_sd,   0, 1, 
                                 tail_included = tail_included),
-        gaussian_kernel_radious(0, 1, horizontal_radious, horizontal_sd, 
+        gaussian_kernel_radius(0, 1, horizontal_radius, horizontal_sd, 
                                 tail_included = tail_included)),
       na.rm = na.rm, mp = mp, debug_use_r_implementation = debug_use_r_implementation,
       transform_function = transform_function, reduce_function = reduce_function, 
@@ -68,8 +68,8 @@ fast_gaussian_confidence_pFocal <-
 #' @export
 #' @rdname pFocal-methods
 fast_binomial_pFocal <- 
-  function(data, vertical_radious, 
-           horizontal_radious = vertical_radious,
+  function(data, vertical_radius, 
+           horizontal_radius = vertical_radius,
            na.rm = NA, mp = TRUE, debug_use_r_implementation = FALSE,
            ..., transform_function = "MULTIPLY", reduce_function = "SUM", 
            mean_divider = "ONE", variance = FALSE){
@@ -81,8 +81,8 @@ fast_binomial_pFocal <-
     
     fast_seperated_pFocal(
       data, list(
-        binomial_kernel(vertical_radious, 0),
-        binomial_kernel(0, horizontal_radious)),
+        binomial_kernel(vertical_radius, 0),
+        binomial_kernel(0, horizontal_radius)),
       na.rm = na.rm, mp = mp, debug_use_r_implementation = debug_use_r_implementation,
       transform_function = transform_function, reduce_function = reduce_function, 
       mean_divider = mean_divider, variance = variance)

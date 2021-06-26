@@ -3,7 +3,7 @@
 export(fast_abs_rectangle_pFocal)
 export(fast_binomial_pFocal)
 export(fast_gaussian_confidence_pFocal)
-export(fast_gaussian_radious_pFocal)
+export(fast_gaussian_radius_pFocal)
 export(fast_seperated_pFocal)
 export(pFocal)
 export(pFocal_mean_divisor_info)
