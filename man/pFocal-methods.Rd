@@ -87,15 +87,19 @@ fast_seperated_pFocal(
 \arguments{
 \item{data}{\strong{[matrix-type]} Grid to compute onto.}
 
-\item{vertical_radius}{\strong{[numeric]} Vertical radius for the kernel.}
+\item{vertical_radius}{\strong{[numeric]} The kernel's radius in the vertical
+dimension.}
 
-\item{vertical_sd}{\strong{[numeric]} TODO}
+\item{vertical_sd}{\strong{[numeric]} The kernel's standard deviation in the
+vertical dimension.}
 
-\item{horizontal_radius}{\strong{[numeric]}}
+\item{horizontal_radius}{**[numeric]**The kernel's radius in the horizontal
+dimension.}
 
-\item{horizontal_sd}{\strong{[numeric]}}
+\item{horizontal_sd}{\strong{[numeric]} The kernel's standard deviation in the
+horizontal dimension.}
 
-\item{tail_included}{\strong{[logical]}}
+\item{tail_included}{\strong{[logical]} TODO}
 
 \item{na.rm}{\strong{[NA OR character]} The behavior to adopt for dealing with
 missing values, default to \code{NA}. Far possible values see
@@ -130,15 +134,21 @@ intermediate values at each point (for more details please see
 \code{\link[=pFocal_variance_info]{pFocal_variance_info()}}). Default to \code{FALSE} (just returns the value
 at each point).}
 
-\item{vertical_r0}{\strong{[numeric]}}
+\item{vertical_r0}{\strong{[numeric]} TODO}
 
-\item{horizontal_r0}{\strong{[numeric]}}
+\item{horizontal_r0}{\strong{[numeric]} TODO}
 
-\item{height}{\strong{[numeric]}}
+\item{height}{\strong{[numeric]} For rectangular kernels, the height of the
+rectangle.}
 
-\item{width}{\strong{[numeric]}}
+\item{width}{\strong{[numeric]} For rectangular kernels, the width of the
+rectangle.}
 
-\item{kernel_list}{\strong{[list]}}
+\item{kernel_list}{\strong{[list]} A list of kernels computer from functions in
+\link{kernels}.}
+}
+\value{
+The updated, convoluted grid.
 }
 \description{
 Methods wrapping \link{pFocal} to implement common kernel computations with

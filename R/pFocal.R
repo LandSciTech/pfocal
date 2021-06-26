@@ -35,7 +35,7 @@
 #' @param ... None used.
 #' 
 #' @return 
-#' The updated, convoluted grid-type object (`matrix` or `STARS`).
+#' The updated, convoluted grid.
 #' 
 #' @details 
 #' Note that the memory allocation for the output is of size

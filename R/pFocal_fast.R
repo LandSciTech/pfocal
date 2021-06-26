@@ -3,17 +3,27 @@
 #' Methods wrapping [pFocal] to implement common kernel computations with 
 #' default argument values
 #' 
-#' @param vertical_radius **\[numeric\]** Vertical radius for the kernel.
-#' @param vertical_sd **\[numeric\]** TODO
-#' @param vertical_r0 **\[numeric\]**
-#' @param horizontal_radius **\[numeric\]**
-#' @param horizontal_sd **\[numeric\]**
-#' @param horizontal_r0 **\[numeric\]**
-#' @param tail_included **\[logical\]**
-#' @param height **\[numeric\]**
-#' @param width **\[numeric\]**
-#' @param kernel_list **\[list\]**
+#' @param vertical_radius **\[numeric\]** The kernel's radius in the vertical
+#'     dimension.
+#' @param vertical_sd **\[numeric\]** The kernel's standard deviation in the 
+#'     vertical dimension.
+#' @param vertical_r0 **\[numeric\]** TODO
+#' @param horizontal_radius **\[numeric\]**The kernel's radius in the horizontal
+#'     dimension.
+#' @param horizontal_sd **\[numeric\]** The kernel's standard deviation in the 
+#'     horizontal dimension.
+#' @param horizontal_r0 **\[numeric\]** TODO
+#' @param tail_included **\[logical\]** TODO
+#' @param height **\[numeric\]** For rectangular kernels, the height of the 
+#'     rectangle.
+#' @param width **\[numeric\]** For rectangular kernels, the width of the 
+#'     rectangle.
+#' @param kernel_list **\[list\]** A list of kernels computer from functions in
+#'     [kernels].
 #' @inheritParams pFocal
+#' 
+#' @return 
+#' The updated, convoluted grid.
 
 # Fast kernel specific routines -------------------------------------------
 

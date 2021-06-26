@@ -61,7 +61,7 @@ Default to \code{FALSE}.}
 \item{...}{None used.}
 }
 \value{
-The updated, convoluted grid-type object (\code{matrix} or \code{STARS}).
+The updated, convoluted grid.
 }
 \description{
 A fast, parallel implementation of convolutions for grid-type
