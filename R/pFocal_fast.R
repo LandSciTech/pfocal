@@ -30,7 +30,7 @@
 # Fast kernel specific routines -------------------------------------------
 
 #' @export
-#' @rdname pFocal-methods
+#' @rdname pFocal_fast
 fast_gaussian_radius_pFocal <- 
   function(data, vertical_radius, vertical_sd = 1, 
            horizontal_radius = vertical_radius, horizontal_sd = vertical_sd, 
@@ -55,7 +55,7 @@ fast_gaussian_radius_pFocal <-
   }
 
 #' @export
-#' @rdname pFocal-methods
+#' @rdname pFocal_fast
 fast_gaussian_confidence_pFocal <- 
   function(data, vertical_r0 = 0.05, vertical_sd = 1, 
            horizontal_r0 = vertical_r0, horizontal_sd = vertical_sd, 
@@ -78,7 +78,7 @@ fast_gaussian_confidence_pFocal <-
   }
 
 #' @export
-#' @rdname pFocal-methods
+#' @rdname pFocal_fast
 fast_binomial_pFocal <- 
   function(data, vertical_radius, 
            horizontal_radius = vertical_radius,
@@ -101,7 +101,7 @@ fast_binomial_pFocal <-
   }
 
 #' @export
-#' @rdname pFocal-methods
+#' @rdname pFocal_fast
 fast_abs_rectangle_pFocal <- 
   function(data, height, width = height, value = 1,
            na.rm = NA, mp = TRUE, debug_use_r_implementation = FALSE,
@@ -128,7 +128,7 @@ fast_abs_rectangle_pFocal <-
 # Applies all kernels in the list in order. Made for separable kernels
 
 #' @export
-#' @rdname pFocal-methods
+#' @rdname pFocal_fast
 fast_seperated_pFocal <- 
   function(data, kernel_list, na.rm = NA, mp = TRUE, debug_use_r_implementation = FALSE, ..., 
            transform_function = "MULTIPLY", reduce_function = "SUM", mean_divider = "ONE", 
