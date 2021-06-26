@@ -104,7 +104,7 @@
     for(m in pFocal_mean_divisor_info()[,1]){
       for(r in pFocal_reduce_info()[,1]){
         for(t in pFocal_transform_info()[,1]){
-          o <- pFocal_compare(data, kernel, edge_value, t, r, m, v)
+          o <- .pFocal_compare(data, kernel, edge_value, t, r, m, v)
           if(any(o[5:length(o)] > 0)){
             print(o[1:4])
             print(o[5:length(o)])
