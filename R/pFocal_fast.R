@@ -1,6 +1,24 @@
+#' Fast methods for common kernel computations
+#' 
+#' Methods wrapping [pFocal] to implement common kernel computations with 
+#' default argument values
+#' 
+#' @param vertical_radious **\[numeric\]** Vertical radius for the kernel.
+#' @param vertical_sd **\[numeric\]** TODO
+#' @param vertical_r0 **\[numeric\]**
+#' @param horizontal_radious **\[numeric\]**
+#' @param horizontal_sd **\[numeric\]**
+#' @param horizontal_r0 **\[numeric\]**
+#' @param tail_included **\[logical\]**
+#' @param height **\[numeric\]**
+#' @param width **\[numeric\]**
+#' @param kernel_list **\[list\]**
+#' @inheritParams pFocal
 
 # Fast kernel specific routines -------------------------------------------
 
+#' @export
+#' @rdname pFocal-methods
 fast_gaussian_radious_pFocal <- 
   function(data, vertical_radious, vertical_sd = 1, 
            horizontal_radious = vertical_radious, horizontal_sd = vertical_sd, 
@@ -24,6 +42,8 @@ fast_gaussian_radious_pFocal <-
       mean_divider = mean_divider, variance = variance)
   }
 
+#' @export
+#' @rdname pFocal-methods
 fast_gaussian_confidence_pFocal <- 
   function(data, vertical_r0 = 0.05, vertical_sd = 1, 
            horizontal_r0 = vertical_r0, horizontal_sd = vertical_sd, 
@@ -45,6 +65,8 @@ fast_gaussian_confidence_pFocal <-
       mean_divider = mean_divider, variance = variance)
   }
 
+#' @export
+#' @rdname pFocal-methods
 fast_binomial_pFocal <- 
   function(data, vertical_radious, 
            horizontal_radious = vertical_radious,
@@ -66,6 +88,8 @@ fast_binomial_pFocal <-
       mean_divider = mean_divider, variance = variance)
   }
 
+#' @export
+#' @rdname pFocal-methods
 fast_abs_rectangle_pFocal <- 
   function(data, height, width = height, value = 1,
            na.rm = NA, mp = TRUE, debug_use_r_implementation = FALSE,
@@ -91,6 +115,8 @@ fast_abs_rectangle_pFocal <-
 # Only meant for multiply+sum, with no mean and no variance calculation. 
 # Applies all kernels in the list in order. Made for separable kernels
 
+#' @export
+#' @rdname pFocal-methods
 fast_seperated_pFocal <- 
   function(data, kernel_list, na.rm = NA, mp = TRUE, debug_use_r_implementation = FALSE, ..., 
            transform_function = "MULTIPLY", reduce_function = "SUM", mean_divider = "ONE", 
