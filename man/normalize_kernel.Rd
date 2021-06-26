@@ -8,6 +8,9 @@ normalize_kernel(k, warning_enabled = TRUE)
 }
 \arguments{
 \item{k}{\strong{[matrix]} The kernel.}
+
+\item{warning_enabled}{\strong{[logical]} Whether to unable warnings, default
+to \code{TRUE}.}
 }
 \value{
 The normalized kernel, a \code{matrix}.

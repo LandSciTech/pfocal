@@ -20,6 +20,7 @@
 #'     rectangle.
 #' @param width **\[numeric\]** For rectangular kernels, the width of the 
 #'     rectangle.
+#' @param value **\[numeric\]** For single value matrices, the value.
 #' @param kernel_list **\[list\]** A list of kernels computed from functions in
 #'     [kernel-gaussian], [kernel-binomial], [kernel-circular], [kernel-distance],
 #'     [kernel-exponential].

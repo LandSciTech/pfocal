@@ -6,6 +6,8 @@
 #' input kernel.
 #' 
 #' @param k **\[matrix\]** The kernel.
+#' @param warning_enabled **\[logical\]** Whether to unable warnings, default 
+#'     to `TRUE`.
 #' 
 #' @return 
 #' The normalized kernel, a `matrix`.
@@ -14,7 +16,7 @@
 normalize_kernel <- function(k, warning_enabled = TRUE){
   
   if(!is.logical(warning_enabled)){
-    stop(paste0("warning_enabled must be logical. If true, and if the kernal ",
+    stop(paste0("warning_enabled must be logical. If TRUE, and if the kernal ",
                 "cannot be normalized (ex: it sums to 0) then a warning will be generated"))
   }
   
