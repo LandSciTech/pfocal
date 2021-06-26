@@ -93,7 +93,7 @@ dimension.}
 \item{vertical_sd}{\strong{[numeric]} The kernel's standard deviation in the
 vertical dimension.}
 
-\item{horizontal_radius}{**[numeric]**The kernel's radius in the horizontal
+\item{horizontal_radius}{\strong{[numeric]} The kernel's radius in the horizontal
 dimension.}
 
 \item{horizontal_sd}{\strong{[numeric]} The kernel's standard deviation in the

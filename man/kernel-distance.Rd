@@ -36,7 +36,7 @@ distance_kernel(vertical_radius, horizontal_radius = vertical_radius)
 \item{vertical_radius}{\strong{[numeric]} The kernel's radius in the vertical
 dimension.}
 
-\item{horizontal_radius}{**[numeric]**The kernel's radius in the horizontal
+\item{horizontal_radius}{\strong{[numeric]} The kernel's radius in the horizontal
 dimension.}
 
 \item{p}{\strong{[numeric]} Exponent parameter for the minkowski distance.}

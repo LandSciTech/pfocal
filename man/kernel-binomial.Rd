@@ -11,7 +11,7 @@ binomial_kernel(vertical_radius, horizontal_radius = 0)
 \item{vertical_radius}{\strong{[numeric]} The kernel's radius in the vertical
 dimension.}
 
-\item{horizontal_radius}{**[numeric]**The kernel's radius in the horizontal
+\item{horizontal_radius}{\strong{[numeric]} The kernel's radius in the horizontal
 dimension.}
 }
 \value{

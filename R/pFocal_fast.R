@@ -9,7 +9,7 @@
 #'     vertical dimension.
 #' @param vertical_r0 **\[numeric\]** The kernel's r0 (exponential) in the 
 #'     vertical dimension.
-#' @param horizontal_radius **\[numeric\]**The kernel's radius in the horizontal
+#' @param horizontal_radius **\[numeric\]** The kernel's radius in the horizontal
 #'     dimension.
 #' @param horizontal_sd **\[numeric\]** The kernel's standard deviation in the 
 #'     horizontal dimension.
