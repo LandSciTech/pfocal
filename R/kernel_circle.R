@@ -1,3 +1,25 @@
+#' Compute an Circular kernel
+#' 
+#' Functions to compute a circular kernel.
+#' 
+#' @param r **\[numeric\]** Circle radius.
+#' 
+#' @return 
+#' A `matrix` corresponding to the kernel.
+#' 
+#' @export
+#' @rdname kernel-circular
+smooth_uniform_circle_kernel <- function(r) {.
+  q_kernel_to_kernel(.smooth_uniform_circle_quarter_kernel(r)) 
+}
+
+#' @export
+#' @rdname kernel-circular
+hard_uniform_circle_kernel <- function(r) {
+  .q_kernel_to_kernel(.hard_uniform_circle_quarter_kernel(r)) 
+}
+
+# Helpers -----------------------------------------------------------------
 
 .half_circle_integral <- function(r, a, b) {
   # This is $$\int_{a}^b \sqrt{r^2 - x^2} dx$$ simplified slightly
@@ -156,24 +178,12 @@
   }
 }
 
-
 .smooth_uniform_circle_quarter_kernel <- function(r) {
   qmx = matrix(1:(r+1.5), r+1.5, r+1.5)
   qmy = matrix(1:(r+1.5), r+1.5, r+1.5, byrow=TRUE)
   matrix(mapply(.square_covered_portion, r, qmx, qmy), r+1.5, r+1.5)
 }
 
-
 .hard_uniform_circle_quarter_kernel <- function(r){
   +(.euclidean_distance_quarter_kernel(r)<=r)
 }
-
-smooth_uniform_circle_kernel <- function(r) .q_kernel_to_kernel(.smooth_uniform_circle_quarter_kernel(r)) 
-
-hard_uniform_circle_kernel <- function(r) .q_kernel_to_kernel(.hard_uniform_circle_quarter_kernel(r)) 
-
-
-
-
-
-

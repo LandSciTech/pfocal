@@ -134,9 +134,11 @@ intermediate values at each point (for more details please see
 \code{\link[=pFocal_variance_info]{pFocal_variance_info()}}). Default to \code{FALSE} (just returns the value
 at each point).}
 
-\item{vertical_r0}{\strong{[numeric]} TODO}
+\item{vertical_r0}{\strong{[numeric]} The kernel's r0 (exponential) in the
+vertical dimension.}
 
-\item{horizontal_r0}{\strong{[numeric]} TODO}
+\item{horizontal_r0}{\strong{[numeric]} The kernel's r0 (exponential) in the
+horizontal dimension.}
 
 \item{height}{\strong{[numeric]} For rectangular kernels, the height of the
 rectangle.}
@@ -152,5 +154,5 @@ The updated, convoluted grid.
 }
 \description{
 Methods wrapping \link{pFocal} to implement common kernel computations with
-default argument values
+default argument values.
 }

@@ -1,18 +1,20 @@
 #' Fast methods for common kernel computations
 #' 
 #' Methods wrapping [pFocal] to implement common kernel computations with 
-#' default argument values
+#' default argument values.
 #' 
 #' @param vertical_radius **\[numeric\]** The kernel's radius in the vertical
 #'     dimension.
 #' @param vertical_sd **\[numeric\]** The kernel's standard deviation in the 
 #'     vertical dimension.
-#' @param vertical_r0 **\[numeric\]** TODO
+#' @param vertical_r0 **\[numeric\]** The kernel's r0 (exponential) in the 
+#'     vertical dimension.
 #' @param horizontal_radius **\[numeric\]**The kernel's radius in the horizontal
 #'     dimension.
 #' @param horizontal_sd **\[numeric\]** The kernel's standard deviation in the 
 #'     horizontal dimension.
-#' @param horizontal_r0 **\[numeric\]** TODO
+#' @param horizontal_r0 **\[numeric\]** The kernel's r0 (exponential) in the 
+#'     horizontal dimension.
 #' @param tail_included **\[logical\]** TODO
 #' @param height **\[numeric\]** For rectangular kernels, the height of the 
 #'     rectangle.
