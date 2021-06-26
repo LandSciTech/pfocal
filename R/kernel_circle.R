@@ -9,8 +9,8 @@
 #' 
 #' @export
 #' @rdname kernel-circular
-smooth_uniform_circle_kernel <- function(r) {.
-  q_kernel_to_kernel(.smooth_uniform_circle_quarter_kernel(r)) 
+smooth_uniform_circle_kernel <- function(r) {
+  .q_kernel_to_kernel(.smooth_uniform_circle_quarter_kernel(r)) 
 }
 
 #' @export
