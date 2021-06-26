@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 [![R-CMD-check](https://github.com/LandSciTech/dwsR/workflows/R-CMD-check/badge.svg)](https://github.com/LandSciTech/dwsR/actions)
 <!-- badges: end -->
 
-The goal of `dwsR` is to implement fast parallel convolution. R version >= 3.5 is required.
+The goal of `dwsR` is to implement fast parallel convolution. R version >= 4.0.0 is required.
 
 ## Installation
 

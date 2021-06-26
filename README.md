@@ -13,7 +13,7 @@ WIP](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.o
 <!-- badges: end -->
 
 The goal of `dwsR` is to implement fast parallel convolution. R version
-&gt;= 3.5 is required.
+&gt;= 4.0.0 is required.
 
 ## Installation
 
