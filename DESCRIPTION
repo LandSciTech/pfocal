@@ -13,6 +13,7 @@ Authors@R: c(
 Description: Takes a matrix of numeric data and a kernel, 
     and convolves the data using the matrix.
 License: GPL-3 + file LICENSE
+BugReports: https://github.com/LandSciTech/dwsR
 Depends: R (>= 4.0.0)
 Imports: 
     Rcpp,
