@@ -1,12 +1,12 @@
-#include "p_focal.h"
+#include <Rcpp.h>
 
+#include "p_focal.h"
 #include "p_focal_narrow.h"
 
-#include <Rcpp.h>
 using namespace p_focal;
+using namespace Rcpp;
 
 // [[Rcpp::plugins(cpp17)]]
-
 
 // [[Rcpp::export(.openmp_self_test_cpp)]]
 Rcpp::List openmp_self_test_cpp() {
@@ -120,25 +120,25 @@ Rcpp::NumericMatrix p_focal_cpp(
     bool good = true;
 
     if(tf >= TRANSFORM::SIZE){
-        std::cerr << "\n"
+        Rcerr << "\n"
                   << "The transform function, ie: 'weight_fun', is not a valid value.\n"
                   << "It is " << ((size_t)tf) << " when it must be in the range [0, " << ((size_t)TRANSFORM::SIZE) << ")\n";
         good = false;
     }
     if(rf >= REDUCE::SIZE){
-        std::cerr << "\n"
+        Rcerr << "\n"
                   << "The reduce function, ie: 'fun', is not a valid value.\n"
                   << "It is " << ((size_t)rf) << " when it must be in the range [0, " << ((size_t)REDUCE::SIZE) << ")\n";
         good = false;
     }
     if(nf >= NAN_POLICY::SIZE){
-        std::cerr << "\n"
+        Rcerr << "\n"
                   << "The nan policy is not a valid value.\n"
                   << "It is " << ((size_t)nf) << " when it must be in the range [0, " << ((size_t)NAN_POLICY::SIZE) << ")\n";
         good = false;
     }
     if(md >= MEAN_DIVISOR::SIZE){
-        std::cerr << "\n"
+        Rcerr << "\n"
                   << "The mean policy is not a valid value.\n"
                   << "It is " << ((size_t)md) << " when it must be in the range [0, " << ((size_t)MEAN_DIVISOR::SIZE) << ")\n";
         good = false;
@@ -159,4 +159,3 @@ Rcpp::NumericMatrix p_focal_cpp(
         return dest;
     }
 }
-

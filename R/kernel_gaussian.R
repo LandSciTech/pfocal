@@ -12,10 +12,10 @@
   }
   
   if(tail_included){
-    dist <- pnorm(-0.5:(radious+0.5), sd=sd, lower.tail=FALSE)
+    dist <- stats::pnorm(-0.5:(radious+0.5), sd=sd, lower.tail=FALSE)
     matrix(dist-append(dist[-1], 0))
   }else{
-    dist <- pnorm(-0.5:(radious+1.5), sd=sd, lower.tail=FALSE)
+    dist <- stats::pnorm(-0.5:(radious+1.5), sd=sd, lower.tail=FALSE)
     dist2 <- dist-append(dist[-1], 0)
     matrix(dist2[-length(dist2)])
   }
@@ -29,7 +29,7 @@
     stop("r0 must be <= 1")
   }
 
-  .gaussian_strip_radious(ceiling(qnorm((r0/2), sd=sd, lower.tail=FALSE)-0.5), sd=sd, tail_included=tail_included)
+  .gaussian_strip_radious(ceiling(stats::qnorm((r0/2), sd=sd, lower.tail=FALSE)-0.5), sd=sd, tail_included=tail_included)
 }
 
 .gaussian_quarter_kernel_radious <- function(vertical_radious, vertical_sd=1, horizontal_radious=vertical_radious, horizontal_sd=vertical_sd, tail_included=TRUE){

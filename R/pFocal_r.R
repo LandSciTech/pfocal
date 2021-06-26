@@ -50,7 +50,7 @@
     function(...){0}, #DYNAMIC_DATA_ABS_SUM
     function(...){1}, #DYNAMIC_DATA_PROD
     function(...){1}  #DYNAMIC_DATA_ABS_PROD
-  )[[mean_divisor+1]](k)
+  )[[mean_divisor+1]](kernel)
   
   mf <- c(
     #Static mean dividers do not change per value

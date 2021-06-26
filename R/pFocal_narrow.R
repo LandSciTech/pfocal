@@ -1,4 +1,28 @@
 
+# Higher level, argument level function calling routine below -------------
+
+pFocal_narrow_transform <- function(f) {
+  .pFocal_narrow(f, pFocal_transform_info())
+}
+
+pFocal_narrow_reduce <- function(f) {
+  .pFocal_narrow(f, pFocal_reduce_info())
+}
+
+pFocal_narrow_nan_policy <- function(f) {
+  .pFocal_narrow(f, pFocal_nan_policy_info())
+}
+
+pFocal_narrow_mean_divisor <- function(f) {
+  .pFocal_narrow(f, pFocal_mean_divisor_info())
+}
+
+pFocal_narrow_variance <- function(f) {
+  .pFocal_narrow(f, pFocal_variance_info())
+}
+
+# General routine ---------------------------------------------------------
+
 .pFocal_narrow <- function(f, info){
   
   if(is.na(f)){
@@ -32,9 +56,3 @@
     #stop("F must be a numeric or a string")
   }
 }
-
-pFocal_narrow_transform    <- function(f) .pFocal_narrow(f, pFocal_transform_info())
-pFocal_narrow_reduce       <- function(f) .pFocal_narrow(f, pFocal_reduce_info())
-pFocal_narrow_nan_policy   <- function(f) .pFocal_narrow(f, pFocal_nan_policy_info())
-pFocal_narrow_mean_divisor <- function(f) .pFocal_narrow(f, pFocal_mean_divisor_info())
-pFocal_narrow_variance     <- function(f) .pFocal_narrow(f, pFocal_variance_info())
