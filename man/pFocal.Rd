@@ -2,7 +2,7 @@
 % Please edit documentation in R/pFocal.R
 \name{pFocal}
 \alias{pFocal}
-\title{Fast, parallel implementation of raster focal calculations}
+\title{Fast, parallel implementation of grid data convolution}
 \usage{
 pFocal(
   data,
@@ -23,30 +23,54 @@ pFocal(
 
 \item{kernel}{\strong{[matrix]} Computation kernel (neighborhood).}
 
-\item{edge_value}{\strong{[numeric]} TBD, default to 0.}
+\item{edge_value}{\strong{[numeric]} Numeric value, \code{NA} or \code{NaN}.The value to
+give at the edge of the kernel matrix when the moving window overflows
+the data grid.}
 
-\item{transform_function}{\strong{[character]} TBD, default to "MULTIPLY".}
+\item{transform_function}{\strong{[character]} The function to apply to the
+cell values covered by the kernel. For possible values, see
+\code{\link[=pFocal_transform_info]{pFocal_transform_info()}}. Default to \code{"MULTIPLY"}.}
 
-\item{reduce_function}{\strong{[character]} TBD, default to "SUM".}
+\item{reduce_function}{\strong{[character]} The function to apply to the kernel
+values after the function passed in \code{transform_function} has been applied
+(the function that summarize the data). For possible values, see
+\code{\link[=pFocal_reduce_info]{pFocal_reduce_info()}}. Default to \code{"SUM"}.}
 
-\item{mean_divider}{\strong{[character]} TBD, default to "ONE".}
+\item{mean_divider}{\strong{[character]} Optional, allows to specify how the
+final value at each cell is divided by a value that can be function of
+the intermediate data resulting of applying \code{transform_function}. For
+possible values, see \code{\link[=pFocal_mean_divisor_info]{pFocal_mean_divisor_info()}}. Default to "ONE" (for
+no division).}
 
-\item{variance}{\strong{[logical]} TBD, default to FALSE.}
+\item{variance}{\strong{[logical]} Whether to return the "variance" of the
+intermediate values at each point (for more details please see
+\code{\link[=pFocal_variance_info]{pFocal_variance_info()}}). Default to \code{FALSE} (just returns the value
+at each point).}
 
-\item{na.rm}{\strong{[NA OR logical]} TBD, default to NA.}
+\item{na.rm}{\strong{[NA OR character]} The behavior to adopt for dealing with
+missing values, default to \code{NA}. Far possible values see
+\code{\link[=pFocal_nan_policy_info]{pFocal_nan_policy_info()}}.}
 
-\item{mp}{\strong{[logical]} TBD, default to TRUE.}
+\item{mp}{\strong{[logical]} Whether to use the open_mp implementation,
+default to \code{TRUE}.}
 
-\item{debug_use_r_implementation}{\strong{[logical]} TDB, default to FALSE.}
+\item{debug_use_r_implementation}{\strong{[logical]} Used for debugging purposes
+whether to use the slow R implementation instead of the fass C++ code.
+Default to \code{FALSE}.}
 
-\item{...}{TDB.}
+\item{...}{None used.}
 }
 \value{
-The updated matrix-type object.
+The updated, convoluted grid.
 }
 \description{
-A fast and pluralized implementation of focal and conventional calculation
-on raster-type data (matrices and other grid based objects).
+A fast, parallel implementation of convolutions for grid-type
+data (matrices, rasters and other grid based objects).
+}
+\details{
+Note that the memory allocation for the output is of size
+\code{sizeof(double) * ncol * nrow} and for the intermediate
+values, \code{sizeof(double) * (ncol + kernel_ncol) * (nrow + kernel_nrow/2)}.
 }
 \examples{
 

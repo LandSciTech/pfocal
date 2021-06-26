@@ -11,6 +11,13 @@
 Takes a matrix of numeric data and a kernel, 
     and convolves the data using the matrix.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item Report bugs at \url{https://github.com/LandSciTech/dwsR}
+}
+
+}
 \author{
 \strong{Maintainer}: Griffin Barrett \email{griffin-barrett@outlook.com}
 
