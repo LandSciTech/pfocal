@@ -1,10 +1,13 @@
 
+# Testing functions -------------------------------------------------------
+# This code is provided for forming a basis to tests and showing readers
+# how to compare outputs wit the R implementation.
+
 .implies <- function(a, b)
   a | !b
 
-
 #for all values, closer to 0 is better
-pFocal_compare <- function(
+.pFocal_compare <- function(
   data, 
   kernel, 
   edge_value = 0, 
@@ -23,14 +26,26 @@ pFocal_compare <- function(
   cv_f <- NA
   
   times <- c(
-    system.time(rv_t <- pFocal(data, kernel, edge_value, transform_function, reduce_function, mean_divider, variance, na.rm=TRUE, mp=FALSE, debug_use_r_implementation = TRUE)),
-    system.time(cv_t <- pFocal(data, kernel, edge_value, transform_function, reduce_function, mean_divider, variance, na.rm=TRUE, mp=TRUE, debug_use_r_implementation = FALSE)),
+    system.time(rv_t <- pFocal(data, kernel, edge_value, transform_function, 
+                               reduce_function, mean_divider, variance, na.rm=TRUE, 
+                               mp=FALSE, debug_use_r_implementation = TRUE)),
+    system.time(cv_t <- pFocal(data, kernel, edge_value, transform_function, 
+                               reduce_function, mean_divider, variance, na.rm=TRUE, 
+                               mp=TRUE, debug_use_r_implementation = FALSE)),
     
-    system.time(rv_n <- pFocal(data, kernel, edge_value, transform_function, reduce_function, mean_divider, variance, na.rm=NA, mp=FALSE, debug_use_r_implementation = TRUE)),
-    system.time(cv_n <- pFocal(data, kernel, edge_value, transform_function, reduce_function, mean_divider, variance, na.rm=NA, mp=TRUE, debug_use_r_implementation = FALSE)),
+    system.time(rv_n <- pFocal(data, kernel, edge_value, transform_function, 
+                               reduce_function, mean_divider, variance, na.rm=NA, 
+                               mp=FALSE, debug_use_r_implementation = TRUE)),
+    system.time(cv_n <- pFocal(data, kernel, edge_value, transform_function, 
+                               reduce_function, mean_divider, variance, na.rm=NA, 
+                               mp=TRUE, debug_use_r_implementation = FALSE)),
     
-    system.time(rv_f <- pFocal(data, kernel, edge_value, transform_function, reduce_function, mean_divider, variance, na.rm=TRUE, mp=FALSE, debug_use_r_implementation = TRUE)),
-    system.time(cv_f <- pFocal(data, kernel, edge_value, transform_function, reduce_function, mean_divider, variance, na.rm=TRUE, mp=TRUE, debug_use_r_implementation = FALSE))
+    system.time(rv_f <- pFocal(data, kernel, edge_value, transform_function, 
+                               reduce_function, mean_divider, variance, na.rm=TRUE, 
+                               mp=FALSE, debug_use_r_implementation = TRUE)),
+    system.time(cv_f <- pFocal(data, kernel, edge_value, transform_function, 
+                               reduce_function, mean_divider, variance, na.rm=TRUE, 
+                               mp=TRUE, debug_use_r_implementation = FALSE))
   )
   
   v_t = rv_t+rv_t
@@ -71,20 +86,19 @@ pFocal_compare <- function(
     #sum(!.implies(!na_rv_f, !na_rv_n)),
     #sum(!.implies(!na_cv_f, !na_cv_n)),
     
-  # sum(abs((rv_t-cv_t)[(!na_rv_t) && (!na_cv_t)])), #abs error of non NA values when na.rm=TRUE
-  # sum(abs((rv_t-cv_n)[(!na_rv_n) && (!na_cv_n)])), #abs error of non NA values when na.rm=NA
-  # sum(abs((rv_t-cv_f)[(!na_rv_f) && (!na_cv_f)])), #abs error of non NA values when na.rm=FALSE
-  #  
+    # sum(abs((rv_t-cv_t)[(!na_rv_t) && (!na_cv_t)])), #abs error of non NA values when na.rm=TRUE
+    # sum(abs((rv_t-cv_n)[(!na_rv_n) && (!na_cv_n)])), #abs error of non NA values when na.rm=NA
+    # sum(abs((rv_t-cv_f)[(!na_rv_f) && (!na_cv_f)])), #abs error of non NA values when na.rm=FALSE
+    #  
     max(c(0, (abs(rv_t-cv_t)/abs(v_t))[(!na_rv_t) & (!na_cv_t) & (!na_v_t)])), #highest reletive error in na.rm=TRUE
     max(c(0, (abs(rv_n-cv_n)/abs(v_n))[(!na_rv_n) & (!na_cv_n) & (!na_v_n)])), #highest reletive error in na.rm=TRUE
     max(c(0, (abs(rv_f-cv_f)/abs(v_f))[(!na_rv_f) & (!na_cv_f) & (!na_v_f)])), #highest reletive error in na.rm=TRUE
     
-  #  times
+    #  times
     0)
 }
 
-
-pFocal_compare_sweep <- function(data, kernel, edge_value){
+.pFocal_compare_sweep <- function(data, kernel, edge_value){
   
   for(v in 0:1){
     for(m in pFocal_mean_divisor_info()[,1]){
