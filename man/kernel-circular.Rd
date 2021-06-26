@@ -2,6 +2,7 @@
 % Please edit documentation in R/kernel_circle.R
 \name{smooth_uniform_circle_kernel}
 \alias{smooth_uniform_circle_kernel}
+\alias{kernel-circular}
 \alias{hard_uniform_circle_kernel}
 \title{Compute an Circular kernel}
 \usage{

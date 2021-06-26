@@ -9,6 +9,7 @@
 #' 
 #' @export
 #' @rdname kernel-binomial
+#' @aliases kernel-binomial
 binomial_kernel <- function(vertical_radius, horizontal_radius=0){
   .q_kernel_to_kernel(.binomial_quarter_kernel(vertical_radius, horizontal_radius))
 }

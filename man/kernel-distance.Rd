@@ -2,6 +2,7 @@
 % Please edit documentation in R/kernel_distance.R
 \name{euclidean_distance_kernel}
 \alias{euclidean_distance_kernel}
+\alias{kernel-distance}
 \alias{manhattan_distance_kernel}
 \alias{minkowski_distance_kernel}
 \alias{chebyshev_distance_kernel}

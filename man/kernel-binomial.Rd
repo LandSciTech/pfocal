@@ -2,6 +2,7 @@
 % Please edit documentation in R/kernel_binomial.R
 \name{binomial_kernel}
 \alias{binomial_kernel}
+\alias{kernel-binomial}
 \title{Compute an Binomial kernel}
 \usage{
 binomial_kernel(vertical_radius, horizontal_radius = 0)

@@ -9,6 +9,7 @@
 #' 
 #' @export
 #' @rdname kernel-gaussian
+#' @aliases kernel-gaussian
 gaussian_kernel_confidence <- function(
   vertical_r0=0.05, 
   vertical_sd=1, 

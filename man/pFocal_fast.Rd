@@ -149,8 +149,8 @@ rectangle.}
 \item{value}{\strong{[numeric]} For single value matrices, the value.}
 
 \item{kernel_list}{\strong{[list]} A list of kernels computed from functions in
-\link{kernel-gaussian}, \link{kernel-binomial}, \link{kernel-circular}, \link{kernel-distance},
-\link{kernel-exponential}.}
+\link{kernel-gaussian}, \link{kernel-binomial}, \link{kernel-circular},
+\link{kernel-distance}, \link{kernel-exponential}.}
 }
 \value{
 The updated, convoluted grid.

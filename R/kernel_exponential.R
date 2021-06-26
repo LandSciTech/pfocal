@@ -10,6 +10,7 @@
 #' 
 #' @export
 #' @rdname kernel-exponential
+#' @aliases kernel-exponential
 exponential_kernel <- function(beta=0.2, r0=0.05) {
   .q_kernel_to_kernel(.exponential_quarter_kernel(beta=beta, r0=r0))
 }

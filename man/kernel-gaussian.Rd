@@ -2,6 +2,7 @@
 % Please edit documentation in R/kernel_gaussian.R
 \name{gaussian_kernel_confidence}
 \alias{gaussian_kernel_confidence}
+\alias{kernel-gaussian}
 \alias{gaussian_kernel_radius}
 \title{Compute a Gaussian kernel}
 \usage{

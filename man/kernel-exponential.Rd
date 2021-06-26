@@ -2,6 +2,7 @@
 % Please edit documentation in R/kernel_exponential.R
 \name{exponential_kernel}
 \alias{exponential_kernel}
+\alias{kernel-exponential}
 \title{Compute an Exponential kernel}
 \usage{
 exponential_kernel(beta = 0.2, r0 = 0.05)

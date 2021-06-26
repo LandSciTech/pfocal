@@ -18,11 +18,11 @@ Depends: R (>= 4.0.0)
 Imports: 
     Rcpp,
     stats,
-    methods,
-    starsExtra
+    methods
 LinkingTo: Rcpp
 Suggests:
-    testthat
+    testthat,
+    starsExtra
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Encoding: UTF-8

@@ -10,6 +10,7 @@
 #' 
 #' @export
 #' @rdname kernel-distance
+#' @aliases kernel-distance
 euclidean_distance_kernel <- function(vertical_radius, 
                                       horizontal_radius=vertical_radius){
   .q_kernel_to_kernel(.euclidean_distance_quarter_kernel(vertical_radius, horizontal_radius))
