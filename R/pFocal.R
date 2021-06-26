@@ -5,18 +5,42 @@
 #' 
 #' @param data **\[matrix-type\]** Grid to compute onto.
 #' @param kernel **\[matrix\]** Computation kernel (neighborhood).
-#' @param edge_value **\[numeric\]** TBD, default to 0.
-#' @param transform_function **\[character\]** TBD, default to "MULTIPLY".
-#' @param reduce_function **\[character\]** TBD, default to "SUM".
-#' @param mean_divider **\[character\]** TBD, default to "ONE".
-#' @param variance **\[logical\]** TBD, default to FALSE.
-#' @param na.rm **\[NA OR logical\]** TBD, default to NA.
-#' @param mp **\[logical\]** TBD, default to TRUE.
-#' @param debug_use_r_implementation **\[logical\]** TDB, default to FALSE.
-#' @param ... TDB.
+#' @param edge_value **\[numeric\]** Numeric value, `NA` or `NaN`.The value to 
+#'     give at the edge of the kernel matrix when the moving window overflows 
+#'     the data grid.
+#' @param transform_function **\[character\]** The function to apply to the 
+#'     cell values covered by the kernel. For possible values, see 
+#'     [pFocal_transform_info()]. Default to `"MULTIPLY"`.
+#' @param reduce_function **\[character\]** The function to apply to the kernel 
+#'     values after the function passed in `transform_function` has been applied
+#'     (the function that summarize the data). For possible values, see 
+#'     [pFocal_reduce_info()]. Default to `"SUM"`.
+#' @param mean_divider **\[character\]** Optional, allows to specify how the 
+#'     final value at each cell is divided by a value that can be function of 
+#'     the intermediate data resulting of applying `transform_function`. For 
+#'     possible values, see [pFocal_mean_divisor_info()]. Default to "ONE" (for 
+#'     no division).
+#' @param variance **\[logical\]** Whether to return the "variance" of the 
+#'     intermediate values at each point (for more details please see 
+#'     [pFocal_variance_info()]). Default to `FALSE` (just returns the value
+#'     at each point).
+#' @param na.rm **\[NA OR character\]** The behavior to adopt for dealing with 
+#'     missing values, default to `NA`. Far possible values see 
+#'     [pFocal_nan_policy_info()].
+#' @param mp **\[logical\]** Whether to use the open_mp implementation, 
+#'     default to `TRUE`.
+#' @param debug_use_r_implementation **\[logical\]** Used for debugging purposes
+#'     whether to use the slow R implementation instead of the fass C++ code. 
+#'     Default to `FALSE`.
+#' @param ... None used.
 #' 
 #' @return 
-#' The updated matrix-type object.
+#' The updated, convoluted grid-type object (`matrix` or `STARS`).
+#' 
+#' @details 
+#' Note that the memory allocation for the output is of size
+#' `sizeof(double) * ncol * nrow` and for the intermediate
+#' values, `sizeof(double) * (ncol + kernel_ncol) * (nrow + kernel_nrow/2)`.
 #' 
 #' @examples 
 #' 
