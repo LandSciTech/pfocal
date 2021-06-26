@@ -1,5 +1,8 @@
 
-.p_focal_r <- function(data, kernel, edge_value, transform_fun, reduce_fun, nan_policy, mean_divisor, variance, open_mp){
+# R implementation for testing/debugging ---------------------------------
+
+.p_focal_r <- function(data, kernel, edge_value, transform_fun, reduce_fun, 
+                       nan_policy, mean_divisor, variance, open_mp){
   #if(open_mp){
   #  warning("You are using the R implementation, open_mp is not implemented here")
   #}
@@ -34,7 +37,7 @@
   m_init <- c(
     #static mean divider values
     function(...){1},                    #ONE
-    function(k){length(c(k))},        #KERNEL_SIZE
+    function(k){length(c(k))},           #KERNEL_SIZE
     function(k){sum(+!is.na(k))},        #KERNEL_COUNT
     function(k){sum(k[!is.na(k)])},      #KERNEL_SUM
     function(k){sum(abs(k[!is.na(k)]))}, #KERNEL_ABS_SUM
@@ -153,8 +156,3 @@
   
   return(output)
 }
-
-
-
-
-
