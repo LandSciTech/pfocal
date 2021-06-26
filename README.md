@@ -25,11 +25,22 @@ You can install the development version from
 devtools::install_github("LandSciTech/dwsR")
 ```
 
-## Examples
+## Example
 
 ``` r
-data <- matrix(nrow = 10, ncol = 10, data = runif(10*10))
-kernel <- matrix(1/9, nrow=3, ncol=3)
+library(dwsR)
 
-pFocal(data = data, kernel = kernel)
+data <- matrix(nrow = 100, ncol = 100, 
+               data = runif(n = 100*100, min = 0, max = 10))
+image(data)
 ```
+
+<img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
+
+``` r
+kernel <- exponential_kernel()
+convoluted <- pFocal(data = data, kernel = kernel, edge_value = 0)
+image(convoluted)
+```
+
+<img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />

@@ -11,6 +11,7 @@ knitr::opts_chunk$set(
   fig.path = "man/figures/README-",
   out.width = "100%"
 )
+set.seed(77)
 ```
 
 # dwsR <img src='man/figures/logo.png' align="right" height="150" />
@@ -27,16 +28,22 @@ The goal of `dwsR` is to implement fast parallel convolution. R version >= 4.0.0
 
 You can install the development version from [GitHub](https://github.com/) with:
 
-``` r
+```{r, eval=FALSE}
 # install.packages("devtools")
 devtools::install_github("LandSciTech/dwsR")
 ```
 
-## Examples
+## Example
 
-``` r
-data <- matrix(nrow = 10, ncol = 10, data = runif(10*10))
-kernel <- matrix(1/9, nrow=3, ncol=3)
+```{r}
+library(dwsR)
 
-pFocal(data = data, kernel = kernel)
+data <- matrix(nrow = 100, ncol = 100, 
+               data = runif(n = 100*100, min = 0, max = 10))
+image(data)
+```
+```{r}
+kernel <- exponential_kernel()
+convoluted <- pFocal(data = data, kernel = kernel, edge_value = 0)
+image(convoluted)
 ```
