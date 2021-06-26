@@ -20,8 +20,9 @@
 #'     rectangle.
 #' @param width **\[numeric\]** For rectangular kernels, the width of the 
 #'     rectangle.
-#' @param kernel_list **\[list\]** A list of kernels computer from functions in
-#'     [kernels].
+#' @param kernel_list **\[list\]** A list of kernels computed from functions in
+#'     [kernel-gaussian], [kernel-binomial], [kernel-circular], [kernel-distance],
+#'     [kernel-exponential].
 #' @inheritParams pFocal
 #' 
 #' @return 

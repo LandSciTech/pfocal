@@ -146,8 +146,9 @@ rectangle.}
 \item{width}{\strong{[numeric]} For rectangular kernels, the width of the
 rectangle.}
 
-\item{kernel_list}{\strong{[list]} A list of kernels computer from functions in
-\link{kernels}.}
+\item{kernel_list}{\strong{[list]} A list of kernels computed from functions in
+\link{kernel-gaussian}, \link{kernel-binomial}, \link{kernel-circular}, \link{kernel-distance},
+\link{kernel-exponential}.}
 }
 \value{
 The updated, convoluted grid.
