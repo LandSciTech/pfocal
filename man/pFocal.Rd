@@ -2,7 +2,7 @@
 % Please edit documentation in R/pFocal.R
 \name{pFocal}
 \alias{pFocal}
-\title{Fast, parallel implementation of raster focal calculations}
+\title{Fast, parallel implementation of grid data convolution}
 \usage{
 pFocal(
   data,
@@ -64,8 +64,8 @@ Default to \code{FALSE}.}
 The updated, convoluted grid-type object (\code{matrix} or \code{STARS}).
 }
 \description{
-A fast and pluralized implementation of focal and conventional calculation
-on raster-type data (matrices and other grid based objects).
+A fast, parallel implementation of convolutions for grid-type
+data (matrices, rasters and other grid based objects).
 }
 \details{
 Note that the memory allocation for the output is of size

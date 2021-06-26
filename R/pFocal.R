@@ -1,7 +1,7 @@
-#' Fast, parallel implementation of raster focal calculations
+#' Fast, parallel implementation of grid data convolution
 #' 
-#' A fast and pluralized implementation of focal and conventional calculation
-#' on raster-type data (matrices and other grid based objects).
+#' A fast, parallel implementation of convolutions for grid-type 
+#' data (matrices, rasters and other grid based objects).
 #' 
 #' @param data **\[matrix-type\]** Grid to compute onto.
 #' @param kernel **\[matrix\]** Computation kernel (neighborhood).
