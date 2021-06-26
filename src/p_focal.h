@@ -120,7 +120,7 @@ namespace p_focal{
             this->buffer = (double*)malloc(this->data_size*sizeof(double)+alignment());
             if(!(this->buffer)){
                 Rcerr << "Out of memory\n";
-                throw "Out of memory";
+                stop("Out of memory");
             }
             //take the first aligned pointer into the buffer
             this->data = (double*)((((uintptr_t)(this->buffer))+alignment()-1) & ~(alignment()-1));
