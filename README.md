@@ -32,7 +32,7 @@ library(dwsR)
 
 data <- matrix(nrow = 100, ncol = 100, 
                data = runif(n = 100*100, min = 0, max = 10))
-image(data)
+image(data, asp = 1)
 ```
 
 <img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
@@ -40,7 +40,7 @@ image(data)
 ``` r
 kernel <- exponential_kernel()
 convoluted <- pFocal(data = data, kernel = kernel, edge_value = 0)
-image(convoluted)
+image(convoluted, asp = 1)
 ```
 
 <img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
