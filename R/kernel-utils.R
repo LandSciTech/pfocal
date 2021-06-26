@@ -1,3 +1,64 @@
+#' Normalize a kernel
+#' 
+#' A normalized kernel is one that, if given a data matrix that is all 1s, will 
+#' result in 1. This function applies a scalier multiple to the kernel to make 
+#' it normalized, if possible. Otherwise, it optionally warns and returns the 
+#' input kernel.
+#' 
+#' @param k **\[matrix\]** The kernel.
+#' 
+#' @return 
+#' The normalized kernel, a `matrix`.
+#' 
+#' @export
+normalize_kernel <- function(k, warning_enabled = TRUE){
+  
+  if(!is.logical(warning_enabled)){
+    stop(paste0("warning_enabled must be logical. If true, and if the kernal ",
+                "cannot be normalized (ex: it sums to 0) then a warning will be generated"))
+  }
+  
+  s <- sum(k, na.rm=TRUE)
+  if(s != 0){
+    return(k/s)
+  }else{
+    if(warning_enabled){
+      warning("The kernel's values sum to 0, this cannot be normalized")
+    }
+    return(k)
+  }
+}
+
+# -------------------------------------------------------------------------
+
+#' Flip a kernel
+#' 
+#' Flip the kernel vertically, horizontally, or both.
+#' 
+#' @inheritParams normalize_kernel
+#' 
+#' @return 
+#' The flipped kernel, a `matrix`.
+#' 
+#' @export
+#' @rdname kernel_flip
+kernel_flip_horizontal <- function(k){
+  k[,c(ncol(k):1), drop = FALSE]
+}
+
+#' @export
+#' @rdname kernel_flip
+kernel_flip_vertical <- function(k){
+  k[c(nrow(k):1),, drop = FALSE]
+}
+
+#' @export
+#' @rdname kernel_flip
+kernel_flip_both <- function(k){
+  k[c(nrow(k):1), c(ncol(k):1), drop = FALSE]
+}
+
+# Helper ------------------------------------------------------------------
 
 .q_kernel_to_kernel <- function(qk, quarter='SE'){
   
@@ -32,37 +93,4 @@
   output[-(1:extra_height), -(1:extra_width)] <- se
   
   return(output)
-}
-
-kernel_flip_horizontal <- function(k){
-  k[,c(ncol(k):1), drop = FALSE]
-}
-
-kernel_flip_vertical <- function(k){
-  k[c(nrow(k):1),, drop = FALSE]
-}
-
-kernel_flip_both <- function(k){
-  k[c(nrow(k):1), c(ncol(k):1), drop = FALSE]
-}
-
-# A normalized kernel is one that, if given a data matrix that is all 1s, will result in 1
-# This function applies a scalier multiple to the kernel to make it normalized, if possible.
-# Otherwise, it optionally warns and returns the input kernel
-normalize_kernel <- function(k, warning_enabled = TRUE){
-  
-  if(!is.logical(warning_enabled)){
-    stop(paste0("warning_enabled must be logical. If true, and if the kernal ",
-                "cannot be normalized (ex: it sums to 0) then a warning will be generated"))
-  }
-  
-  s <- sum(k, na.rm=TRUE)
-  if(s != 0){
-    return(k/s)
-  }else{
-    if(warning_enabled){
-      warning("The kernel's values sum to 0, this cannot be normalized")
-    }
-    return(k)
-  }
 }
