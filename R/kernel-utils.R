@@ -12,6 +12,12 @@
 #' @return 
 #' The normalized kernel, a `matrix`.
 #' 
+#' @examples 
+#' 
+#' kernel <- distance_kernel(vertical_radius = 2, horizontal_radius = 2)
+#' kernel_norm <- normalize_kernel(kernel)
+#' sum(kernel_norm)
+#' 
 #' @export
 normalize_kernel <- function(k, warning_enabled = TRUE){
   
@@ -41,6 +47,15 @@ normalize_kernel <- function(k, warning_enabled = TRUE){
 #' 
 #' @return 
 #' The flipped kernel, a `matrix`.
+#' 
+#' @examples 
+#' 
+#' kernel <- matrix(c(1,2,3,
+#'                    0,1,0,
+#'                    2,3,4), nrow = 3, ncol= 3)
+#' kernel_flip_horizontal(kernel)
+#' kernel_flip_vertical(kernel)
+#' kernel_flip_both(kernel)
 #' 
 #' @export
 #' @rdname kernel_flip

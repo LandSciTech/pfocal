@@ -21,3 +21,13 @@ The flipped kernel, a \code{matrix}.
 \description{
 Flip the kernel vertically, horizontally, or both.
 }
+\examples{
+
+kernel <- matrix(c(1,2,3,
+                   0,1,0,
+                   2,3,4), nrow = 3, ncol= 3)
+kernel_flip_horizontal(kernel)
+kernel_flip_vertical(kernel)
+kernel_flip_both(kernel)
+
+}
