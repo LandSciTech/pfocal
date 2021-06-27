@@ -1,4 +1,4 @@
-#' Kernel and arguments information
+#' Retrieve kernel and arguments information
 #' 
 #' Different kernels and arguments can be passed to [pFocal]. A set of functions
 #' is available to provide all possible values for these arguments.
@@ -6,6 +6,15 @@
 #' @return 
 #' An object of type `matrix`: first column shows the possible argument value, 
 #' second column is used internally and third column describe the argument.
+#' 
+#' @examples 
+#' 
+#' # Retrieve info on different arguments
+#' pFocal_transform_info()
+#' pFocal_reduce_info()
+#' pFocal_nan_policy_info()
+#' pFocal_mean_divisor_info()
+#' pFocal_variance_info()
 
 # Higher level, argument level functions calling routine below -------------
 
