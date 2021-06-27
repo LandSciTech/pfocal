@@ -14,6 +14,7 @@ Takes a matrix of numeric data and a kernel,
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://landscitech.github.io/dwsR}
   \item Report bugs at \url{https://github.com/LandSciTech/dwsR}
 }
 
