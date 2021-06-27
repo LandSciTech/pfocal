@@ -10,6 +10,7 @@
 #' @examples 
 #' 
 #' # Retrieve info on different arguments
+#' 
 #' pFocal_transform_info()
 #' pFocal_reduce_info()
 #' pFocal_nan_policy_info()
