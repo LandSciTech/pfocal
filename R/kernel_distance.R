@@ -13,8 +13,8 @@
 #' distance_kernel(vertical_radius = 2, horizontal_radius = 2)
 #' euclidean_distance_kernel(vertical_radius = 2, horizontal_radius = 2)
 #' manhattan_distance_kernel(vertical_radius = 2, horizontal_radius = 2)
-#' minkowski_distance_kernel(vertical_radius = 2, horizontal_radius = 2)
-#' chebyshev_distance_kernel(vertical_radius = 2, horizontal_radius = 2)
+#' minkowski_distance_kernel(vertical_radius = 2, horizontal_radius = 2, p = 1)
+#' # chebyshev_distance_kernel(vertical_radius = 2, horizontal_radius = 2)
 #' vertical_distance_kernel(vertical_radius = 2, horizontal_radius = 2)
 #' horizontal_distance_kernel(vertical_radius = 2, horizontal_radius = 2)
 #'
