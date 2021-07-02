@@ -20,3 +20,8 @@ A \code{matrix} corresponding to the kernel.
 \description{
 Functions to compute a binomial kernel.
 }
+\examples{
+
+binomial_kernel(vertical_radius = 2, horizontal_radius = 2)
+
+}

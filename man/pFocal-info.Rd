@@ -6,7 +6,7 @@
 \alias{pFocal_nan_policy_info}
 \alias{pFocal_mean_divisor_info}
 \alias{pFocal_variance_info}
-\title{Kernel and arguments information}
+\title{Retrieve kernel and arguments information}
 \usage{
 pFocal_transform_info()
 
@@ -25,4 +25,16 @@ second column is used internally and third column describe the argument.
 \description{
 Different kernels and arguments can be passed to \link{pFocal}. A set of functions
 is available to provide all possible values for these arguments.
+}
+\examples{
+
+# Retrieve info on different arguments
+
+pFocal_transform_info()
+pFocal_reduce_info()
+pFocal_nan_policy_info()
+pFocal_mean_divisor_info()
+pFocal_variance_info()
+
+# Higher level, argument level functions calling routine below -------------
 }

@@ -74,8 +74,8 @@ values, \code{sizeof(double) * (ncol + kernel_ncol) * (nrow + kernel_nrow/2)}.
 }
 \examples{
 
-data <- matrix(nrow = 10, ncol = 10, data = runif(10*10))
-kernel <- matrix(1/9,nrow=3,ncol=3)
+data <- matrix(nrow = 10, ncol = 10, data = runif(10 * 10))
+kernel <- matrix(1 / 9, nrow = 3, ncol = 3)
 pFocal(data = data, kernel = kernel)
 
 }

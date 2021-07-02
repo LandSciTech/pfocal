@@ -21,3 +21,10 @@ result in 1. This function applies a scalier multiple to the kernel to make
 it normalized, if possible. Otherwise, it optionally warns and returns the
 input kernel.
 }
+\examples{
+
+kernel <- distance_kernel(vertical_radius = 2, horizontal_radius = 2)
+kernel_norm <- normalize_kernel(kernel)
+sum(kernel_norm)
+
+}
