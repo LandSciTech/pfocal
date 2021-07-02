@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Kernel and arguments information — pFocal_transform_info • dwsR</title>
+<title>Retrieve kernel and arguments information — pFocal_transform_info • dwsR</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,7 +46,7 @@
 
 
 
-<meta property="og:title" content="Kernel and arguments information — pFocal_transform_info" />
+<meta property="og:title" content="Retrieve kernel and arguments information — pFocal_transform_info" />
 <meta property="og:description" content="Different kernels and arguments can be passed to pFocal. A set of functions
 is available to provide all possible values for these arguments." />
 <meta property="og:image" content="https://landscitech.github.io/dwsR/logo.png" />
@@ -117,7 +117,7 @@ is available to provide all possible values for these arguments." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Kernel and arguments information</h1>
+    <h1>Retrieve kernel and arguments information</h1>
     <small class="dont-index">Source: <a href='https://github.com/LandSciTech/dwsR/blob/master/R/pFocal_info.R'><code>R/pFocal_info.R</code></a></small>
     <div class="hidden name"><code>pFocal-info.Rd</code></div>
     </div>
@@ -143,6 +143,85 @@ is available to provide all possible values for these arguments.</p>
     <p>An object of type <code>matrix</code>: first column shows the possible argument value,
 second column is used internally and third column describe the argument.</p>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'>
+<span class='co'># Retrieve info on different arguments</span>
+
+<span class='fu'>pFocal_transform_info</span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;      [,1]       [,2]
+#&gt; [1,] "MULTIPLY" "0" 
+#&gt; [2,] "ADD"      "1" 
+#&gt; [3,] "R_EXP"    "2" 
+#&gt; [4,] "L_EXP"    "3" 
+#&gt;      [,3]                                                                   
+#&gt; [1,] "For data value 'd' and kernal value 'k', intermediate_value = (d * k)"
+#&gt; [2,] "For data value 'd' and kernal value 'k', intermediate_value = (d + k)"
+#&gt; [3,] "For data value 'd' and kernal value 'k', intermediate_value = (d ^ k)"
+#&gt; [4,] "For data value 'd' and kernal value 'k', intermediate_value = (k ^ d)"</div><div class='input'><span class='fu'>pFocal_reduce_info</span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;      [,1]          [,2]
+#&gt; [1,] "SUM"         "0" 
+#&gt; [2,] "ABS_SUM"     "1" 
+#&gt; [3,] "PRODUCT"     "2" 
+#&gt; [4,] "ABS_PRODUCT" "3" 
+#&gt; [5,] "MIN"         "4" 
+#&gt; [6,] "MAX"         "5" 
+#&gt;      [,3]                                                                                                                          
+#&gt; [1,] "Accumulator starts at 0. For each intermediate value, in no particular order, acc = ( acc + iv )"                            
+#&gt; [2,] "Accumulator starts at 0. For each intermediate value, in no particular order, acc = ( acc + abs(iv) )"                       
+#&gt; [3,] "Accumulator starts at 1. For each intermediate value, in no particular order, acc = ( acc * iv )"                            
+#&gt; [4,] "Accumulator starts at 1. For each intermediate value, in no particular order, acc = ( acc * abs(iv) )"                       
+#&gt; [5,] "Accumulator starts at the highest possible value. For each intermediate value, in no particular order, acc = min( acc , iv )"
+#&gt; [6,] "Accumulator starts at the lowest possible value. For each intermediate value, in no particular order, acc = max( acc , iv )" </div><div class='input'><span class='fu'>pFocal_nan_policy_info</span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;      [,1]          [,2]
+#&gt; [1,] "FAST"        "0" 
+#&gt; [2,] "NA_RM_FALSE" "1" 
+#&gt; [3,] "NA_RM_TRUE"  "2" 
+#&gt;      [,3]                                                                                                                   
+#&gt; [1,] "Assume that there will be no NAN values. Will not crash if it is given a NAN, but makes no guarantee other than that."
+#&gt; [2,] "Will propagate NANs aggressively."                                                                                    
+#&gt; [3,] "Will discard NAN values early."                                                                                       </div><div class='input'><span class='fu'>pFocal_mean_divisor_info</span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;       [,1]                    [,2]
+#&gt;  [1,] "ONE"                   "0" 
+#&gt;  [2,] "KERNEL_SIZE"           "1" 
+#&gt;  [3,] "KERNEL_COUNT"          "2" 
+#&gt;  [4,] "KERNEL_SUM"            "3" 
+#&gt;  [5,] "KERNEL_ABS_SUM"        "4" 
+#&gt;  [6,] "KERNEL_PROD"           "5" 
+#&gt;  [7,] "KERNEL_ABS_PROD"       "6" 
+#&gt;  [8,] "DYNAMIC_COUNT"         "7" 
+#&gt;  [9,] "DYNAMIC_SUM"           "8" 
+#&gt; [10,] "DYNAMIC_ABS_SUM"       "9" 
+#&gt; [11,] "DYNAMIC_PROD"          "10"
+#&gt; [12,] "DYNAMIC_ABS_PROD"      "11"
+#&gt; [13,] "DYNAMIC_DATA_SUM"      "12"
+#&gt; [14,] "DYNAMIC_DATA_ABS_SUM"  "13"
+#&gt; [15,] "DYNAMIC_DATA_PROD"     "14"
+#&gt; [16,] "DYNAMIC_DATA_ABS_PROD" "15"
+#&gt;       [,3]                                                                                                                            
+#&gt;  [1,] "Does not divide the final value by anything"                                                                                   
+#&gt;  [2,] "Divide the final value at each point by nrow(k)*ncol(k)"                                                                       
+#&gt;  [3,] "Divide the final value at each point by sum(+!is.na(k))"                                                                       
+#&gt;  [4,] "Divide the final value at each point by sum(k[!is.na(k)])"                                                                     
+#&gt;  [5,] "Divide the final value at each point by sum(abs(k[!is.na(k)]))"                                                                
+#&gt;  [6,] "Divide the final value at each point by prod(k[!is.na(k)])"                                                                    
+#&gt;  [7,] "Divide the final value at each point by prod(abs(k[!is.na(k)]))"                                                               
+#&gt;  [8,] "Divide the final value at each point by sum(!is.na( intermediate_data )), recalculated at every point"                         
+#&gt;  [9,] "Divide the final value at each point by sum(intermediate_data[!is.na( intermediate_data )]), recalculated at every point"      
+#&gt; [10,] "Divide the final value at each point by sum(abs(intermediate_data[!is.na( intermediate_data )])), recalculated at every point" 
+#&gt; [11,] "Divide the final value at each point by prod(intermediate_data[!is.na( intermediate_data )]), recalculated at every point"     
+#&gt; [12,] "Divide the final value at each point by prod(abs(intermediate_data[!is.na( intermediate_data )])), recalculated at every point"
+#&gt; [13,] "Divide the final value at each point by sum(local_data[!is.na( intermediate_data )]), recalculated at every point"             
+#&gt; [14,] "Divide the final value at each point by sum(abs(local_data[!is.na( intermediate_data )])), recalculated at every point"        
+#&gt; [15,] "Divide the final value at each point by prod(local_data[!is.na( intermediate_data )]), recalculated at every point"            
+#&gt; [16,] "Divide the final value at each point by prod(abs(local_data[!is.na( intermediate_data )])), recalculated at every point"       </div><div class='input'><span class='fu'>pFocal_variance_info</span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;      [,1]    [,2]
+#&gt; [1,] "FALSE" "0" 
+#&gt; [2,] "TRUE"  "1" 
+#&gt;      [,3]                                                                                                                                                                                                                                                                                                                                                                              
+#&gt; [1,] "Returns the value at each point"                                                                                                                                                                                                                                                                                                                                                 
+#&gt; [2,] "Retruns something like the variance of the intermediate values at each point.First calculate the value as normal. Then find the 'mean' by dividing the value by the mean_divisor. Then for each intermidiate value, calculate the square of the difference and 'reduce' them using the reduce_function. (ie: sum them if SUM, multiply them if PROD, take their max if MAX etc.)"</div><div class='input'>
+<span class='co'># Higher level, argument level functions calling routine below -------------</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
