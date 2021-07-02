@@ -25,6 +25,21 @@
 #'     [kernel-gaussian], [kernel-binomial], [kernel-circular],
 #'     [kernel-distance], [kernel-exponential].
 #' @inheritParams pFocal
+#' 
+#' @examples 
+#' 
+#' data <- matrix(nrow = 10, ncol = 10, data = runif(10 * 10))
+#' 
+#' fast_gaussian_radius_pFocal(data, vertical_radius = 2)
+#' fast_gaussian_confidence_pFocal(data)
+#' fast_binomial_pFocal(data, vertical_radius = 2)
+#' fast_abs_rectangle_pFocal(data, height = 2)
+#' 
+#' fast_seperated_pFocal(data, 
+#'                       kernel_list = list(binomial_kernel(vertical_radius = 2, 
+#'                                                          horizontal_radius = 2), 
+#'                                          distance_kernel(vertical_radius = 2,
+#'                                                          horizontal_radius = 2)))
 #'
 #' @return
 #' The updated, convoluted grid.

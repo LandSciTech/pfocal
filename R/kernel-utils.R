@@ -17,6 +17,7 @@
 #' kernel <- distance_kernel(vertical_radius = 2, horizontal_radius = 2)
 #' kernel_norm <- normalize_kernel(kernel)
 #' sum(kernel_norm)
+#' 
 #' @export
 normalize_kernel <- function(k, warning_enabled = TRUE) {
   if (!is.logical(warning_enabled)) {

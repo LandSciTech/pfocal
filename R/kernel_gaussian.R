@@ -7,6 +7,13 @@
 #' @return
 #' A `matrix` corresponding to the kernel.
 #'
+#' @examples 
+#' 
+#' gaussian_kernel_confidence(vertical_r0 = 0.4, vertical_sd = 1, 
+#'                            horizontal_r0 = 0.5, horizontal_sd = 2)
+#' gaussian_kernel_confidence(vertical_r0 = 0.4, vertical_sd = 1, 
+#'                            horizontal_r0 = 0.5, horizontal_sd = 2)
+#' 
 #' @export
 #' @rdname kernel-gaussian
 #' @aliases kernel-gaussian

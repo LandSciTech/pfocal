@@ -6,6 +6,11 @@
 #'
 #' @return
 #' A `matrix` corresponding to the kernel.
+#' 
+#' @examples 
+#' 
+#' smooth_uniform_circle_kernel(r = 3)
+#' hard_uniform_circle_kernel(r = 3)
 #'
 #' @export
 #' @rdname kernel-circular

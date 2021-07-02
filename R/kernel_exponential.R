@@ -7,6 +7,10 @@
 #'
 #' @return
 #' A `matrix` corresponding to the kernel.
+#' 
+#' @examples 
+#' 
+#' exponential_kernel(beta = 2, r0 = 0.7)
 #'
 #' @export
 #' @rdname kernel-exponential

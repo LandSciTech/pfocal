@@ -19,3 +19,9 @@ A \code{matrix} corresponding to the kernel.
 \description{
 Functions to compute a circular kernel.
 }
+\examples{
+
+smooth_uniform_circle_kernel(r = 3)
+hard_uniform_circle_kernel(r = 3)
+
+}

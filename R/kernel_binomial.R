@@ -6,6 +6,10 @@
 #'
 #' @return
 #' A `matrix` corresponding to the kernel.
+#' 
+#' @examples 
+#' 
+#' binomial_kernel(vertical_radius = 2, horizontal_radius = 2)
 #'
 #' @export
 #' @rdname kernel-binomial

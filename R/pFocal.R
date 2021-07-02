@@ -47,6 +47,7 @@
 #' data <- matrix(nrow = 10, ncol = 10, data = runif(10 * 10))
 #' kernel <- matrix(1 / 9, nrow = 3, ncol = 3)
 #' pFocal(data = data, kernel = kernel)
+#' 
 #' @export
 pFocal <- function(data, kernel, edge_value = 0, transform_function = "MULTIPLY",
                    reduce_function = "SUM", mean_divider = "ONE", variance = FALSE,

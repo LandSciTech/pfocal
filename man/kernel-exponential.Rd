@@ -18,3 +18,8 @@ A \code{matrix} corresponding to the kernel.
 \description{
 Functions to compute an exponential kernel.
 }
+\examples{
+
+exponential_kernel(beta = 2, r0 = 0.7)
+
+}

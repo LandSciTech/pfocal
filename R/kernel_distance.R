@@ -7,6 +7,16 @@
 #'
 #' @return
 #' A `matrix` corresponding to the kernel.
+#' 
+#' @examples 
+#' 
+#' distance_kernel(vertical_radius = 2, horizontal_radius = 2)
+#' euclidean_distance_kernel(vertical_radius = 2, horizontal_radius = 2)
+#' manhattan_distance_kernel(vertical_radius = 2, horizontal_radius = 2)
+#' minkowski_distance_kernel(vertical_radius = 2, horizontal_radius = 2)
+#' chebyshev_distance_kernel(vertical_radius = 2, horizontal_radius = 2)
+#' vertical_distance_kernel(vertical_radius = 2, horizontal_radius = 2)
+#' horizontal_distance_kernel(vertical_radius = 2, horizontal_radius = 2)
 #'
 #' @export
 #' @rdname kernel-distance
