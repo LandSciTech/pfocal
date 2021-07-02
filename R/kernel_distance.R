@@ -91,12 +91,12 @@ distance_kernel <- euclidean_distance_kernel
     return((.horizontal_distance_quarter_kernel(vertical_radius, horizontal_radius)^p +
       .vertical_distance_quarter_kernel(vertical_radius, horizontal_radius)^p)^(1 / p))
   } else if (p > 0) {
-    return(max(
+    return(pmax(
       .horizontal_distance_quarter_kernel(vertical_radius, horizontal_radius),
       .vertical_distance_quarter_kernel(vertical_radius, horizontal_radius)
     ))
   } else {
-    return(min(
+    return(pmin(
       .horizontal_distance_quarter_kernel(vertical_radius, horizontal_radius),
       .vertical_distance_quarter_kernel(vertical_radius, horizontal_radius)
     ))
