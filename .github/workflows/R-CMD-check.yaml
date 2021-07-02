@@ -81,7 +81,7 @@ jobs:
           pak::pkg_install("rcmdcheck")
         shell: Rscript {0}
         
-        - name: Install dependencies - MAC # from sf CI workflow
+      - name: Install dependencies - MAC # from sf CI workflow
         if: runner.os == 'macOS'
         run: |
           # conflicts with gfortran from r-lib/actions when linking gcc
