@@ -65,7 +65,7 @@ gaussian_kernel_radius <- function(vertical_radius,
   } else if (radius == 0) {
     return(matrix(1))
   }
-
+  
   if (tail_included) {
     dist <- stats::pnorm(-0.5:(radius + 0.5), sd = sd, lower.tail = FALSE)
     matrix(dist - append(dist[-1], 0))
@@ -82,9 +82,9 @@ gaussian_kernel_radius <- function(vertical_radius,
   } else if (r0 > 1) {
     stop("r0 must be <= 1")
   }
-
+  
   .gaussian_strip_radius(ceiling(stats::qnorm((r0 / 2), sd = sd, lower.tail = FALSE) - 0.5),
-    sd = sd, tail_included = tail_included
+                         sd = sd, tail_included = tail_included
   )
 }
 
@@ -93,13 +93,13 @@ gaussian_kernel_radius <- function(vertical_radius,
                                             horizontal_sd = vertical_sd,
                                             tail_included = TRUE) {
   return(.gaussian_strip_radius(vertical_radius,
-    sd = vertical_sd,
-    tail_included = tail_included
+                                sd = vertical_sd,
+                                tail_included = tail_included
   )
   %*%
     t(.gaussian_strip_radius(horizontal_radius,
-      sd = horizontal_sd,
-      tail_included = tail_included
+                             sd = horizontal_sd,
+                             tail_included = tail_included
     )))
 }
 
