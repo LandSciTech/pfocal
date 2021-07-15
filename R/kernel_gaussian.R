@@ -52,14 +52,14 @@ gaussian_kernel_radius <- function(vertical_radius,
 .gaussian_strip_radius <- function(radius, sd = 1, tail_included = TRUE) {
   if (!is.logical(tail_included)) {
     stop(paste0('tail_included must be logical. If true, the long tail of the ",
-                "distrobution is included in the last element of the strip, ",
+                "distribution is included in the last element of the strip, ",
                 "otherwise it is simply truncated off'))
   } else if (radius < 0) {
     stop("radius must be >= 0")
   } else if ((radius %% 1) != 0) {
     warning(paste0(
       "radius should be an even multiple of 1. It will be ",
-      "ceiling()ed to the next hole number"
+      "ceiling()ed to the next whole number"
     ))
     radius <- ceiling(radius)
   } else if (radius == 0) {
