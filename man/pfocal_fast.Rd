@@ -103,7 +103,7 @@ horizontal dimension.}
 
 \item{na.rm}{\strong{[NA OR character]} The behavior to adopt for dealing with
 missing values, default to \code{NA}. Far possible values see
-\code{\link[=pfocal_nan_policy_info]{pfocal_nan_policy_info()}}.}
+\code{\link[=pfocal_info_nan_policy]{pfocal_info_nan_policy()}}.}
 
 \item{mp}{\strong{[logical]} Whether to use the open_mp implementation,
 default to \code{TRUE}.}
@@ -116,22 +116,22 @@ Default to \code{FALSE}.}
 
 \item{transform_function}{\strong{[character]} The function to apply to the
 cell values covered by the kernel. For possible values, see
-\code{\link[=pfocal_transform_info]{pfocal_transform_info()}}. Default to \code{"MULTIPLY"}.}
+\code{\link[=pfocal_info_transform]{pfocal_info_transform()}}. Default to \code{"MULTIPLY"}.}
 
 \item{reduce_function}{\strong{[character]} The function to apply to the kernel
 values after the function passed in \code{transform_function} has been applied
 (the function that summarize the data). For possible values, see
-\code{\link[=pfocal_reduce_info]{pfocal_reduce_info()}}. Default to \code{"SUM"}.}
+\code{\link[=pfocal_info_reduce]{pfocal_info_reduce()}}. Default to \code{"SUM"}.}
 
 \item{mean_divider}{\strong{[character]} Optional, allows to specify how the
 final value at each cell is divided by a value that can be function of
 the intermediate data resulting of applying \code{transform_function}. For
-possible values, see \code{\link[=pfocal_mean_divisor_info]{pfocal_mean_divisor_info()}}. Default to "ONE" (for
+possible values, see \code{\link[=pfocal_info_mean_divisor]{pfocal_info_mean_divisor()}}. Default to "ONE" (for
 no division).}
 
 \item{variance}{\strong{[logical]} Whether to return the "variance" of the
 intermediate values at each point (for more details please see
-\code{\link[=pfocal_variance_info]{pfocal_variance_info()}}). Default to \code{FALSE} (just returns the value
+\code{\link[=pfocal_info_variance]{pfocal_info_variance()}}). Default to \code{FALSE} (just returns the value
 at each point).}
 
 \item{vertical_r0}{\strong{[numeric]} The kernel's r0 (exponential) in the

@@ -110,9 +110,9 @@
 
 .pfocal_compare_sweep <- function(data, kernel, edge_value) {
   for (v in 0:1) {
-    for (m in pfocal_mean_divisor_info()[, 1]) {
-      for (r in pfocal_reduce_info()[, 1]) {
-        for (t in pfocal_transform_info()[, 1]) {
+    for (m in pfocal_info_mean_divisor()[, 1]) {
+      for (r in pfocal_info_reduce()[, 1]) {
+        for (t in pfocal_info_transform()[, 1]) {
           o <- .pfocal_compare(data, kernel, edge_value, t, r, m, v)
           if (any(o[5:length(o)] > 0)) {
             print(o[1:4])

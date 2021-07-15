@@ -2,23 +2,23 @@
 # Higher level, argument level function calling routine below -------------
 
 pfocal_narrow_transform <- function(f) {
-  .pfocal_narrow(f, pfocal_transform_info())
+  .pfocal_narrow(f, pfocal_info_transform())
 }
 
 pfocal_narrow_reduce <- function(f) {
-  .pfocal_narrow(f, pfocal_reduce_info())
+  .pfocal_narrow(f, pfocal_info_reduce())
 }
 
 pfocal_narrow_nan_policy <- function(f) {
-  .pfocal_narrow(f, pfocal_nan_policy_info())
+  .pfocal_narrow(f, pfocal_info_nan_policy())
 }
 
 pfocal_narrow_mean_divisor <- function(f) {
-  .pfocal_narrow(f, pfocal_mean_divisor_info())
+  .pfocal_narrow(f, pfocal_info_mean_divisor())
 }
 
 pfocal_narrow_variance <- function(f) {
-  .pfocal_narrow(f, pfocal_variance_info())
+  .pfocal_narrow(f, pfocal_info_variance())
 }
 
 # General routine ---------------------------------------------------------

@@ -11,40 +11,40 @@
 #'
 #' # Retrieve info on different arguments
 #'
-#' pfocal_transform_info()
-#' pfocal_reduce_info()
-#' pfocal_nan_policy_info()
-#' pfocal_mean_divisor_info()
-#' pfocal_variance_info()
+#' pfocal_info_transform()
+#' pfocal_info_reduce()
+#' pfocal_info_nan_policy()
+#' pfocal_info_mean_divisor()
+#' pfocal_info_variance()
 #'
 #' # Higher level, argument level functions calling routine below -------------
 #' @export
 #' @rdname pfocal-info
-pfocal_transform_info <- function() {
+pfocal_info_transform <- function() {
   .pfocal_info("transform_info", .p_focal_transform_info_cpp())
 }
 
 #' @export
 #' @rdname pfocal-info
-pfocal_reduce_info <- function() {
+pfocal_info_reduce <- function() {
   .pfocal_info("reduce_info", .p_focal_reduce_info_cpp())
 }
 
 #' @export
 #' @rdname pfocal-info
-pfocal_nan_policy_info <- function() {
+pfocal_info_nan_policy <- function() {
   .pfocal_info("policy_info", .p_focal_nan_policy_info_cpp())
 }
 
 #' @export
 #' @rdname pfocal-info
-pfocal_mean_divisor_info <- function() {
+pfocal_info_mean_divisor <- function() {
   .pfocal_info("divisor_info", .p_focal_mean_divisor_info_cpp())
 }
 
 #' @export
 #' @rdname pfocal-info
-pfocal_variance_info <- function() {
+pfocal_info_variance <- function() {
   .pfocal_info("variance_info", .p_focal_variance_info_cpp())
 }
 

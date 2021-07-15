@@ -10,23 +10,23 @@
 #'     the data grid.
 #' @param transform_function **\[character\]** The function to apply to the
 #'     cell values covered by the kernel. For possible values, see
-#'     [pfocal_transform_info()]. Default to `"MULTIPLY"`.
+#'     [pfocal_info_transform()]. Default to `"MULTIPLY"`.
 #' @param reduce_function **\[character\]** The function to apply to the kernel
 #'     values after the function passed in `transform_function` has been applied
 #'     (the function that summarize the data). For possible values, see
-#'     [pfocal_reduce_info()]. Default to `"SUM"`.
+#'     [pfocal_info_reduce()]. Default to `"SUM"`.
 #' @param mean_divider **\[character\]** Optional, allows to specify how the
 #'     final value at each cell is divided by a value that can be function of
 #'     the intermediate data resulting of applying `transform_function`. For
-#'     possible values, see [pfocal_mean_divisor_info()]. Default to "ONE" (for
+#'     possible values, see [pfocal_info_mean_divisor()]. Default to "ONE" (for
 #'     no division).
 #' @param variance **\[logical\]** Whether to return the "variance" of the
 #'     intermediate values at each point (for more details please see
-#'     [pfocal_variance_info()]). Default to `FALSE` (just returns the value
+#'     [pfocal_info_variance()]). Default to `FALSE` (just returns the value
 #'     at each point).
 #' @param na.rm **\[NA OR character\]** The behavior to adopt for dealing with
 #'     missing values, default to `NA`. Far possible values see
-#'     [pfocal_nan_policy_info()].
+#'     [pfocal_info_nan_policy()].
 #' @param mp **\[logical\]** Whether to use the open_mp implementation,
 #'     default to `TRUE`.
 #' @param debug_use_r_implementation **\[logical\]** Used for debugging purposes
