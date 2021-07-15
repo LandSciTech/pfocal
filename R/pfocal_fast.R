@@ -1,6 +1,6 @@
 #' Fast methods for common kernel computations
 #'
-#' Methods wrapping [pFocal] to implement common kernel computations with
+#' Methods wrapping [pfocal] to implement common kernel computations with
 #' default argument values.
 #'
 #' @param vertical_radius **\[numeric\]** The kernel's radius in the vertical
@@ -24,18 +24,18 @@
 #' @param kernel_list **\[list\]** A list of kernels computed from functions in
 #'     [kernel-gaussian], [kernel-binomial], [kernel-circular],
 #'     [kernel-distance], [kernel-exponential].
-#' @inheritParams pFocal
+#' @inheritParams pfocal
 #' 
 #' @examples 
 #' 
 #' data <- matrix(nrow = 10, ncol = 10, data = runif(10 * 10))
 #' 
-#' fast_gaussian_radius_pFocal(data, vertical_radius = 2)
-#' fast_gaussian_confidence_pFocal(data)
-#' fast_binomial_pFocal(data, vertical_radius = 2)
-#' fast_abs_rectangle_pFocal(data, height = 2)
+#' fast_pfocal_gaussian_radius(data, vertical_radius = 2)
+#' fast_pfocal_gaussian_confidence(data)
+#' fast_pfocal_binomial(data, vertical_radius = 2)
+#' fast_pfocal_abs_rectangle(data, height = 2)
 #' 
-#' fast_seperated_pFocal(data, 
+#' fast_pfocal_separated(data, 
 #'                       kernel_list = list(binomial_kernel(vertical_radius = 2, 
 #'                                                          horizontal_radius = 2), 
 #'                                          distance_kernel(vertical_radius = 2,
@@ -47,8 +47,8 @@
 # Fast kernel specific routines -------------------------------------------
 
 #' @export
-#' @rdname pFocal_fast
-fast_gaussian_radius_pFocal <-
+#' @rdname pfocal_fast
+fast_pfocal_gaussian_radius <-
   function(data, vertical_radius, vertical_sd = 1,
            horizontal_radius = vertical_radius, horizontal_sd = vertical_sd,
            tail_included = TRUE, na.rm = NA, mp = TRUE, debug_use_r_implementation = FALSE,
@@ -61,7 +61,7 @@ fast_gaussian_radius_pFocal <-
       ))
     }
 
-    fast_seperated_pFocal(
+    fast_pfocal_separated(
       data, list(
         gaussian_kernel_radius(vertical_radius, vertical_sd, 0, 1,
           tail_included = tail_included
@@ -77,8 +77,8 @@ fast_gaussian_radius_pFocal <-
   }
 
 #' @export
-#' @rdname pFocal_fast
-fast_gaussian_confidence_pFocal <-
+#' @rdname pfocal_fast
+fast_pfocal_gaussian_confidence <-
   function(data, vertical_r0 = 0.05, vertical_sd = 1,
            horizontal_r0 = vertical_r0, horizontal_sd = vertical_sd,
            tail_included = TRUE, na.rm = NA, mp = TRUE, debug_use_r_implementation = FALSE,
@@ -91,7 +91,7 @@ fast_gaussian_confidence_pFocal <-
       ))
     }
 
-    fast_seperated_pFocal(
+    fast_pfocal_separated(
       data, list(
         gaussian_kernel_confidence(vertical_r0, vertical_sd, 1, 1, tail_included = tail_included),
         gaussian_kernel_confidence(1, 1, horizontal_r0, horizontal_sd, tail_included = tail_included)
@@ -103,8 +103,8 @@ fast_gaussian_confidence_pFocal <-
   }
 
 #' @export
-#' @rdname pFocal_fast
-fast_binomial_pFocal <-
+#' @rdname pfocal_fast
+fast_pfocal_binomial <-
   function(data, vertical_radius,
            horizontal_radius = vertical_radius,
            na.rm = NA, mp = TRUE, debug_use_r_implementation = FALSE,
@@ -117,7 +117,7 @@ fast_binomial_pFocal <-
       ))
     }
 
-    fast_seperated_pFocal(
+    fast_pfocal_separated(
       data, list(
         binomial_kernel(vertical_radius, 0),
         binomial_kernel(0, horizontal_radius)
@@ -129,8 +129,8 @@ fast_binomial_pFocal <-
   }
 
 #' @export
-#' @rdname pFocal_fast
-fast_abs_rectangle_pFocal <-
+#' @rdname pfocal_fast
+fast_pfocal_abs_rectangle <-
   function(data, height, width = height, value = 1,
            na.rm = NA, mp = TRUE, debug_use_r_implementation = FALSE,
            ..., transform_function = "MULTIPLY", reduce_function = "SUM",
@@ -142,7 +142,7 @@ fast_abs_rectangle_pFocal <-
       ))
     }
 
-    fast_seperated_pFocal(
+    fast_pfocal_separated(
       data, list(
         matrix(abs(value), height, 1),
         matrix(abs(value), 1, width)
@@ -159,8 +159,8 @@ fast_abs_rectangle_pFocal <-
 # Applies all kernels in the list in order. Made for separable kernels
 
 #' @export
-#' @rdname pFocal_fast
-fast_seperated_pFocal <-
+#' @rdname pfocal_fast
+fast_pfocal_separated <-
   function(data, kernel_list, na.rm = NA, mp = TRUE, debug_use_r_implementation = FALSE, ...,
            transform_function = "MULTIPLY", reduce_function = "SUM", mean_divider = "ONE",
            variance = FALSE) {
@@ -172,7 +172,7 @@ fast_seperated_pFocal <-
     }
 
     for (k in kernel_list) {
-      data <- pFocal(data, k,
+      data <- pfocal(data, k,
         edge_value = 0, na.rm = na.rm, mp = mp,
         debug_use_r_implementation = debug_use_r_implementation,
         transform_function = transform_function,

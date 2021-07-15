@@ -1,6 +1,6 @@
 #' Retrieve kernel and arguments information
 #'
-#' Different kernels and arguments can be passed to [pFocal]. A set of functions
+#' Different kernels and arguments can be passed to [pfocal]. A set of functions
 #' is available to provide all possible values for these arguments.
 #'
 #' @return
@@ -11,48 +11,48 @@
 #'
 #' # Retrieve info on different arguments
 #'
-#' pFocal_transform_info()
-#' pFocal_reduce_info()
-#' pFocal_nan_policy_info()
-#' pFocal_mean_divisor_info()
-#' pFocal_variance_info()
+#' pfocal_transform_info()
+#' pfocal_reduce_info()
+#' pfocal_nan_policy_info()
+#' pfocal_mean_divisor_info()
+#' pfocal_variance_info()
 #'
 #' # Higher level, argument level functions calling routine below -------------
 #' @export
-#' @rdname pFocal-info
-pFocal_transform_info <- function() {
+#' @rdname pfocal-info
+pfocal_transform_info <- function() {
   .pfocal_info("transform_info", .p_focal_transform_info_cpp())
 }
 
 #' @export
-#' @rdname pFocal-info
-pFocal_reduce_info <- function() {
+#' @rdname pfocal-info
+pfocal_reduce_info <- function() {
   .pfocal_info("reduce_info", .p_focal_reduce_info_cpp())
 }
 
 #' @export
-#' @rdname pFocal-info
-pFocal_nan_policy_info <- function() {
+#' @rdname pfocal-info
+pfocal_nan_policy_info <- function() {
   .pfocal_info("policy_info", .p_focal_nan_policy_info_cpp())
 }
 
 #' @export
-#' @rdname pFocal-info
-pFocal_mean_divisor_info <- function() {
+#' @rdname pfocal-info
+pfocal_mean_divisor_info <- function() {
   .pfocal_info("divisor_info", .p_focal_mean_divisor_info_cpp())
 }
 
 #' @export
-#' @rdname pFocal-info
-pFocal_variance_info <- function() {
+#' @rdname pfocal-info
+pfocal_variance_info <- function() {
   .pfocal_info("variance_info", .p_focal_variance_info_cpp())
 }
 
 # Helpers -----------------------------------------------------------------
 
-.pFocal_info_cache_env <- new.env()
+.pfocal_info_cache_env <- new.env()
 
-.pFocal_info_clean <- function(info) {
+.pfocal_info_clean <- function(info) {
   matrix(c(info[[1]], 0:(length(info[[1]]) - 1), info[[-1]]),
     nrow = length(info[[1]])
   )
@@ -61,11 +61,11 @@ pFocal_variance_info <- function() {
 # General routine ---------------------------------------------------------
 
 .pfocal_info <- function(name, info) {
-  if (exists(name, envir = .pFocal_info_cache_env)) {
-    return(get(name, envir = .pFocal_info_cache_env))
+  if (exists(name, envir = .pfocal_info_cache_env)) {
+    return(get(name, envir = .pfocal_info_cache_env))
   } else {
-    o <- .pFocal_info_clean(info)
-    assign(name, o, envir = .pFocal_info_cache_env)
+    o <- .pfocal_info_clean(info)
+    assign(name, o, envir = .pfocal_info_cache_env)
 
     return(o)
   }

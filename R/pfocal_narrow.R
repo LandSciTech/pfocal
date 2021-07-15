@@ -1,29 +1,29 @@
 
 # Higher level, argument level function calling routine below -------------
 
-pFocal_narrow_transform <- function(f) {
-  .pFocal_narrow(f, pFocal_transform_info())
+pfocal_narrow_transform <- function(f) {
+  .pfocal_narrow(f, pfocal_transform_info())
 }
 
-pFocal_narrow_reduce <- function(f) {
-  .pFocal_narrow(f, pFocal_reduce_info())
+pfocal_narrow_reduce <- function(f) {
+  .pfocal_narrow(f, pfocal_reduce_info())
 }
 
-pFocal_narrow_nan_policy <- function(f) {
-  .pFocal_narrow(f, pFocal_nan_policy_info())
+pfocal_narrow_nan_policy <- function(f) {
+  .pfocal_narrow(f, pfocal_nan_policy_info())
 }
 
-pFocal_narrow_mean_divisor <- function(f) {
-  .pFocal_narrow(f, pFocal_mean_divisor_info())
+pfocal_narrow_mean_divisor <- function(f) {
+  .pfocal_narrow(f, pfocal_mean_divisor_info())
 }
 
-pFocal_narrow_variance <- function(f) {
-  .pFocal_narrow(f, pFocal_variance_info())
+pfocal_narrow_variance <- function(f) {
+  .pfocal_narrow(f, pfocal_variance_info())
 }
 
 # General routine ---------------------------------------------------------
 
-.pFocal_narrow <- function(f, info) {
+.pfocal_narrow <- function(f, info) {
   if (is.na(f)) {
     return(NA)
     # stop("F is NA")
