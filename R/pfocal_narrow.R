@@ -24,13 +24,14 @@ pfocal_narrow_variance <- function(f) {
 # General routine ---------------------------------------------------------
 
 .pfocal_narrow <- function(f, info) {
-  if (is.na(f)) {
-    return(NA)
-    # stop("F is NA")
-  }
 
   if (length(f) != 1L) {
     stop("F must have a length of 1")
+  }
+  
+  if (is.na(f)) {
+    return(NA)
+    # stop("F is NA")
   }
 
   if (is.numeric(f) || is.logical(f)) {
