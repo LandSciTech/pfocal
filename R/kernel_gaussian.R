@@ -2,7 +2,7 @@
 #'
 #' Functions to compute a Gaussian kernel.
 #'
-#' @inheritParams fast_pfocal_gaussian_radius
+#' @inheritParams pfocal_fast_gaussian_radius
 #'
 #' @return
 #' A `matrix` corresponding to the kernel.
