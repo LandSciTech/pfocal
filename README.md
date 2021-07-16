@@ -14,8 +14,8 @@ WIP](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.o
 coverage](https://codecov.io/gh/LandSciTech/pfocal/branch/master/graph/badge.svg)](https://codecov.io/gh/LandSciTech/pfocal?branch=master)
 <!-- badges: end -->
 
-The goal of `pfocal` is to implement fast parallel convolution. R version
-&gt;= 4.0.0 is required.
+The goal of `pfocal` is to implement fast parallel convolution. R
+version &gt;= 4.0.0 is required.
 
 ## Installation
 
@@ -41,7 +41,7 @@ image(data, asp = 1)
 
 ``` r
 kernel <- exponential_kernel()
-convoluted <- pFocal(data = data, kernel = kernel, edge_value = 0)
+convoluted <- pfocal(data = data, kernel = kernel, edge_value = 0)
 image(convoluted, asp = 1)
 ```
 

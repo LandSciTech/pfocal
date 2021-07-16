@@ -45,6 +45,6 @@ image(data, asp = 1)
 ```
 ```{r}
 kernel <- exponential_kernel()
-convoluted <- pFocal(data = data, kernel = kernel, edge_value = 0)
+convoluted <- pfocal(data = data, kernel = kernel, edge_value = 0)
 image(convoluted, asp = 1)
 ```
