@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Retrieve kernel and arguments information — pFocal_transform_info • dwsR</title>
+<title>Retrieve kernel and arguments information — pfocal_info_transform • dwsR</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,10 +46,9 @@
 
 
 
-<meta property="og:title" content="Retrieve kernel and arguments information — pFocal_transform_info" />
-<meta property="og:description" content="Different kernels and arguments can be passed to pFocal. A set of functions
+<meta property="og:title" content="Retrieve kernel and arguments information — pfocal_info_transform" />
+<meta property="og:description" content="Different kernels and arguments can be passed to pfocal. A set of functions
 is available to provide all possible values for these arguments." />
-<meta property="og:image" content="https://landscitech.github.io/dwsR/logo.png" />
 
 
 
@@ -118,24 +117,24 @@ is available to provide all possible values for these arguments." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Retrieve kernel and arguments information</h1>
-    <small class="dont-index">Source: <a href='https://github.com/LandSciTech/dwsR/blob/master/R/pFocal_info.R'><code>R/pFocal_info.R</code></a></small>
-    <div class="hidden name"><code>pFocal-info.Rd</code></div>
+    <small class="dont-index">Source: <a href='https://github.com/LandSciTech/dwsR/blob/master/R/pfocal_info.R'><code>R/pfocal_info.R</code></a></small>
+    <div class="hidden name"><code>pfocal-info.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Different kernels and arguments can be passed to <a href='pFocal.html'>pFocal</a>. A set of functions
+    <p>Different kernels and arguments can be passed to <a href='pfocal.html'>pfocal</a>. A set of functions
 is available to provide all possible values for these arguments.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>pFocal_transform_info</span><span class='op'>(</span><span class='op'>)</span>
+    <pre class="usage"><span class='fu'>pfocal_info_transform</span><span class='op'>(</span><span class='op'>)</span>
 
-<span class='fu'>pFocal_reduce_info</span><span class='op'>(</span><span class='op'>)</span>
+<span class='fu'>pfocal_info_reduce</span><span class='op'>(</span><span class='op'>)</span>
 
-<span class='fu'>pFocal_nan_policy_info</span><span class='op'>(</span><span class='op'>)</span>
+<span class='fu'>pfocal_info_nan_policy</span><span class='op'>(</span><span class='op'>)</span>
 
-<span class='fu'>pFocal_mean_divisor_info</span><span class='op'>(</span><span class='op'>)</span>
+<span class='fu'>pfocal_info_mean_divisor</span><span class='op'>(</span><span class='op'>)</span>
 
-<span class='fu'>pFocal_variance_info</span><span class='op'>(</span><span class='op'>)</span></pre>
+<span class='fu'>pfocal_info_variance</span><span class='op'>(</span><span class='op'>)</span></pre>
 
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -147,7 +146,7 @@ second column is used internally and third column describe the argument.</p>
     <pre class="examples"><div class='input'>
 <span class='co'># Retrieve info on different arguments</span>
 
-<span class='fu'>pFocal_transform_info</span><span class='op'>(</span><span class='op'>)</span>
+<span class='fu'>pfocal_info_transform</span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;      [,1]       [,2]
 #&gt; [1,] "MULTIPLY" "0" 
 #&gt; [2,] "ADD"      "1" 
@@ -157,7 +156,7 @@ second column is used internally and third column describe the argument.</p>
 #&gt; [1,] "For data value 'd' and kernal value 'k', intermediate_value = (d * k)"
 #&gt; [2,] "For data value 'd' and kernal value 'k', intermediate_value = (d + k)"
 #&gt; [3,] "For data value 'd' and kernal value 'k', intermediate_value = (d ^ k)"
-#&gt; [4,] "For data value 'd' and kernal value 'k', intermediate_value = (k ^ d)"</div><div class='input'><span class='fu'>pFocal_reduce_info</span><span class='op'>(</span><span class='op'>)</span>
+#&gt; [4,] "For data value 'd' and kernal value 'k', intermediate_value = (k ^ d)"</div><div class='input'><span class='fu'>pfocal_info_reduce</span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;      [,1]          [,2]
 #&gt; [1,] "SUM"         "0" 
 #&gt; [2,] "ABS_SUM"     "1" 
@@ -171,7 +170,7 @@ second column is used internally and third column describe the argument.</p>
 #&gt; [3,] "Accumulator starts at 1. For each intermediate value, in no particular order, acc = ( acc * iv )"                            
 #&gt; [4,] "Accumulator starts at 1. For each intermediate value, in no particular order, acc = ( acc * abs(iv) )"                       
 #&gt; [5,] "Accumulator starts at the highest possible value. For each intermediate value, in no particular order, acc = min( acc , iv )"
-#&gt; [6,] "Accumulator starts at the lowest possible value. For each intermediate value, in no particular order, acc = max( acc , iv )" </div><div class='input'><span class='fu'>pFocal_nan_policy_info</span><span class='op'>(</span><span class='op'>)</span>
+#&gt; [6,] "Accumulator starts at the lowest possible value. For each intermediate value, in no particular order, acc = max( acc , iv )" </div><div class='input'><span class='fu'>pfocal_info_nan_policy</span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;      [,1]          [,2]
 #&gt; [1,] "FAST"        "0" 
 #&gt; [2,] "NA_RM_FALSE" "1" 
@@ -179,7 +178,7 @@ second column is used internally and third column describe the argument.</p>
 #&gt;      [,3]                                                                                                                   
 #&gt; [1,] "Assume that there will be no NAN values. Will not crash if it is given a NAN, but makes no guarantee other than that."
 #&gt; [2,] "Will propagate NANs aggressively."                                                                                    
-#&gt; [3,] "Will discard NAN values early."                                                                                       </div><div class='input'><span class='fu'>pFocal_mean_divisor_info</span><span class='op'>(</span><span class='op'>)</span>
+#&gt; [3,] "Will discard NAN values early."                                                                                       </div><div class='input'><span class='fu'>pfocal_info_mean_divisor</span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;       [,1]                    [,2]
 #&gt;  [1,] "ONE"                   "0" 
 #&gt;  [2,] "KERNEL_SIZE"           "1" 
@@ -213,7 +212,7 @@ second column is used internally and third column describe the argument.</p>
 #&gt; [13,] "Divide the final value at each point by sum(local_data[!is.na( intermediate_data )]), recalculated at every point"             
 #&gt; [14,] "Divide the final value at each point by sum(abs(local_data[!is.na( intermediate_data )])), recalculated at every point"        
 #&gt; [15,] "Divide the final value at each point by prod(local_data[!is.na( intermediate_data )]), recalculated at every point"            
-#&gt; [16,] "Divide the final value at each point by prod(abs(local_data[!is.na( intermediate_data )])), recalculated at every point"       </div><div class='input'><span class='fu'>pFocal_variance_info</span><span class='op'>(</span><span class='op'>)</span>
+#&gt; [16,] "Divide the final value at each point by prod(abs(local_data[!is.na( intermediate_data )])), recalculated at every point"       </div><div class='input'><span class='fu'>pfocal_info_variance</span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;      [,1]    [,2]
 #&gt; [1,] "FALSE" "0" 
 #&gt; [2,] "TRUE"  "1" 
