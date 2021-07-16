@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://landscitech.github.io/dwsR/index.html</loc>
+    <loc>https://landscitech.github.io/pfocal/index.html</loc>
   </url>
   <url>
-    <loc>https://landscitech.github.io/dwsR/reference/dwsR-package.html</loc>
+    <loc>https://landscitech.github.io/pfocal/reference/kernel-binomial.html</loc>
   </url>
   <url>
-    <loc>https://landscitech.github.io/dwsR/reference/kernel-binomial.html</loc>
+    <loc>https://landscitech.github.io/pfocal/reference/kernel-circular.html</loc>
   </url>
   <url>
-    <loc>https://landscitech.github.io/dwsR/reference/kernel-circular.html</loc>
+    <loc>https://landscitech.github.io/pfocal/reference/kernel-distance.html</loc>
   </url>
   <url>
-    <loc>https://landscitech.github.io/dwsR/reference/kernel-distance.html</loc>
+    <loc>https://landscitech.github.io/pfocal/reference/kernel-exponential.html</loc>
   </url>
   <url>
-    <loc>https://landscitech.github.io/dwsR/reference/kernel-exponential.html</loc>
+    <loc>https://landscitech.github.io/pfocal/reference/kernel-gaussian.html</loc>
   </url>
   <url>
-    <loc>https://landscitech.github.io/dwsR/reference/kernel-gaussian.html</loc>
+    <loc>https://landscitech.github.io/pfocal/reference/kernel_flip.html</loc>
   </url>
   <url>
-    <loc>https://landscitech.github.io/dwsR/reference/kernel_flip.html</loc>
+    <loc>https://landscitech.github.io/pfocal/reference/normalize_kernel.html</loc>
   </url>
   <url>
-    <loc>https://landscitech.github.io/dwsR/reference/normalize_kernel.html</loc>
+    <loc>https://landscitech.github.io/pfocal/reference/pfocal-info.html</loc>
   </url>
   <url>
-    <loc>https://landscitech.github.io/dwsR/reference/pfocal-info.html</loc>
+    <loc>https://landscitech.github.io/pfocal/reference/pfocal-package.html</loc>
   </url>
   <url>
-    <loc>https://landscitech.github.io/dwsR/reference/pfocal.html</loc>
+    <loc>https://landscitech.github.io/pfocal/reference/pfocal.html</loc>
   </url>
   <url>
-    <loc>https://landscitech.github.io/dwsR/reference/pfocal_fast.html</loc>
+    <loc>https://landscitech.github.io/pfocal/reference/pfocal_fast.html</loc>
   </url>
 </urlset>
