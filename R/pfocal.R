@@ -10,23 +10,23 @@
 #'     the data grid.
 #' @param transform_function **\[character\]** The function to apply to the
 #'     cell values covered by the kernel. For possible values, see
-#'     [pFocal_transform_info()]. Default to `"MULTIPLY"`.
+#'     [pfocal_info_transform()]. Default to `"MULTIPLY"`.
 #' @param reduce_function **\[character\]** The function to apply to the kernel
 #'     values after the function passed in `transform_function` has been applied
 #'     (the function that summarize the data). For possible values, see
-#'     [pFocal_reduce_info()]. Default to `"SUM"`.
+#'     [pfocal_info_reduce()]. Default to `"SUM"`.
 #' @param mean_divider **\[character\]** Optional, allows to specify how the
 #'     final value at each cell is divided by a value that can be function of
 #'     the intermediate data resulting of applying `transform_function`. For
-#'     possible values, see [pFocal_mean_divisor_info()]. Default to "ONE" (for
+#'     possible values, see [pfocal_info_mean_divisor()]. Default to "ONE" (for
 #'     no division).
 #' @param variance **\[logical\]** Whether to return the "variance" of the
 #'     intermediate values at each point (for more details please see
-#'     [pFocal_variance_info()]). Default to `FALSE` (just returns the value
+#'     [pfocal_info_variance()]). Default to `FALSE` (just returns the value
 #'     at each point).
 #' @param na.rm **\[NA OR character\]** The behavior to adopt for dealing with
 #'     missing values, default to `NA`. Far possible values see
-#'     [pFocal_nan_policy_info()].
+#'     [pfocal_info_nan_policy()].
 #' @param mp **\[logical\]** Whether to use the open_mp implementation,
 #'     default to `TRUE`.
 #' @param debug_use_r_implementation **\[logical\]** Used for debugging purposes
@@ -46,20 +46,20 @@
 #'
 #' data <- matrix(nrow = 10, ncol = 10, data = runif(10 * 10))
 #' kernel <- matrix(1 / 9, nrow = 3, ncol = 3)
-#' pFocal(data = data, kernel = kernel)
+#' pfocal(data = data, kernel = kernel)
 #' 
 #' @export
-pFocal <- function(data, kernel, edge_value = 0, transform_function = "MULTIPLY",
+pfocal <- function(data, kernel, edge_value = 0, transform_function = "MULTIPLY",
                    reduce_function = "SUM", mean_divider = "ONE", variance = FALSE,
                    na.rm = NA, mp = TRUE, debug_use_r_implementation = FALSE, ...) {
   if (methods::is(data, "matrix")) {
-    return(pFocal.matrix(
+    return(pfocal.matrix(
       data, kernel, edge_value, transform_function,
       reduce_function, mean_divider, variance,
       na.rm, mp, debug_use_r_implementation, ...
     ))
   } else if (methods::is(data, "stars")) {
-    return(pFocal.stars(
+    return(pfocal.stars(
       data, kernel, edge_value, transform_function,
       reduce_function, mean_divider, variance,
       na.rm, mp, debug_use_r_implementation, ...
@@ -71,10 +71,10 @@ pFocal <- function(data, kernel, edge_value = 0, transform_function = "MULTIPLY"
 
 # Matrix routine ----------------------------------------------------------
 
-pFocal.matrix <- function(data, kernel, edge_value = NA, transform_function = "MULTIPLY",
+pfocal.matrix <- function(data, kernel, edge_value = NA, transform_function = "MULTIPLY",
                           reduce_function = "SUM", mean_divider = "ONE", variance = FALSE,
                           na.rm = NA, mp = TRUE, debug_use_r_implementation = FALSE, ...) {
-  .pFocal(
+  .pfocal(
     data, kernel, edge_value, transform_function, reduce_function, mean_divider,
     variance, na.rm, mp, debug_use_r_implementation
   )
@@ -82,14 +82,14 @@ pFocal.matrix <- function(data, kernel, edge_value = NA, transform_function = "M
 
 # Stars object routine ----------------------------------------------------
 
-pFocal.stars <- function(data, ...) {
+pfocal.stars <- function(data, ...) {
 
   # Code from github.com/michaeldorman/starsExtra R/focal2.R:focal2
   template <- data
 
   input <- starsExtra::layer_to_matrix(template, check = TRUE)
 
-  output <- pFocal.matrix(input, ...)
+  output <- pfocal.matrix(input, ...)
 
   # Back to 'stars'
 
@@ -102,10 +102,10 @@ pFocal.stars <- function(data, ...) {
 
 # General routine ---------------------------------------------------------
 
-.pFocal <- function(data, kernel, edge_value = NA, transform_function = "MULTIPLY",
+.pfocal <- function(data, kernel, edge_value = NA, transform_function = "MULTIPLY",
                     reduce_function = "SUM", mean_divider = "ONE", variance = FALSE,
                     na.rm = NA, mp = TRUE, debug_use_r_implementation = FALSE) {
-  pFocal_f <- if (debug_use_r_implementation) {
+  pfocal_f <- if (debug_use_r_implementation) {
     .p_focal_r
   } else {
     .p_focal_cpp
@@ -119,11 +119,11 @@ pFocal.stars <- function(data, ...) {
     na.rm <- "NA_RM_FALSE"
   }
 
-  t_index <- pFocal_narrow_transform(transform_function)
-  r_index <- pFocal_narrow_reduce(reduce_function)
-  n_index <- pFocal_narrow_nan_policy(na.rm)
-  m_index <- pFocal_narrow_mean_divisor(mean_divider)
-  v_index <- pFocal_narrow_variance(variance)
+  t_index <- pfocal_narrow_transform(transform_function)
+  r_index <- pfocal_narrow_reduce(reduce_function)
+  n_index <- pfocal_narrow_nan_policy(na.rm)
+  m_index <- pfocal_narrow_mean_divisor(mean_divider)
+  v_index <- pfocal_narrow_variance(variance)
 
   if (is.na(v_index)) {
     stop("variance must be logical or 'TRUE' or 'FALSE'")
@@ -146,13 +146,13 @@ pFocal.stars <- function(data, ...) {
     # special transform cases
     if (toupper(transform_function) == "SUBTRACT") {
       data <- data * -1
-      t_index <- pFocal_narrow_transform("ADD")
+      t_index <- pfocal_narrow_transform("ADD")
     } else if (toupper(transform_function) == "L_DIVIDE") {
       data <- 1 / data
-      t_index <- pFocal_narrow_transform("MULTIPLY")
+      t_index <- pfocal_narrow_transform("MULTIPLY")
     } else if (toupper(transform_function) %in% c("DIVIDE", "R_DIVIDE")) {
       kernel <- 1 / kernel
-      t_index <- pFocal_narrow_transform("MULTIPLY")
+      t_index <- pfocal_narrow_transform("MULTIPLY")
     } else {
       stop("Unknown transform_function")
     }
@@ -160,12 +160,12 @@ pFocal.stars <- function(data, ...) {
 
   if (is.na(r_index)) {
     if (toupper(reduce_function) == "RANGE") {
-      return(pFocal_f(
-        data, kernel, edge_value, t_index, pFocal_narrow_reduce("MAX"),
+      return(pfocal_f(
+        data, kernel, edge_value, t_index, pfocal_narrow_reduce("MAX"),
         n_index, m_index, v_index, mp
       ) -
-        pFocal_f(
-          data, kernel, edge_value, t_index, pFocal_narrow_reduce("MIN"),
+        pfocal_f(
+          data, kernel, edge_value, t_index, pfocal_narrow_reduce("MIN"),
           n_index, m_index, v_index, mp
         ))
     } else {
@@ -173,7 +173,7 @@ pFocal.stars <- function(data, ...) {
     }
   }
 
-  pf <- pFocal_f(
+  pf <- pfocal_f(
     data, kernel, edge_value, t_index, r_index, n_index, m_index,
     v_index, mp
   )

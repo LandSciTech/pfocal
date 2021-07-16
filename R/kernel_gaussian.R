@@ -2,7 +2,7 @@
 #'
 #' Functions to compute a Gaussian kernel.
 #'
-#' @inheritParams fast_gaussian_radius_pFocal
+#' @inheritParams pfocal_fast_gaussian_radius
 #'
 #' @return
 #' A `matrix` corresponding to the kernel.
@@ -52,20 +52,20 @@ gaussian_kernel_radius <- function(vertical_radius,
 .gaussian_strip_radius <- function(radius, sd = 1, tail_included = TRUE) {
   if (!is.logical(tail_included)) {
     stop(paste0('tail_included must be logical. If true, the long tail of the ",
-                "distrobution is included in the last element of the strip, ",
+                "distribution is included in the last element of the strip, ",
                 "otherwise it is simply truncated off'))
   } else if (radius < 0) {
     stop("radius must be >= 0")
   } else if ((radius %% 1) != 0) {
     warning(paste0(
       "radius should be an even multiple of 1. It will be ",
-      "ceiling()ed to the next hole number"
+      "ceiling()ed to the next whole number"
     ))
     radius <- ceiling(radius)
   } else if (radius == 0) {
     return(matrix(1))
   }
-
+  
   if (tail_included) {
     dist <- stats::pnorm(-0.5:(radius + 0.5), sd = sd, lower.tail = FALSE)
     matrix(dist - append(dist[-1], 0))
@@ -82,9 +82,9 @@ gaussian_kernel_radius <- function(vertical_radius,
   } else if (r0 > 1) {
     stop("r0 must be <= 1")
   }
-
+  
   .gaussian_strip_radius(ceiling(stats::qnorm((r0 / 2), sd = sd, lower.tail = FALSE) - 0.5),
-    sd = sd, tail_included = tail_included
+                         sd = sd, tail_included = tail_included
   )
 }
 
@@ -93,13 +93,13 @@ gaussian_kernel_radius <- function(vertical_radius,
                                             horizontal_sd = vertical_sd,
                                             tail_included = TRUE) {
   return(.gaussian_strip_radius(vertical_radius,
-    sd = vertical_sd,
-    tail_included = tail_included
+                                sd = vertical_sd,
+                                tail_included = tail_included
   )
   %*%
     t(.gaussian_strip_radius(horizontal_radius,
-      sd = horizontal_sd,
-      tail_included = tail_included
+                             sd = horizontal_sd,
+                             tail_included = tail_included
     )))
 }
 

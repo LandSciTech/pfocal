@@ -8,7 +8,7 @@
 }
 
 # for all values, closer to 0 is better
-.pFocal_compare <- function(data,
+.pfocal_compare <- function(data,
                             kernel,
                             edge_value = 0,
                             transform_function = "MULTIPLY",
@@ -25,32 +25,32 @@
   cv_f <- NA
 
   times <- c(
-    system.time(rv_t <- pFocal(data, kernel, edge_value, transform_function,
+    system.time(rv_t <- pfocal(data, kernel, edge_value, transform_function,
       reduce_function, mean_divider, variance,
       na.rm = TRUE,
       mp = FALSE, debug_use_r_implementation = TRUE
     )),
-    system.time(cv_t <- pFocal(data, kernel, edge_value, transform_function,
+    system.time(cv_t <- pfocal(data, kernel, edge_value, transform_function,
       reduce_function, mean_divider, variance,
       na.rm = TRUE,
       mp = TRUE, debug_use_r_implementation = FALSE
     )),
-    system.time(rv_n <- pFocal(data, kernel, edge_value, transform_function,
+    system.time(rv_n <- pfocal(data, kernel, edge_value, transform_function,
       reduce_function, mean_divider, variance,
       na.rm = NA,
       mp = FALSE, debug_use_r_implementation = TRUE
     )),
-    system.time(cv_n <- pFocal(data, kernel, edge_value, transform_function,
+    system.time(cv_n <- pfocal(data, kernel, edge_value, transform_function,
       reduce_function, mean_divider, variance,
       na.rm = NA,
       mp = TRUE, debug_use_r_implementation = FALSE
     )),
-    system.time(rv_f <- pFocal(data, kernel, edge_value, transform_function,
+    system.time(rv_f <- pfocal(data, kernel, edge_value, transform_function,
       reduce_function, mean_divider, variance,
       na.rm = TRUE,
       mp = FALSE, debug_use_r_implementation = TRUE
     )),
-    system.time(cv_f <- pFocal(data, kernel, edge_value, transform_function,
+    system.time(cv_f <- pfocal(data, kernel, edge_value, transform_function,
       reduce_function, mean_divider, variance,
       na.rm = TRUE,
       mp = TRUE, debug_use_r_implementation = FALSE
@@ -108,12 +108,12 @@
   )
 }
 
-.pFocal_compare_sweep <- function(data, kernel, edge_value) {
+.pfocal_compare_sweep <- function(data, kernel, edge_value) {
   for (v in 0:1) {
-    for (m in pFocal_mean_divisor_info()[, 1]) {
-      for (r in pFocal_reduce_info()[, 1]) {
-        for (t in pFocal_transform_info()[, 1]) {
-          o <- .pFocal_compare(data, kernel, edge_value, t, r, m, v)
+    for (m in pfocal_info_mean_divisor()[, 1]) {
+      for (r in pfocal_info_reduce()[, 1]) {
+        for (t in pfocal_info_transform()[, 1]) {
+          o <- .pfocal_compare(data, kernel, edge_value, t, r, m, v)
           if (any(o[5:length(o)] > 0)) {
             print(o[1:4])
             print(o[5:length(o)])

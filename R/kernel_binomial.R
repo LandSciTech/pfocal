@@ -2,7 +2,7 @@
 #'
 #' Functions to compute a binomial kernel.
 #'
-#' @inheritParams fast_binomial_pFocal
+#' @inheritParams pfocal_fast_binomial
 #'
 #' @return
 #' A `matrix` corresponding to the kernel.

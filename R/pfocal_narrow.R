@@ -1,36 +1,37 @@
 
 # Higher level, argument level function calling routine below -------------
 
-pFocal_narrow_transform <- function(f) {
-  .pFocal_narrow(f, pFocal_transform_info())
+pfocal_narrow_transform <- function(f) {
+  .pfocal_narrow(f, pfocal_info_transform())
 }
 
-pFocal_narrow_reduce <- function(f) {
-  .pFocal_narrow(f, pFocal_reduce_info())
+pfocal_narrow_reduce <- function(f) {
+  .pfocal_narrow(f, pfocal_info_reduce())
 }
 
-pFocal_narrow_nan_policy <- function(f) {
-  .pFocal_narrow(f, pFocal_nan_policy_info())
+pfocal_narrow_nan_policy <- function(f) {
+  .pfocal_narrow(f, pfocal_info_nan_policy())
 }
 
-pFocal_narrow_mean_divisor <- function(f) {
-  .pFocal_narrow(f, pFocal_mean_divisor_info())
+pfocal_narrow_mean_divisor <- function(f) {
+  .pfocal_narrow(f, pfocal_info_mean_divisor())
 }
 
-pFocal_narrow_variance <- function(f) {
-  .pFocal_narrow(f, pFocal_variance_info())
+pfocal_narrow_variance <- function(f) {
+  .pfocal_narrow(f, pfocal_info_variance())
 }
 
 # General routine ---------------------------------------------------------
 
-.pFocal_narrow <- function(f, info) {
-  if (is.na(f)) {
-    return(NA)
-    # stop("F is NA")
-  }
+.pfocal_narrow <- function(f, info) {
 
   if (length(f) != 1L) {
     stop("F must have a length of 1")
+  }
+  
+  if (is.na(f)) {
+    return(NA)
+    # stop("F is NA")
   }
 
   if (is.numeric(f) || is.logical(f)) {
