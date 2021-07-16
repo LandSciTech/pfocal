@@ -1,4 +1,4 @@
-Package: dwsR
+Package: pfocal
 Type: Package
 Title: Fast Convolution of Matrixes of Numbers
 Version: 0.0.0.1
@@ -13,7 +13,7 @@ Authors@R: c(
 Description: Takes a matrix of numeric data and a kernel, 
     and convolves the data using the matrix.
 License: GPL-3 + file LICENSE
-BugReports: https://github.com/LandSciTech/dwsR
+BugReports: https://github.com/LandSciTech/pfocal
 Depends: R (>= 4.0.0)
 Imports: 
     Rcpp,
@@ -27,5 +27,5 @@ Suggests:
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Encoding: UTF-8
-URL: https://landscitech.github.io/dwsR
+URL: https://landscitech.github.io/pfocal
 Config/testthat/edition: 3
