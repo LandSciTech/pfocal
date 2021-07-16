@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# dwsR <img src='man/figures/logo.png' align="right" height="150" />
+# pfocal <img src='man/figures/logo.png' align="right" height="150" />
 
 <!-- badges: start -->
 
@@ -9,12 +9,12 @@
 v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
 [![Project Status:
 WIP](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
-[![R-CMD-check](https://github.com/LandSciTech/dwsR/workflows/R-CMD-check/badge.svg)](https://github.com/LandSciTech/dwsR/actions)
+[![R-CMD-check](https://github.com/LandSciTech/pfocal/workflows/R-CMD-check/badge.svg)](https://github.com/LandSciTech/pfocal/actions)
 [![Codecov test
-coverage](https://codecov.io/gh/LandSciTech/dwsR/branch/master/graph/badge.svg)](https://codecov.io/gh/LandSciTech/dwsR?branch=master)
+coverage](https://codecov.io/gh/LandSciTech/pfocal/branch/master/graph/badge.svg)](https://codecov.io/gh/LandSciTech/pfocal?branch=master)
 <!-- badges: end -->
 
-The goal of `dwsR` is to implement fast parallel convolution. R version
+The goal of `pfocal` is to implement fast parallel convolution. R version
 &gt;= 4.0.0 is required.
 
 ## Installation
@@ -24,13 +24,13 @@ You can install the development version from
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("LandSciTech/dwsR")
+devtools::install_github("LandSciTech/pfocal")
 ```
 
 ## Example
 
 ``` r
-library(dwsR)
+library(pfocal)
 
 data <- matrix(nrow = 100, ncol = 100, 
                data = runif(n = 100*100, min = 0, max = 10))

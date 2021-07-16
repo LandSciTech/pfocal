@@ -1,4 +1,4 @@
 library(testthat)
-library(dwsR)
+library(pfocal)
 
-test_check("dwsR")
+test_check("pfocal")
