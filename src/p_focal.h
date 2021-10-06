@@ -2,12 +2,19 @@
 #define P_FOCAL_H_
 
 #ifdef _OPENMP
+//we have some openmp
 #include <omp.h>
 // [[Rcpp::plugins(openmp)]]
-#define _P_FOCAL_OPENMP_ENADLED 1
-#else
-#define _P_FOCAL_OPENMP_ENADLED 0
+
+//we have basic openmp
+#define _P_FOCAL_OPENMP_ENADLED
+
+#if _OPENMP >= 201307
+//we have openmp simd
+#define _P_FOCAL_OPENMP_SIMD_ENADLED
 #endif
+#endif
+
 
 #define _P_FOCAL_ALLIGNMENT 64
 
@@ -74,11 +81,10 @@ namespace p_focal{
             const size_t col_size = this->col_size;
             double* data = this->data;
 
-#ifdef _OPENMP
+            #ifdef _P_FOCAL_OPENMP_ENADLED
             #pragma omp parallel for
-#endif
+            #endif
             for(size_t col = 0; col<n_col; col++){
-                
                 double* col_start = (data+start_position+(col_size*col));
                 memcpy(col_start, incomming_data+(n_row*col), n_row*sizeof(double));
             }
@@ -192,11 +198,15 @@ namespace p_focal{
             const size_t col_size = this->col_size;
             const size_t n_col = this->n_col;
             const size_t n_row = this->n_row;
-#ifdef _OPENMP
+
+            #ifdef _P_FOCAL_OPENMP_ENADLED
             #pragma omp parallel for
-#endif
+            #endif
             for(size_t col = 0; col<n_col; col++){
                 const double* c_data = data+col*col_size;
+                #ifdef _P_FOCAL_OPENMP_SIMD_ENADLED
+                #pragma omp simd
+                #endif
                 for(size_t row=0; row<n_row; row++){
                     output[col*n_row+row] = c_data[row];
                 }
@@ -211,11 +221,11 @@ namespace p_focal{
     }
 
     std::tuple<bool, int, int> openmp_self_test(void) noexcept{
-#ifdef _OPENMP
+        #ifdef _P_FOCAL_OPENMP_ENADLED
             return {true, _OPENMP, omp_get_max_threads()};
-#else
+        #else
             return {false, 0, 1};
-#endif
+        #endif
     }
 
     enum class TRANSFORM : size_t{
@@ -313,9 +323,9 @@ namespace p_focal{
         static_assert(NAN_P              < NAN_POLICY::SIZE,   "NAN_POLICY out of range");
         static_assert(MEAN_D             < MEAN_DIVISOR::SIZE, "MEAN_D out of range");
 
-
-        if(!_P_FOCAL_OPENMP_ENADLED && open_mp_requested){Rcerr << "You are asking for open_mp, but it was not enabled at compile time\n";};
-
+        #ifndef _P_FOCAL_OPENMP_ENADLED
+        if(open_mp_requested){Rcerr << "You are asking for open_mp, but it was not enabled at compile time\n";};
+        #endif
         //set up compile time values
         static const size_t ALIGNMENT_BYTES = expanded_aligned_data<ALIGNMENT>::alignment();
 
@@ -399,13 +409,16 @@ namespace p_focal{
         const double mean_divider __attribute__((unused)) = mean_divider_temp;
 
         //start the main loops
-#ifdef _OPENMP
-        #pragma omp parallel if(open_mp_enabled)
-#endif
+        #ifdef _P_FOCAL_OPENMP_ENADLED
+        #pragma omp parallel for if(open_mp_requested)
+        #endif
         for(size_t d_col=0; d_col<d_cols; d_col++){
             const double* const d_col_p = (d_p+d_col*d_col_size);
             double* const dest_col_p = dest+d_col*d_rows;
 
+            #ifdef _P_FOCAL_OPENMP_SIMD_ENADLED
+            #pragma omp simd if(open_mp_requested)
+            #endif
             for(size_t d_row=0; d_row<d_rows; d_row++){
 
                 double acc = ACC_INITIAL_VALUE;
