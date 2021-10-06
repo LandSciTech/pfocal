@@ -414,7 +414,7 @@ namespace p_focal{
             double* const dest_col_p = dest+d_col*d_rows;
 
             #ifdef _P_FOCAL_OPENMP_SIMD_ENADLED
-            #pragma omp simd if(open_mp_requested)
+            #pragma omp simd
             #endif
             for(size_t d_row=0; d_row<d_rows; d_row++){
 
