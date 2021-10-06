@@ -339,9 +339,6 @@ namespace p_focal{
                 std::numeric_limits<double>::min()  //MAX
             })[static_cast<size_t>(REDUCE_FUNCTION)];
 
-        //set up once per call values
-        const bool open_mp_enabled = _P_FOCAL_OPENMP_ENADLED && open_mp_requested;
-
         const size_t s_start_position = src.start_position;
 
         const double* const d_p = (src.data+s_start_position);
