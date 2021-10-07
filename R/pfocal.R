@@ -67,6 +67,16 @@ pfocal <- function(data, kernel, edge_value = 0, transform_function = "MULTIPLY"
     )
     raster::values(data) <- data_transformed
     return(data)
+  }  else if (methods::is(data, "SpatRaster")){
+    browser()
+    data_matrix <- terra::as.matrix(data)
+    data_transformed <- pfocal.matrix(
+      data_matrix, kernel, edge_value, transform_function,
+      reduce_function, mean_divider, variance,
+      na.rm, mp, debug_use_r_implementation, ...
+    )
+    terra::values(data) <- data_transformed
+    return(data)
   } else if (methods::is(data, "stars")) {
     return(pfocal.stars(
       data, kernel, edge_value, transform_function,
