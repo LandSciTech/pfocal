@@ -58,6 +58,15 @@ pfocal <- function(data, kernel, edge_value = 0, transform_function = "MULTIPLY"
       reduce_function, mean_divider, variance,
       na.rm, mp, debug_use_r_implementation, ...
     ))
+  } else if (methods::is(data, "RasterLayer")){
+    data_matrix <- raster::as.matrix(data)
+    data_transformed <- pfocal.matrix(
+      data_matrix, kernel, edge_value, transform_function,
+      reduce_function, mean_divider, variance,
+      na.rm, mp, debug_use_r_implementation, ...
+    )
+    raster::values(data) <- data_transformed
+    return(data)
   } else if (methods::is(data, "stars")) {
     return(pfocal.stars(
       data, kernel, edge_value, transform_function,
@@ -65,7 +74,7 @@ pfocal <- function(data, kernel, edge_value = 0, transform_function = "MULTIPLY"
       na.rm, mp, debug_use_r_implementation, ...
     ))
   } else {
-    stop('unsupported type, x must be a "matrix" or a "stars"')
+    stop('unsupported type, x must be a "matrix", "RasterLayer" or a "stars"')
   }
 }
 
