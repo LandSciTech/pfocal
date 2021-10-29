@@ -112,7 +112,7 @@ default to \code{TRUE}.}
 whether to use the slow R implementation instead of the fass C++ code.
 Default to \code{FALSE}.}
 
-\item{...}{None used.}
+\item{...}{None used at the moment.}
 
 \item{transform_function}{\strong{[character]} The function to apply to the
 cell values covered by the kernel. For possible values, see
