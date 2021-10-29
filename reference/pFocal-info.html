@@ -172,14 +172,14 @@ second column is used internally and third column describe the argument.</p>
 #&gt; [4,] "Accumulator starts at 1. For each intermediate value, in no particular order, acc = ( acc * abs(iv) )"                       
 #&gt; [5,] "Accumulator starts at the highest possible value. For each intermediate value, in no particular order, acc = min( acc , iv )"
 #&gt; [6,] "Accumulator starts at the lowest possible value. For each intermediate value, in no particular order, acc = max( acc , iv )" </div><div class='input'><span class='fu'>pfocal_info_nan_policy</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;      [,1]          [,2]
-#&gt; [1,] "FAST"        "0" 
-#&gt; [2,] "NA_RM_FALSE" "1" 
-#&gt; [3,] "NA_RM_TRUE"  "2" 
-#&gt;      [,3]                                                                                                                   
-#&gt; [1,] "Assume that there will be no NAN values. Will not crash if it is given a NAN, but makes no guarantee other than that."
-#&gt; [2,] "Will propagate NANs aggressively."                                                                                    
-#&gt; [3,] "Will discard NAN values early."                                                                                       </div><div class='input'><span class='fu'>pfocal_info_mean_divisor</span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;      [,1]    [,2]
+#&gt; [1,] "NA"    "0" 
+#&gt; [2,] "FALSE" "1" 
+#&gt; [3,] "TRUE"  "2" 
+#&gt;      [,3]                                                                                                                            
+#&gt; [1,] "Fastest. Assume that there will be no NAN values. Will not crash if it is given a NAN, but makes no guarantee other than that."
+#&gt; [2,] "Will propagate NANs aggressively."                                                                                             
+#&gt; [3,] "Will discard NAN values early."                                                                                                </div><div class='input'><span class='fu'>pfocal_info_mean_divisor</span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;       [,1]                    [,2]
 #&gt;  [1,] "ONE"                   "0" 
 #&gt;  [2,] "KERNEL_SIZE"           "1" 
