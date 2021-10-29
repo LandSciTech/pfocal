@@ -8,8 +8,7 @@
 \description{
 \if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
 
-Takes a matrix of numeric data and a kernel, 
-    and convolves the data using the matrix.
+Takes a matrix of numeric data and a kernel, and convolves the data using the matrix.
 }
 \seealso{
 Useful links:
