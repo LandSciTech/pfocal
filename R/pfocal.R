@@ -25,7 +25,7 @@
 #'     [pfocal_info_variance()]). Default to `FALSE` (just returns the value
 #'     at each point).
 #' @param na.rm **\[NA OR logical\]** The behavior to adopt for dealing with
-#'     missing values, default to `NA` ("FAST" option). Far possible values see
+#'     missing values, default to `NA` (faster option). For possible values see
 #'     [pfocal_info_nan_policy()].
 #' @param mp **\[logical\]** Whether to use the open_mp implementation,
 #'     default to `TRUE`.
@@ -130,11 +130,11 @@ pfocal.stars <- function(data, ...) {
   }
 
   if (is.na(na.rm)) {
-    na.rm <- "FAST"
+    na.rm <- "NA" # 'Fast' version
   } else if (na.rm) {
-    na.rm <- "NA_RM_TRUE"
+    na.rm <- "TRUE"
   } else {
-    na.rm <- "NA_RM_FALSE"
+    na.rm <- "FALSE"
   }
 
   t_index <- pfocal_narrow_transform(transform_function)

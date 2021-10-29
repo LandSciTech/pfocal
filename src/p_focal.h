@@ -270,9 +270,9 @@ namespace p_focal{
     };
 
     const std::array<const std::tuple<const size_t, const char*, const char*>, static_cast<size_t>(NAN_POLICY::SIZE)> NAN_POLICY_DESCRIPTION {
-        std::tuple<const size_t, const char*, const char*>{static_cast<size_t>(NAN_POLICY::FAST),        "FAST",        "Assume that there will be no NAN values. Will not crash if it is given a NAN, but makes no guarantee other than that."},
-        std::tuple<const size_t, const char*, const char*>{static_cast<size_t>(NAN_POLICY::NA_RM_FALSE), "NA_RM_FALSE", "Will propagate NANs aggressively."                                                                                   },
-        std::tuple<const size_t, const char*, const char*>{static_cast<size_t>(NAN_POLICY::NA_RM_TRUE),  "NA_RM_TRUE",  "Will discard NAN values early."                                                                                      }
+        std::tuple<const size_t, const char*, const char*>{static_cast<size_t>(NAN_POLICY::FAST),        "NA",        "Fastest. Assume that there will be no NAN values. Will not crash if it is given a NAN, but makes no guarantee other than that."},
+        std::tuple<const size_t, const char*, const char*>{static_cast<size_t>(NAN_POLICY::NA_RM_FALSE), "FALSE",     "Will propagate NANs aggressively."                                                                                   },
+        std::tuple<const size_t, const char*, const char*>{static_cast<size_t>(NAN_POLICY::NA_RM_TRUE),  "TRUE",      "Will discard NAN values early."                                                                                      }
     };
 
     enum class MEAN_DIVISOR : size_t{
