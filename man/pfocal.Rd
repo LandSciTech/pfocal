@@ -48,7 +48,7 @@ intermediate values at each point (for more details please see
 at each point).}
 
 \item{na.rm}{\strong{[NA OR logical]} The behavior to adopt for dealing with
-missing values, default to \code{NA} ("FAST" option). Far possible values see
+missing values, default to \code{NA} (faster option). For possible values see
 \code{\link[=pfocal_info_nan_policy]{pfocal_info_nan_policy()}}.}
 
 \item{mp}{\strong{[logical]} Whether to use the open_mp implementation,
