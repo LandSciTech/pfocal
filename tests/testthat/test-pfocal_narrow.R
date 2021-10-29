@@ -18,9 +18,9 @@ test_that("narrowing for reduce happens as expected", {
 
 test_that("narrowing for NAN policy happens as expected", {
   expect_equal(pfocal_narrow_nan_policy(NA), NA)
-  expect_equal(pfocal_narrow_nan_policy("FAST"), 0)
-  expect_equal(pfocal_narrow_nan_policy("NA_RM_FALSE"), 1)
-  expect_equal(pfocal_narrow_nan_policy("NA_RM_TRUE"), 2)
+  expect_equal(pfocal_narrow_nan_policy("NA"), 0)
+  expect_equal(pfocal_narrow_nan_policy("FALSE"), 1)
+  expect_equal(pfocal_narrow_nan_policy("TRUE"), 2)
 })
 
 test_that("narrowing for mean divisor happens as expected", {
