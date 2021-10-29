@@ -17,7 +17,9 @@
 #' pfocal_info_mean_divisor()
 #' pfocal_info_variance()
 #'
-#' # Higher level, argument level functions calling routine below -------------
+
+# Higher level, argument level functions calling routine below -------------
+
 #' @export
 #' @rdname pfocal-info
 pfocal_info_transform <- function() {

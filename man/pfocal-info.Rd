@@ -36,5 +36,4 @@ pfocal_info_nan_policy()
 pfocal_info_mean_divisor()
 pfocal_info_variance()
 
-# Higher level, argument level functions calling routine below -------------
 }
