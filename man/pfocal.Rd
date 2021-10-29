@@ -47,8 +47,8 @@ intermediate values at each point (for more details please see
 \code{\link[=pfocal_info_variance]{pfocal_info_variance()}}). Default to \code{FALSE} (just returns the value
 at each point).}
 
-\item{na.rm}{\strong{[NA OR character]} The behavior to adopt for dealing with
-missing values, default to \code{NA}. Far possible values see
+\item{na.rm}{\strong{[NA OR logical]} The behavior to adopt for dealing with
+missing values, default to \code{NA} ("FAST" option). Far possible values see
 \code{\link[=pfocal_info_nan_policy]{pfocal_info_nan_policy()}}.}
 
 \item{mp}{\strong{[logical]} Whether to use the open_mp implementation,

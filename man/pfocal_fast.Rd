@@ -101,8 +101,8 @@ horizontal dimension.}
 
 \item{tail_included}{\strong{[logical]} TODO}
 
-\item{na.rm}{\strong{[NA OR character]} The behavior to adopt for dealing with
-missing values, default to \code{NA}. Far possible values see
+\item{na.rm}{\strong{[NA OR logical]} The behavior to adopt for dealing with
+missing values, default to \code{NA} ("FAST" option). Far possible values see
 \code{\link[=pfocal_info_nan_policy]{pfocal_info_nan_policy()}}.}
 
 \item{mp}{\strong{[logical]} Whether to use the open_mp implementation,

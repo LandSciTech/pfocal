@@ -24,8 +24,8 @@
 #'     intermediate values at each point (for more details please see
 #'     [pfocal_info_variance()]). Default to `FALSE` (just returns the value
 #'     at each point).
-#' @param na.rm **\[NA OR character\]** The behavior to adopt for dealing with
-#'     missing values, default to `NA`. Far possible values see
+#' @param na.rm **\[NA OR logical\]** The behavior to adopt for dealing with
+#'     missing values, default to `NA` ("FAST" option). Far possible values see
 #'     [pfocal_info_nan_policy()].
 #' @param mp **\[logical\]** Whether to use the open_mp implementation,
 #'     default to `TRUE`.
