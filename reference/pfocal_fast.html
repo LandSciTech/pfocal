@@ -96,6 +96,18 @@ default argument values." />
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/Getting_started.html">Getting started</a>
+    </li>
+  </ul>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
@@ -320,126 +332,131 @@ rectangle.</p></td>
     <p>The updated, convoluted grid.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='va'>data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span>nrow <span class='op'>=</span> <span class='fl'>10</span>, ncol <span class='op'>=</span> <span class='fl'>10</span>, data <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='fl'>10</span> <span class='op'>*</span> <span class='fl'>10</span><span class='op'>)</span><span class='op'>)</span>
-
-<span class='fu'>pfocal_fast_gaussian_radius</span><span class='op'>(</span><span class='va'>data</span>, vertical_radius <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;            [,1]      [,2]      [,3]      [,4]      [,5]      [,6]      [,7]
-#&gt;  [1,] 0.2628364 0.3574417 0.3714271 0.3438907 0.3204405 0.3443735 0.3759912
-#&gt;  [2,] 0.3268494 0.4574755 0.4897148 0.4713342 0.4456533 0.4567309 0.4766896
-#&gt;  [3,] 0.3576430 0.5041493 0.5484033 0.5334575 0.4946795 0.5069408 0.5437409
-#&gt;  [4,] 0.3867988 0.5543018 0.6107332 0.5967368 0.5532097 0.5669883 0.6147860
-#&gt;  [5,] 0.3921279 0.5605049 0.6081984 0.5849713 0.5295699 0.5245708 0.5658006
-#&gt;  [6,] 0.3699087 0.5114626 0.5409768 0.5271725 0.5035787 0.5168716 0.5581573
-#&gt;  [7,] 0.4024290 0.5373086 0.5433907 0.5201428 0.5022244 0.5136201 0.5508799
-#&gt;  [8,] 0.3662598 0.4659302 0.4502189 0.4419401 0.4594620 0.4691939 0.4750813
-#&gt;  [9,] 0.3183505 0.3835535 0.3576683 0.3640769 0.3971971 0.4098379 0.4071539
-#&gt; [10,] 0.2488969 0.2984337 0.2820581 0.3048392 0.3467230 0.3457431 0.3207881
-#&gt;            [,8]      [,9]     [,10]
-#&gt;  [1,] 0.3467073 0.2990798 0.2306232
-#&gt;  [2,] 0.4395626 0.3922491 0.3049334
-#&gt;  [3,] 0.5012261 0.4278174 0.3211132
-#&gt;  [4,] 0.5827508 0.5112987 0.3902675
-#&gt;  [5,] 0.5404551 0.4740006 0.3646350
-#&gt;  [6,] 0.5474646 0.4954128 0.3781620
-#&gt;  [7,] 0.5423260 0.4921301 0.3892513
-#&gt;  [8,] 0.4646128 0.4392928 0.3525901
-#&gt;  [9,] 0.3887802 0.3596569 0.2891678
-#&gt; [10,] 0.3042297 0.2980619 0.2517118</div><div class='input'><span class='fu'>pfocal_fast_gaussian_confidence</span><span class='op'>(</span><span class='va'>data</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;            [,1]      [,2]      [,3]      [,4]      [,5]      [,6]      [,7]
-#&gt;  [1,] 0.3528231 0.4522402 0.4255708 0.3583573 0.3469013 0.4124750 0.4681138
-#&gt;  [2,] 0.4115273 0.5373437 0.5568216 0.5531511 0.5464686 0.5635243 0.5697185
-#&gt;  [3,] 0.3533482 0.5077165 0.5956102 0.6341771 0.6026655 0.5815354 0.5758476
-#&gt;  [4,] 0.3545399 0.5644012 0.6666803 0.6551762 0.5725952 0.5458410 0.5830026
-#&gt;  [5,] 0.3937192 0.5972179 0.6559579 0.6108346 0.5367308 0.5393123 0.6083631
-#&gt;  [6,] 0.3915381 0.5303500 0.5493814 0.5217723 0.4881969 0.5297135 0.6143708
-#&gt;  [7,] 0.3862140 0.4971682 0.4977162 0.4735671 0.4560965 0.4867209 0.5438087
-#&gt;  [8,] 0.4017909 0.5078042 0.4760900 0.4409617 0.4468622 0.4483183 0.4501033
-#&gt;  [9,] 0.3899118 0.4671977 0.4193715 0.4306685 0.4955978 0.4909860 0.4473734
-#&gt; [10,] 0.3027438 0.3468063 0.3204631 0.3756272 0.4553983 0.4553292 0.4058879
-#&gt;            [,8]      [,9]     [,10]
-#&gt;  [1,] 0.4352346 0.3749933 0.2870108
-#&gt;  [2,] 0.4935532 0.4170166 0.3174998
-#&gt;  [3,] 0.5096473 0.4471981 0.3450839
-#&gt;  [4,] 0.5665607 0.5151951 0.4032534
-#&gt;  [5,] 0.6021773 0.5286697 0.3972616
-#&gt;  [6,] 0.5935724 0.4918789 0.3542992
-#&gt;  [7,] 0.5370854 0.4804353 0.3747008
-#&gt;  [8,] 0.4611823 0.4658881 0.3894460
-#&gt;  [9,] 0.4356435 0.4396341 0.3664366
-#&gt; [10,] 0.3641230 0.3429452 0.2880496</div><div class='input'><span class='fu'>pfocal_fast_binomial</span><span class='op'>(</span><span class='va'>data</span>, vertical_radius <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;            [,1]      [,2]      [,3]      [,4]      [,5]     [,6]     [,7]
-#&gt;  [1,]  89.68171 115.72983 108.58436  91.33317  89.04506 105.6559 118.1640
-#&gt;  [2,] 104.47155 137.90923 143.44564 140.80853 140.02493 145.8712 145.9758
-#&gt;  [3,]  91.14672 133.01527 156.38415 163.45193 155.87722 150.2860 146.5507
-#&gt;  [4,]  90.24603 144.41552 171.77756 167.79760 147.85520 141.0532 147.7326
-#&gt;  [5,]  99.96414 152.28763 168.74923 155.49773 136.52380 138.5899 155.2843
-#&gt;  [6,] 100.17923 137.53298 143.51994 133.83500 125.47041 136.6552 156.5503
-#&gt;  [7,]  98.57482 128.09816 128.00398 119.36462 115.21310 124.0442 137.7663
-#&gt;  [8,] 102.64621 130.00729 122.48844 113.46381 114.94009 116.4354 116.4449
-#&gt;  [9,] 100.35487 120.73826 109.97862 111.90126 127.13522 126.9767 115.3182
-#&gt; [10,]  76.40747  87.92867  82.18664  94.58936 114.76685 115.7609 102.4488
-#&gt;            [,8]      [,9]     [,10]
-#&gt;  [1,] 110.91714  95.20840  71.08439
-#&gt;  [2,] 129.15249 108.75882  80.99641
-#&gt;  [3,] 132.69013 115.97358  88.00077
-#&gt;  [4,] 145.60541 132.65335 101.42048
-#&gt;  [5,] 155.88505 136.77308  99.97806
-#&gt;  [6,] 153.50197 128.49853  90.73436
-#&gt;  [7,] 137.52855 123.63314  93.72802
-#&gt;  [8,] 119.68920 121.27878  99.13416
-#&gt;  [9,] 112.30877 114.31535  94.12476
-#&gt; [10,]  92.11852  87.74652  71.96723</div><div class='input'><span class='fu'>pfocal_fast_abs_rectangle</span><span class='op'>(</span><span class='va'>data</span>, height <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;            [,1]     [,2]     [,3]     [,4]      [,5]      [,6]     [,7]
-#&gt;  [1,] 0.8056800 1.514461 1.567447 1.023235 0.2352505 0.7705106 1.672674
-#&gt;  [2,] 1.6197313 3.202718 3.008548 2.253336 1.8953485 1.9874024 2.711756
-#&gt;  [3,] 1.2179623 2.103648 1.705577 2.339673 3.1285255 2.5567352 2.669998
-#&gt;  [4,] 0.6223420 1.522071 2.071529 2.954922 2.5675327 1.7294867 2.429365
-#&gt;  [5,] 0.6367924 2.521389 3.670750 3.265077 2.5609239 1.7553145 2.027689
-#&gt;  [6,] 1.0872322 2.583771 2.612427 2.245332 2.0763354 1.7359221 2.557161
-#&gt;  [7,] 1.1765210 2.035680 1.510578 1.915933 1.8955184 1.5321574 2.607247
-#&gt;  [8,] 1.1680096 2.301890 2.306391 2.104677 1.7626973 1.6510897 1.746472
-#&gt;  [9,] 1.1721506 2.531539 2.248504 1.178451 1.4326102 1.8594941 1.222920
-#&gt; [10,] 1.3473438 2.565795 1.532632 1.268652 2.6796420 3.1068443 2.395191
-#&gt;           [,8]     [,9]    [,10]
-#&gt;  [1,] 1.839460 1.530901 1.617110
-#&gt;  [2,] 2.896995 1.854579 2.024190
-#&gt;  [3,] 1.964956 1.184306 1.624746
-#&gt;  [4,] 2.432303 1.881128 2.182373
-#&gt;  [5,] 2.736028 2.311482 2.645566
-#&gt;  [6,] 2.956872 2.147932 1.887863
-#&gt;  [7,] 3.124513 2.009569 1.597858
-#&gt;  [8,] 2.001703 1.807811 2.410804
-#&gt;  [9,] 1.265922 1.693010 2.089889
-#&gt; [10,] 2.102858 1.939533 2.233216</div><div class='input'>
-<span class='fu'>pfocal_fast_separated</span><span class='op'>(</span><span class='va'>data</span>, 
-                      kernel_list <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fu'><a href='binomial_kernel.html'>binomial_kernel</a></span><span class='op'>(</span>vertical_radius <span class='op'>=</span> <span class='fl'>2</span>, 
-                                                         horizontal_radius <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>, 
-                                         <span class='fu'><a href='euclidean_distance_kernel.html'>distance_kernel</a></span><span class='op'>(</span>vertical_radius <span class='op'>=</span> <span class='fl'>2</span>,
-                                                         horizontal_radius <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;           [,1]     [,2]     [,3]     [,4]     [,5]     [,6]     [,7]     [,8]
-#&gt;  [1,] 1875.203 2466.145 3323.218 3643.088 3713.226 3580.136 3371.061 3089.925
-#&gt;  [2,] 2539.171 3327.785 4411.923 4813.169 4907.163 4746.538 4493.507 4157.117
-#&gt;  [3,] 3507.644 4546.365 5900.870 6380.352 6518.373 6365.670 6082.041 5658.559
-#&gt;  [4,] 3646.451 4753.176 6182.991 6729.549 6946.006 6821.577 6475.971 5961.619
-#&gt;  [5,] 3551.655 4633.623 6046.759 6594.714 6816.756 6707.248 6386.972 5920.488
-#&gt;  [6,] 3514.920 4540.507 5931.466 6394.763 6511.133 6399.696 6181.562 5821.015
-#&gt;  [7,] 3359.607 4322.408 5738.456 6146.132 6201.072 6150.436 6043.284 5702.999
-#&gt;  [8,] 2953.683 3832.472 5227.610 5608.958 5656.851 5687.099 5666.712 5322.526
-#&gt;  [9,] 2131.260 2760.423 3822.786 4057.178 4015.331 4036.696 4086.018 3866.131
-#&gt; [10,] 1611.773 2100.541 2917.352 3060.350 2968.116 2971.558 3035.533 2877.777
-#&gt;           [,9]    [,10]
-#&gt;  [1,] 2290.631 1651.272
-#&gt;  [2,] 3110.220 2280.825
-#&gt;  [3,] 4274.986 3135.038
-#&gt;  [4,] 4490.335 3288.007
-#&gt;  [5,] 4496.699 3342.375
-#&gt;  [6,] 4458.657 3372.857
-#&gt;  [7,] 4323.150 3260.894
-#&gt;  [8,] 3952.649 2947.335
-#&gt;  [9,] 2831.105 2132.155
-#&gt; [10,] 2094.316 1586.893</div><div class='input'>
-</div></pre>
+    <pre class="examples"><span class='r-in'></span>
+<span class='r-in'><span class='va'>data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span>nrow <span class='op'>=</span> <span class='fl'>10</span>, ncol <span class='op'>=</span> <span class='fl'>10</span>, data <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='fl'>10</span> <span class='op'>*</span> <span class='fl'>10</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'>pfocal_fast_gaussian_radius</span><span class='op'>(</span><span class='va'>data</span>, vertical_radius <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>            [,1]      [,2]      [,3]      [,4]      [,5]      [,6]      [,7]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1,] 0.2628364 0.3574417 0.3714271 0.3438907 0.3204405 0.3443735 0.3759912</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [2,] 0.3268494 0.4574755 0.4897148 0.4713342 0.4456533 0.4567309 0.4766896</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [3,] 0.3576430 0.5041493 0.5484033 0.5334575 0.4946795 0.5069408 0.5437409</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [4,] 0.3867988 0.5543018 0.6107332 0.5967368 0.5532097 0.5669883 0.6147860</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [5,] 0.3921279 0.5605049 0.6081984 0.5849713 0.5295699 0.5245708 0.5658006</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [6,] 0.3699087 0.5114626 0.5409768 0.5271725 0.5035787 0.5168716 0.5581573</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [7,] 0.4024290 0.5373086 0.5433907 0.5201428 0.5022244 0.5136201 0.5508799</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [8,] 0.3662598 0.4659302 0.4502189 0.4419401 0.4594620 0.4691939 0.4750813</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [9,] 0.3183505 0.3835535 0.3576683 0.3640769 0.3971971 0.4098379 0.4071539</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [10,] 0.2488969 0.2984337 0.2820581 0.3048392 0.3467230 0.3457431 0.3207881</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>            [,8]      [,9]     [,10]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1,] 0.3467073 0.2990798 0.2306232</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [2,] 0.4395626 0.3922491 0.3049334</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [3,] 0.5012261 0.4278174 0.3211132</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [4,] 0.5827508 0.5112987 0.3902675</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [5,] 0.5404551 0.4740006 0.3646350</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [6,] 0.5474646 0.4954128 0.3781620</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [7,] 0.5423260 0.4921301 0.3892513</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [8,] 0.4646128 0.4392928 0.3525901</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [9,] 0.3887802 0.3596569 0.2891678</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [10,] 0.3042297 0.2980619 0.2517118</span>
+<span class='r-in'><span class='fu'>pfocal_fast_gaussian_confidence</span><span class='op'>(</span><span class='va'>data</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>            [,1]      [,2]      [,3]      [,4]      [,5]      [,6]      [,7]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1,] 0.3528231 0.4522402 0.4255708 0.3583573 0.3469013 0.4124750 0.4681138</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [2,] 0.4115273 0.5373437 0.5568216 0.5531511 0.5464686 0.5635243 0.5697185</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [3,] 0.3533482 0.5077165 0.5956102 0.6341771 0.6026655 0.5815354 0.5758476</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [4,] 0.3545399 0.5644012 0.6666803 0.6551762 0.5725952 0.5458410 0.5830026</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [5,] 0.3937192 0.5972179 0.6559579 0.6108346 0.5367308 0.5393123 0.6083631</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [6,] 0.3915381 0.5303500 0.5493814 0.5217723 0.4881969 0.5297135 0.6143708</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [7,] 0.3862140 0.4971682 0.4977162 0.4735671 0.4560965 0.4867209 0.5438087</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [8,] 0.4017909 0.5078042 0.4760900 0.4409617 0.4468622 0.4483183 0.4501033</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [9,] 0.3899118 0.4671977 0.4193715 0.4306685 0.4955978 0.4909860 0.4473734</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [10,] 0.3027438 0.3468063 0.3204631 0.3756272 0.4553983 0.4553292 0.4058879</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>            [,8]      [,9]     [,10]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1,] 0.4352346 0.3749933 0.2870108</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [2,] 0.4935532 0.4170166 0.3174998</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [3,] 0.5096473 0.4471981 0.3450839</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [4,] 0.5665607 0.5151951 0.4032534</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [5,] 0.6021773 0.5286697 0.3972616</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [6,] 0.5935724 0.4918789 0.3542992</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [7,] 0.5370854 0.4804353 0.3747008</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [8,] 0.4611823 0.4658881 0.3894460</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [9,] 0.4356435 0.4396341 0.3664366</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [10,] 0.3641230 0.3429452 0.2880496</span>
+<span class='r-in'><span class='fu'>pfocal_fast_binomial</span><span class='op'>(</span><span class='va'>data</span>, vertical_radius <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>            [,1]      [,2]      [,3]      [,4]      [,5]     [,6]     [,7]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1,]  89.68171 115.72983 108.58436  91.33317  89.04506 105.6559 118.1640</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [2,] 104.47155 137.90923 143.44564 140.80853 140.02493 145.8712 145.9758</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [3,]  91.14672 133.01527 156.38415 163.45193 155.87722 150.2860 146.5507</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [4,]  90.24603 144.41552 171.77756 167.79760 147.85520 141.0532 147.7326</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [5,]  99.96414 152.28763 168.74923 155.49773 136.52380 138.5899 155.2843</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [6,] 100.17923 137.53298 143.51994 133.83500 125.47041 136.6552 156.5503</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [7,]  98.57482 128.09816 128.00398 119.36462 115.21310 124.0442 137.7663</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [8,] 102.64621 130.00729 122.48844 113.46381 114.94009 116.4354 116.4449</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [9,] 100.35487 120.73826 109.97862 111.90126 127.13522 126.9767 115.3182</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [10,]  76.40747  87.92867  82.18664  94.58936 114.76685 115.7609 102.4488</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>            [,8]      [,9]     [,10]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1,] 110.91714  95.20840  71.08439</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [2,] 129.15249 108.75882  80.99641</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [3,] 132.69013 115.97358  88.00077</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [4,] 145.60541 132.65335 101.42048</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [5,] 155.88505 136.77308  99.97806</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [6,] 153.50197 128.49853  90.73436</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [7,] 137.52855 123.63314  93.72802</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [8,] 119.68920 121.27878  99.13416</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [9,] 112.30877 114.31535  94.12476</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [10,]  92.11852  87.74652  71.96723</span>
+<span class='r-in'><span class='fu'>pfocal_fast_abs_rectangle</span><span class='op'>(</span><span class='va'>data</span>, height <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>            [,1]     [,2]     [,3]     [,4]      [,5]      [,6]     [,7]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1,] 0.8056800 1.514461 1.567447 1.023235 0.2352505 0.7705106 1.672674</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [2,] 1.6197313 3.202718 3.008548 2.253336 1.8953485 1.9874024 2.711756</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [3,] 1.2179623 2.103648 1.705577 2.339673 3.1285255 2.5567352 2.669998</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [4,] 0.6223420 1.522071 2.071529 2.954922 2.5675327 1.7294867 2.429365</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [5,] 0.6367924 2.521389 3.670750 3.265077 2.5609239 1.7553145 2.027689</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [6,] 1.0872322 2.583771 2.612427 2.245332 2.0763354 1.7359221 2.557161</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [7,] 1.1765210 2.035680 1.510578 1.915933 1.8955184 1.5321574 2.607247</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [8,] 1.1680096 2.301890 2.306391 2.104677 1.7626973 1.6510897 1.746472</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [9,] 1.1721506 2.531539 2.248504 1.178451 1.4326102 1.8594941 1.222920</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [10,] 1.3473438 2.565795 1.532632 1.268652 2.6796420 3.1068443 2.395191</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>           [,8]     [,9]    [,10]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1,] 1.839460 1.530901 1.617110</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [2,] 2.896995 1.854579 2.024190</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [3,] 1.964956 1.184306 1.624746</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [4,] 2.432303 1.881128 2.182373</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [5,] 2.736028 2.311482 2.645566</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [6,] 2.956872 2.147932 1.887863</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [7,] 3.124513 2.009569 1.597858</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [8,] 2.001703 1.807811 2.410804</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [9,] 1.265922 1.693010 2.089889</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [10,] 2.102858 1.939533 2.233216</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'>pfocal_fast_separated</span><span class='op'>(</span><span class='va'>data</span>, </span>
+<span class='r-in'>                      kernel_list <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fu'><a href='binomial_kernel.html'>binomial_kernel</a></span><span class='op'>(</span>vertical_radius <span class='op'>=</span> <span class='fl'>2</span>, </span>
+<span class='r-in'>                                                         horizontal_radius <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>, </span>
+<span class='r-in'>                                         <span class='fu'><a href='euclidean_distance_kernel.html'>distance_kernel</a></span><span class='op'>(</span>vertical_radius <span class='op'>=</span> <span class='fl'>2</span>,</span>
+<span class='r-in'>                                                         horizontal_radius <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>           [,1]     [,2]     [,3]     [,4]     [,5]     [,6]     [,7]     [,8]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1,] 1875.203 2466.145 3323.218 3643.088 3713.226 3580.136 3371.061 3089.925</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [2,] 2539.171 3327.785 4411.923 4813.169 4907.163 4746.538 4493.507 4157.117</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [3,] 3507.644 4546.365 5900.870 6380.352 6518.373 6365.670 6082.041 5658.559</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [4,] 3646.451 4753.176 6182.991 6729.549 6946.006 6821.577 6475.971 5961.619</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [5,] 3551.655 4633.623 6046.759 6594.714 6816.756 6707.248 6386.972 5920.488</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [6,] 3514.920 4540.507 5931.466 6394.763 6511.133 6399.696 6181.562 5821.015</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [7,] 3359.607 4322.408 5738.456 6146.132 6201.072 6150.436 6043.284 5702.999</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [8,] 2953.683 3832.472 5227.610 5608.958 5656.851 5687.099 5666.712 5322.526</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [9,] 2131.260 2760.423 3822.786 4057.178 4015.331 4036.696 4086.018 3866.131</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [10,] 1611.773 2100.541 2917.352 3060.350 2968.116 2971.558 3035.533 2877.777</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>           [,9]    [,10]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1,] 2290.631 1651.272</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [2,] 3110.220 2280.825</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [3,] 4274.986 3135.038</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [4,] 4490.335 3288.007</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [5,] 4496.699 3342.375</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [6,] 4458.657 3372.857</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [7,] 4323.150 3260.894</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [8,] 3952.649 2947.335</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [9,] 2831.105 2132.155</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [10,] 2094.316 1586.893</span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

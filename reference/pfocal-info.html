@@ -96,6 +96,18 @@ is available to provide all possible values for these arguments." />
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/Getting_started.html">Getting started</a>
+    </li>
+  </ul>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
@@ -144,83 +156,88 @@ is available to provide all possible values for these arguments.</p>
 second column is used internally and third column describe the argument.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='co'># Retrieve info on different arguments</span>
-
-<span class='fu'>pfocal_info_transform</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;      [,1]       [,2]
-#&gt; [1,] "MULTIPLY" "0" 
-#&gt; [2,] "ADD"      "1" 
-#&gt; [3,] "R_EXP"    "2" 
-#&gt; [4,] "L_EXP"    "3" 
-#&gt;      [,3]                                                                   
-#&gt; [1,] "For data value 'd' and kernal value 'k', intermediate_value = (d * k)"
-#&gt; [2,] "For data value 'd' and kernal value 'k', intermediate_value = (d + k)"
-#&gt; [3,] "For data value 'd' and kernal value 'k', intermediate_value = (d ^ k)"
-#&gt; [4,] "For data value 'd' and kernal value 'k', intermediate_value = (k ^ d)"</div><div class='input'><span class='fu'>pfocal_info_reduce</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;      [,1]          [,2]
-#&gt; [1,] "SUM"         "0" 
-#&gt; [2,] "ABS_SUM"     "1" 
-#&gt; [3,] "PRODUCT"     "2" 
-#&gt; [4,] "ABS_PRODUCT" "3" 
-#&gt; [5,] "MIN"         "4" 
-#&gt; [6,] "MAX"         "5" 
-#&gt;      [,3]                                                                                                                          
-#&gt; [1,] "Accumulator starts at 0. For each intermediate value, in no particular order, acc = ( acc + iv )"                            
-#&gt; [2,] "Accumulator starts at 0. For each intermediate value, in no particular order, acc = ( acc + abs(iv) )"                       
-#&gt; [3,] "Accumulator starts at 1. For each intermediate value, in no particular order, acc = ( acc * iv )"                            
-#&gt; [4,] "Accumulator starts at 1. For each intermediate value, in no particular order, acc = ( acc * abs(iv) )"                       
-#&gt; [5,] "Accumulator starts at the highest possible value. For each intermediate value, in no particular order, acc = min( acc , iv )"
-#&gt; [6,] "Accumulator starts at the lowest possible value. For each intermediate value, in no particular order, acc = max( acc , iv )" </div><div class='input'><span class='fu'>pfocal_info_nan_policy</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;      [,1]    [,2]
-#&gt; [1,] "NA"    "0" 
-#&gt; [2,] "FALSE" "1" 
-#&gt; [3,] "TRUE"  "2" 
-#&gt;      [,3]                                                                                                                            
-#&gt; [1,] "Fastest. Assume that there will be no NAN values. Will not crash if it is given a NAN, but makes no guarantee other than that."
-#&gt; [2,] "Will propagate NANs aggressively."                                                                                             
-#&gt; [3,] "Will discard NAN values early."                                                                                                </div><div class='input'><span class='fu'>pfocal_info_mean_divisor</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;       [,1]                    [,2]
-#&gt;  [1,] "ONE"                   "0" 
-#&gt;  [2,] "KERNEL_SIZE"           "1" 
-#&gt;  [3,] "KERNEL_COUNT"          "2" 
-#&gt;  [4,] "KERNEL_SUM"            "3" 
-#&gt;  [5,] "KERNEL_ABS_SUM"        "4" 
-#&gt;  [6,] "KERNEL_PROD"           "5" 
-#&gt;  [7,] "KERNEL_ABS_PROD"       "6" 
-#&gt;  [8,] "DYNAMIC_COUNT"         "7" 
-#&gt;  [9,] "DYNAMIC_SUM"           "8" 
-#&gt; [10,] "DYNAMIC_ABS_SUM"       "9" 
-#&gt; [11,] "DYNAMIC_PROD"          "10"
-#&gt; [12,] "DYNAMIC_ABS_PROD"      "11"
-#&gt; [13,] "DYNAMIC_DATA_SUM"      "12"
-#&gt; [14,] "DYNAMIC_DATA_ABS_SUM"  "13"
-#&gt; [15,] "DYNAMIC_DATA_PROD"     "14"
-#&gt; [16,] "DYNAMIC_DATA_ABS_PROD" "15"
-#&gt;       [,3]                                                                                                                            
-#&gt;  [1,] "Does not divide the final value by anything"                                                                                   
-#&gt;  [2,] "Divide the final value at each point by nrow(k)*ncol(k)"                                                                       
-#&gt;  [3,] "Divide the final value at each point by sum(+!is.na(k))"                                                                       
-#&gt;  [4,] "Divide the final value at each point by sum(k[!is.na(k)])"                                                                     
-#&gt;  [5,] "Divide the final value at each point by sum(abs(k[!is.na(k)]))"                                                                
-#&gt;  [6,] "Divide the final value at each point by prod(k[!is.na(k)])"                                                                    
-#&gt;  [7,] "Divide the final value at each point by prod(abs(k[!is.na(k)]))"                                                               
-#&gt;  [8,] "Divide the final value at each point by sum(!is.na( intermediate_data )), recalculated at every point"                         
-#&gt;  [9,] "Divide the final value at each point by sum(intermediate_data[!is.na( intermediate_data )]), recalculated at every point"      
-#&gt; [10,] "Divide the final value at each point by sum(abs(intermediate_data[!is.na( intermediate_data )])), recalculated at every point" 
-#&gt; [11,] "Divide the final value at each point by prod(intermediate_data[!is.na( intermediate_data )]), recalculated at every point"     
-#&gt; [12,] "Divide the final value at each point by prod(abs(intermediate_data[!is.na( intermediate_data )])), recalculated at every point"
-#&gt; [13,] "Divide the final value at each point by sum(local_data[!is.na( intermediate_data )]), recalculated at every point"             
-#&gt; [14,] "Divide the final value at each point by sum(abs(local_data[!is.na( intermediate_data )])), recalculated at every point"        
-#&gt; [15,] "Divide the final value at each point by prod(local_data[!is.na( intermediate_data )]), recalculated at every point"            
-#&gt; [16,] "Divide the final value at each point by prod(abs(local_data[!is.na( intermediate_data )])), recalculated at every point"       </div><div class='input'><span class='fu'>pfocal_info_variance</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;      [,1]    [,2]
-#&gt; [1,] "FALSE" "0" 
-#&gt; [2,] "TRUE"  "1" 
-#&gt;      [,3]                                                                                                                                                                                                                                                                                                                                                                              
-#&gt; [1,] "Returns the value at each point"                                                                                                                                                                                                                                                                                                                                                 
-#&gt; [2,] "Retruns something like the variance of the intermediate values at each point.First calculate the value as normal. Then find the 'mean' by dividing the value by the mean_divisor. Then for each intermidiate value, calculate the square of the difference and 'reduce' them using the reduce_function. (ie: sum them if SUM, multiply them if PROD, take their max if MAX etc.)"</div><div class='input'>
-</div></pre>
+    <pre class="examples"><span class='r-in'></span>
+<span class='r-in'><span class='co'># Retrieve info on different arguments</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'>pfocal_info_transform</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      [,1]       [,2]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1,] "MULTIPLY" "0" </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2,] "ADD"      "1" </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [3,] "R_EXP"    "2" </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [4,] "L_EXP"    "3" </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      [,3]                                                                   </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1,] "For data value 'd' and kernal value 'k', intermediate_value = (d * k)"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2,] "For data value 'd' and kernal value 'k', intermediate_value = (d + k)"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [3,] "For data value 'd' and kernal value 'k', intermediate_value = (d ^ k)"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [4,] "For data value 'd' and kernal value 'k', intermediate_value = (k ^ d)"</span>
+<span class='r-in'><span class='fu'>pfocal_info_reduce</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      [,1]          [,2]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1,] "SUM"         "0" </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2,] "ABS_SUM"     "1" </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [3,] "PRODUCT"     "2" </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [4,] "ABS_PRODUCT" "3" </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [5,] "MIN"         "4" </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [6,] "MAX"         "5" </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      [,3]                                                                                                                          </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1,] "Accumulator starts at 0. For each intermediate value, in no particular order, acc = ( acc + iv )"                            </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2,] "Accumulator starts at 0. For each intermediate value, in no particular order, acc = ( acc + abs(iv) )"                       </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [3,] "Accumulator starts at 1. For each intermediate value, in no particular order, acc = ( acc * iv )"                            </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [4,] "Accumulator starts at 1. For each intermediate value, in no particular order, acc = ( acc * abs(iv) )"                       </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [5,] "Accumulator starts at the highest possible value. For each intermediate value, in no particular order, acc = min( acc , iv )"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [6,] "Accumulator starts at the lowest possible value. For each intermediate value, in no particular order, acc = max( acc , iv )" </span>
+<span class='r-in'><span class='fu'>pfocal_info_nan_policy</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      [,1]    [,2]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1,] "NA"    "0" </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2,] "FALSE" "1" </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [3,] "TRUE"  "2" </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      [,3]                                                                                                                            </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1,] "Fastest. Assume that there will be no NAN values. Will not crash if it is given a NAN, but makes no guarantee other than that."</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2,] "Will propagate NANs aggressively."                                                                                             </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [3,] "Will discard NAN values early."                                                                                                </span>
+<span class='r-in'><span class='fu'>pfocal_info_mean_divisor</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       [,1]                    [,2]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1,] "ONE"                   "0" </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [2,] "KERNEL_SIZE"           "1" </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [3,] "KERNEL_COUNT"          "2" </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [4,] "KERNEL_SUM"            "3" </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [5,] "KERNEL_ABS_SUM"        "4" </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [6,] "KERNEL_PROD"           "5" </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [7,] "KERNEL_ABS_PROD"       "6" </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [8,] "DYNAMIC_COUNT"         "7" </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [9,] "DYNAMIC_SUM"           "8" </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [10,] "DYNAMIC_ABS_SUM"       "9" </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [11,] "DYNAMIC_PROD"          "10"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [12,] "DYNAMIC_ABS_PROD"      "11"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [13,] "DYNAMIC_DATA_SUM"      "12"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [14,] "DYNAMIC_DATA_ABS_SUM"  "13"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [15,] "DYNAMIC_DATA_PROD"     "14"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [16,] "DYNAMIC_DATA_ABS_PROD" "15"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       [,3]                                                                                                                            </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1,] "Does not divide the final value by anything"                                                                                   </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [2,] "Divide the final value at each point by nrow(k)*ncol(k)"                                                                       </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [3,] "Divide the final value at each point by sum(+!is.na(k))"                                                                       </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [4,] "Divide the final value at each point by sum(k[!is.na(k)])"                                                                     </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [5,] "Divide the final value at each point by sum(abs(k[!is.na(k)]))"                                                                </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [6,] "Divide the final value at each point by prod(k[!is.na(k)])"                                                                    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [7,] "Divide the final value at each point by prod(abs(k[!is.na(k)]))"                                                               </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [8,] "Divide the final value at each point by sum(!is.na( intermediate_data )), recalculated at every point"                         </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [9,] "Divide the final value at each point by sum(intermediate_data[!is.na( intermediate_data )]), recalculated at every point"      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [10,] "Divide the final value at each point by sum(abs(intermediate_data[!is.na( intermediate_data )])), recalculated at every point" </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [11,] "Divide the final value at each point by prod(intermediate_data[!is.na( intermediate_data )]), recalculated at every point"     </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [12,] "Divide the final value at each point by prod(abs(intermediate_data[!is.na( intermediate_data )])), recalculated at every point"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [13,] "Divide the final value at each point by sum(local_data[!is.na( intermediate_data )]), recalculated at every point"             </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [14,] "Divide the final value at each point by sum(abs(local_data[!is.na( intermediate_data )])), recalculated at every point"        </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [15,] "Divide the final value at each point by prod(local_data[!is.na( intermediate_data )]), recalculated at every point"            </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [16,] "Divide the final value at each point by prod(abs(local_data[!is.na( intermediate_data )])), recalculated at every point"       </span>
+<span class='r-in'><span class='fu'>pfocal_info_variance</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      [,1]    [,2]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1,] "FALSE" "0" </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2,] "TRUE"  "1" </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      [,3]                                                                                                                                                                                                                                                                                                                                                                              </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1,] "Returns the value at each point"                                                                                                                                                                                                                                                                                                                                                 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2,] "Retruns something like the variance of the intermediate values at each point.First calculate the value as normal. Then find the 'mean' by dividing the value by the mean_divisor. Then for each intermidiate value, calculate the square of the difference and 'reduce' them using the reduce_function. (ie: sum them if SUM, multiply them if PROD, take their max if MAX etc.)"</span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
