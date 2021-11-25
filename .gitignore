@@ -6,3 +6,5 @@ install.R
 .dll
 docs
 inst/doc
+/doc/
+/Meta/
