@@ -94,7 +94,7 @@ Rcpp::List p_focal_variance_info_cpp() {
     auto desc_list = Rcpp::CharacterVector::create(
         "Returns the value at each point",
 
-        "Retruns something like the variance of the intermediate values at each point."
+        "Returns something like the variance of the intermediate values at each point."
         "First calculate the value as normal. Then find the 'mean' by dividing the value by the mean_divisor. "
         "Then for each intermidiate value, calculate the square of the difference and 'reduce' them using the reduce_function. (ie: sum them if SUM, multiply them if PROD, take their max if MAX etc.)");
 
