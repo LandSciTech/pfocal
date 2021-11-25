@@ -32,7 +32,8 @@
 #' @param debug_use_r_implementation **\[logical\]** Used for debugging purposes
 #'     whether to use the slow R implementation instead of the fass C++ code.
 #'     Default to `FALSE`.
-#' @param ... None used at the moment.
+#' @param ... None used at the moment
+#' .
 #'
 #' @return
 #' The updated, convoluted grid.
