@@ -1,5 +1,5 @@
 ---
-title: "Getting started"
+title: "Getting started with pfocal"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Getting_started}
@@ -16,4 +16,98 @@ knitr::opts_chunk$set(
 
 ```{r setup}
 library(pfocal)
+```
+
+### Introduction
+
+Moving window calculations are common in many fields, from image processing to raster data manipulation. The process of ingesting values in the neighborhood of a each cell in a grid, passing them through a function, and returning a reduced value, is "embarrassingly parallel". This package implements a this very process with parallel C code. In doing so, it provides a much faster option than other similarly aimed packages and functions.
+
+### A simple example
+
+Let's start with a simple 1000 by 1000 square matrix.
+
+```{r}
+size <- 1000
+data <- matrix(nrow = size, ncol = size, 
+               data = runif(n = size*size, min = 0, max = 10))
+image(data, asp = 1)
+```
+
+The package contains two types of functions: **kernel generation functions** and **kernel application functions**. With the package's kernel generation functions, it is easy to create distance, exponential, circular as well as Gaussian kernels. These kernels are returned under the form of a matrix. Here we generate a chebyshev distance kernel and show its shape.
+
+```{r}
+kernel <- chebyshev_distance_kernel(10)
+image(kernel, asp = 1)
+```
+
+The second type of functions in the package, kernel applications functions, can apply a kernel to a matrix, raster object or terra object (although the most efficient approach is to pass a matrix to the function). The main application function is `pfocal`. 
+
+```{r}
+convoluted <- pfocal(data = data, kernel = kernel, edge_value = 0)
+image(convoluted, asp = 1)
+```
+
+### Convolution functions
+
+The `pfocal` function is not as flexible as other focal calculations functions which can accommodate any functional treatment of the values covered by the kernel (for example `raster::focal` can take on any R function). However, it is optimized for a few common combinations of "transform" and "reduce" functions. The transform function dictates how the values `d` covered by the kernel `k` are treated with regard to the focal cell. To get the list of possible transform functions:
+
+```{r}
+pfocal_info_transform()
+```
+
+The reduce function, on the other hand, dictates how the transformed values are reduced, with the most common option being sum, product, minimum and maximum. See the list of reduce functions:
+
+```{r}
+pfocal_info_reduce()
+```
+
+Finally, there is the option of dividing the final result (a method for scaling). The default is no division. The different options can be seen with:
+
+```{r}
+pfocal_info_mean_divisor()
+```
+
+### Shortcut functions
+
+Other kernel applications are available in the package, bearing the `pfocal_fast`, and wrapping `pfocal` as a shortcut to some default arguments.
+
+```{r}
+fast_convoluted <- pfocal_fast_abs_rectangle(data = data, height = 10, width = 10)
+image(fast_convoluted, asp = 1)
+```
+
+### Comparison with raster::focal
+
+To compare with `raster::focal`, we will make use of the `raster` amd `microbenchmark` packages:
+
+```{r}
+library(raster)
+library(microbenchmark)
+```
+
+We will run the functions 10 times on the same data grid above. We show here how the `mean()` function can be replicated in `pfocal`.
+
+```{r}
+data_raster <- raster::raster(data)
+
+mbm <- microbenchmark(
+  "pfocal" = {
+    pfocal_results <- pfocal::pfocal(data = data_raster, kernel = kernel, 
+                                     transform_function = "MULTIPLY",
+                                     reduce_function = "SUM", 
+                                     mean_divider = "KERNEL_COUNT")
+    gc()
+  },
+  "raster_focal" = {
+    raster_focal_results <- raster::focal(x = data_raster, w = kernel, 
+                                          fun = mean, pad = TRUE, padValue = 0)
+    gc()
+  },
+  times = 100,
+  unit = "s")
+mbm
+```
+
+```{r}
+plot(mbm)
 ```
