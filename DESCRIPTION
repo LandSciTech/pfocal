@@ -27,7 +27,8 @@ Suggests:
     terra,
     covr,
     knitr,
-    rmarkdown
+    rmarkdown,
+    microbenchmark
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
 Encoding: UTF-8
