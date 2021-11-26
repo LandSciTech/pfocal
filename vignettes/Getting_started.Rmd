@@ -85,7 +85,7 @@ library(raster)
 library(microbenchmark)
 ```
 
-We will run the functions 10 times on the same data grid above. We show here how the `mean()` function can be replicated in `pfocal`.
+We will run the functions 100 times on the same data grid above. We show here how the `mean()` function can be replicated in `pfocal`.
 
 ```{r}
 data_raster <- raster::raster(data)
