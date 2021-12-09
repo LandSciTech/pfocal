@@ -26,6 +26,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -38,18 +40,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">pfocal</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.0.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -68,7 +64,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/LandSciTech/pfocal/">
+  <a href="https://github.com/LandSciTech/pfocal/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -89,7 +85,7 @@
       <h1 data-toc-skip>Getting started with pfocal</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/LandSciTech/pfocal/blob/master/vignettes/Getting_started.Rmd"><code>vignettes/Getting_started.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/LandSciTech/pfocal/blob/HEAD/vignettes/Getting_started.Rmd" class="external-link"><code>vignettes/Getting_started.Rmd</code></a></small>
       <div class="hidden name"><code>Getting_started.Rmd</code></div>
 
     </div>
@@ -97,39 +93,39 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://landscitech.github.io/pfocal">pfocal</a></span><span class="op">)</span></code></pre></div>
-<div id="introduction" class="section level3">
-<h3 class="hasAnchor">
-<a href="#introduction" class="anchor"></a>Introduction</h3>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://landscitech.github.io/pfocal">pfocal</a></span><span class="op">)</span></code></pre></div>
+<div class="section level3">
+<h3 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+</h3>
 <p>Moving window calculations are common in many fields, from image processing to raster data manipulation. The process of ingesting values in the neighborhood of a each cell in a grid, passing them through a function, and returning a reduced value, is “embarrassingly parallel”. This package implements a this very process with parallel C code. In doing so, it provides a much faster option than other similarly aimed packages and functions.</p>
 </div>
-<div id="a-simple-example" class="section level3">
-<h3 class="hasAnchor">
-<a href="#a-simple-example" class="anchor"></a>A simple example</h3>
+<div class="section level3">
+<h3 id="a-simple-example">A simple example<a class="anchor" aria-label="anchor" href="#a-simple-example"></a>
+</h3>
 <p>Let’s start with a simple 1000 by 1000 square matrix.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">size</span> <span class="op">&lt;-</span> <span class="fl">1000</span>
-<span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>nrow <span class="op">=</span> <span class="va">size</span>, ncol <span class="op">=</span> <span class="va">size</span>, 
-               data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">size</span><span class="op">*</span><span class="va">size</span>, min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">10</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/image.html">image</a></span><span class="op">(</span><span class="va">data</span>, asp <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
+<span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span>nrow <span class="op">=</span> <span class="va">size</span>, ncol <span class="op">=</span> <span class="va">size</span>, 
+               data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">size</span><span class="op">*</span><span class="va">size</span>, min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">10</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/image.html" class="external-link">image</a></span><span class="op">(</span><span class="va">data</span>, asp <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <p><img src="Getting_started_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
 <p>The package contains two types of functions: <strong>kernel generation functions</strong> and <strong>kernel application functions</strong>. With the package’s kernel generation functions, it is easy to create distance, exponential, circular as well as Gaussian kernels. These kernels are returned under the form of a matrix. Here we generate a chebyshev distance kernel and show its shape.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">kernel</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/euclidean_distance_kernel.html">chebyshev_distance_kernel</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/image.html">image</a></span><span class="op">(</span><span class="va">kernel</span>, asp <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">kernel</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/kernel-distance.html">chebyshev_distance_kernel</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/image.html" class="external-link">image</a></span><span class="op">(</span><span class="va">kernel</span>, asp <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <p><img src="Getting_started_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
 <p>The second type of functions in the package, kernel applications functions, can apply a kernel to a matrix, raster object or terra object (although the most efficient approach is to pass a matrix to the function). The main application function is <code>pfocal</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">convoluted</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pfocal.html">pfocal</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, kernel <span class="op">=</span> <span class="va">kernel</span>, edge_value <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/image.html">image</a></span><span class="op">(</span><span class="va">convoluted</span>, asp <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/graphics/image.html" class="external-link">image</a></span><span class="op">(</span><span class="va">convoluted</span>, asp <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <p><img src="Getting_started_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
 </div>
-<div id="convolution-functions" class="section level3">
-<h3 class="hasAnchor">
-<a href="#convolution-functions" class="anchor"></a>Convolution functions</h3>
-<p>The <code>pfocal</code> function is not as flexible as other focal calculations functions which can accommodate any functional treatment of the values covered by the kernel (for example <code><a href="https://rdrr.io/pkg/raster/man/focal.html">raster::focal</a></code> can take on any R function). However, it is optimized for a few common combinations of “transform” and “reduce” functions. The transform function dictates how the values <code>d</code> covered by the kernel <code>k</code> are treated with regard to the focal cell. To get the list of possible transform functions:</p>
+<div class="section level3">
+<h3 id="convolution-functions">Convolution functions<a class="anchor" aria-label="anchor" href="#convolution-functions"></a>
+</h3>
+<p>The <code>pfocal</code> function is not as flexible as other focal calculations functions which can accommodate any functional treatment of the values covered by the kernel (for example <code><a href="https://rdrr.io/pkg/raster/man/focal.html" class="external-link">raster::focal</a></code> can take on any R function). However, it is optimized for a few common combinations of “transform” and “reduce” functions. The transform function dictates how the values <code>d</code> covered by the kernel <code>k</code> are treated with regard to the focal cell. To get the list of possible transform functions:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/pfocal_info_transform.html">pfocal_info_transform</a></span><span class="op">(</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="../reference/pfocal-info.html">pfocal_info_transform</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt;      [,1]       [,2]</span>
 <span class="co">#&gt; [1,] "MULTIPLY" "0" </span>
 <span class="co">#&gt; [2,] "ADD"      "1" </span>
@@ -142,7 +138,7 @@
 <span class="co">#&gt; [4,] "For data value 'd' and kernal value 'k', intermediate_value = (k ^ d)"</span></code></pre></div>
 <p>The reduce function, on the other hand, dictates how the transformed values are reduced, with the most common option being sum, product, minimum and maximum. See the list of reduce functions:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/pfocal_info_transform.html">pfocal_info_reduce</a></span><span class="op">(</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="../reference/pfocal-info.html">pfocal_info_reduce</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt;      [,1]          [,2]</span>
 <span class="co">#&gt; [1,] "SUM"         "0" </span>
 <span class="co">#&gt; [2,] "ABS_SUM"     "1" </span>
@@ -159,7 +155,7 @@
 <span class="co">#&gt; [6,] "Accumulator starts at the lowest possible value. For each intermediate value, in no particular order, acc = max( acc , iv )"</span></code></pre></div>
 <p>Finally, there is the option of dividing the final result (a method for scaling). The default is no division. The different options can be seen with:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/pfocal_info_transform.html">pfocal_info_mean_divisor</a></span><span class="op">(</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="../reference/pfocal-info.html">pfocal_info_mean_divisor</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt;       [,1]                    [,2]</span>
 <span class="co">#&gt;  [1,] "ONE"                   "0" </span>
 <span class="co">#&gt;  [2,] "KERNEL_SIZE"           "1" </span>
@@ -195,49 +191,49 @@
 <span class="co">#&gt; [15,] "Divide the final value at each point by prod(local_data[!is.na( intermediate_data )]), recalculated at every point"            </span>
 <span class="co">#&gt; [16,] "Divide the final value at each point by prod(abs(local_data[!is.na( intermediate_data )])), recalculated at every point"</span></code></pre></div>
 </div>
-<div id="shortcut-functions" class="section level3">
-<h3 class="hasAnchor">
-<a href="#shortcut-functions" class="anchor"></a>Shortcut functions</h3>
+<div class="section level3">
+<h3 id="shortcut-functions">Shortcut functions<a class="anchor" aria-label="anchor" href="#shortcut-functions"></a>
+</h3>
 <p>Other kernel applications are available in the package, bearing the <code>pfocal_fast</code>, and wrapping <code>pfocal</code> as a shortcut to some default arguments.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">fast_convoluted</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pfocal_fast_gaussian_radius.html">pfocal_fast_abs_rectangle</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, height <span class="op">=</span> <span class="fl">10</span>, width <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/image.html">image</a></span><span class="op">(</span><span class="va">fast_convoluted</span>, asp <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">fast_convoluted</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pfocal_fast.html">pfocal_fast_abs_rectangle</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, height <span class="op">=</span> <span class="fl">10</span>, width <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/image.html" class="external-link">image</a></span><span class="op">(</span><span class="va">fast_convoluted</span>, asp <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <p><img src="Getting_started_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
 </div>
-<div id="comparison-with-rasterfocal" class="section level3">
-<h3 class="hasAnchor">
-<a href="#comparison-with-rasterfocal" class="anchor"></a>Comparison with raster::focal</h3>
-<p>To compare with <code><a href="https://rdrr.io/pkg/raster/man/focal.html">raster::focal</a></code>, we will make use of the <code>raster</code> amd <code>microbenchmark</code> packages:</p>
+<div class="section level3">
+<h3 id="comparison-with-rasterfocal">Comparison with raster::focal<a class="anchor" aria-label="anchor" href="#comparison-with-rasterfocal"></a>
+</h3>
+<p>To compare with <code><a href="https://rdrr.io/pkg/raster/man/focal.html" class="external-link">raster::focal</a></code>, we will make use of the <code>raster</code> amd <code>microbenchmark</code> packages:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/raster">raster</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/raster" class="external-link">raster</a></span><span class="op">)</span>
 <span class="co">#&gt; Loading required package: sp</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/joshuaulrich/microbenchmark/">microbenchmark</a></span><span class="op">)</span></code></pre></div>
-<p>We will run the functions 100 times on the same data grid above. We show here how the <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code> function can be replicated in <code>pfocal</code>.</p>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/joshuaulrich/microbenchmark/" class="external-link">microbenchmark</a></span><span class="op">)</span></code></pre></div>
+<p>We will run the functions 100 times on the same data grid above. We show here how the <code><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean()</a></code> function can be replicated in <code>pfocal</code>.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">data_raster</span> <span class="op">&lt;-</span> <span class="fu">raster</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/raster.html">raster</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">data_raster</span> <span class="op">&lt;-</span> <span class="fu">raster</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/raster.html" class="external-link">raster</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span>
 
-<span class="va">mbm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/microbenchmark/man/microbenchmark.html">microbenchmark</a></span><span class="op">(</span>
+<span class="va">mbm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/microbenchmark/man/microbenchmark.html" class="external-link">microbenchmark</a></span><span class="op">(</span>
   <span class="st">"pfocal"</span> <span class="op">=</span> <span class="op">{</span>
     <span class="va">pfocal_results</span> <span class="op">&lt;-</span> <span class="fu">pfocal</span><span class="fu">::</span><span class="fu"><a href="../reference/pfocal.html">pfocal</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data_raster</span>, kernel <span class="op">=</span> <span class="va">kernel</span>, 
                                      transform_function <span class="op">=</span> <span class="st">"MULTIPLY"</span>,
                                      reduce_function <span class="op">=</span> <span class="st">"SUM"</span>, 
                                      mean_divider <span class="op">=</span> <span class="st">"KERNEL_COUNT"</span><span class="op">)</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/gc.html">gc</a></span><span class="op">(</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/gc.html" class="external-link">gc</a></span><span class="op">(</span><span class="op">)</span>
   <span class="op">}</span>,
   <span class="st">"raster_focal"</span> <span class="op">=</span> <span class="op">{</span>
-    <span class="va">raster_focal_results</span> <span class="op">&lt;-</span> <span class="fu">raster</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/focal.html">focal</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">data_raster</span>, w <span class="op">=</span> <span class="va">kernel</span>, 
+    <span class="va">raster_focal_results</span> <span class="op">&lt;-</span> <span class="fu">raster</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/focal.html" class="external-link">focal</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">data_raster</span>, w <span class="op">=</span> <span class="va">kernel</span>, 
                                           fun <span class="op">=</span> <span class="va">mean</span>, pad <span class="op">=</span> <span class="cn">TRUE</span>, padValue <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/gc.html">gc</a></span><span class="op">(</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/gc.html" class="external-link">gc</a></span><span class="op">(</span><span class="op">)</span>
   <span class="op">}</span>,
   times <span class="op">=</span> <span class="fl">100</span>,
   unit <span class="op">=</span> <span class="st">"s"</span><span class="op">)</span>
 <span class="va">mbm</span>
 <span class="co">#&gt; Unit: seconds</span>
 <span class="co">#&gt;          expr       min        lq      mean    median        uq       max neval</span>
-<span class="co">#&gt;        pfocal 0.6261630 0.6346581 0.6366870 0.6366743 0.6381367 0.6554499   100</span>
-<span class="co">#&gt;  raster_focal 0.7725298 0.7785766 0.7899441 0.7814600 0.7870032 1.1121764   100</span></code></pre></div>
+<span class="co">#&gt;        pfocal 0.5967458 0.6133662 0.6322568 0.6427873 0.6466282 0.6607536   100</span>
+<span class="co">#&gt;  raster_focal 0.7302224 0.7637227 0.7892729 0.7918379 0.7994540 1.0924824   100</span></code></pre></div>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span><span class="op">(</span><span class="va">mbm</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">mbm</span><span class="op">)</span></code></pre></div>
 <p><img src="Getting_started_files/figure-html/unnamed-chunk-11-1.png" width="700"></p>
 </div>
   </div>
@@ -251,11 +247,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Griffin Barrett, Josie Hughes, Valentin Lucet.</p>
+  <p></p>
+<p>Developed by Josie Hughes, Griffin Barrett, Valentin Lucet.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -263,6 +261,8 @@
 
   
 
+
+  
 
   </body>
 </html>
