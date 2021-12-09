@@ -8,7 +8,7 @@
 \description{
 \if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
 
-Takes a matrix of numeric data and a kernel, and convolves the data using the matrix.
+Provides functions to create and apply convolution kernels to rectangular data (matrix, rasters). Implements calculations of convolutions in parallel, emphasizing performance over convolution function diversity.
 }
 \seealso{
 Useful links:

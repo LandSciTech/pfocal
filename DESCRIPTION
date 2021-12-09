@@ -10,8 +10,9 @@ Authors@R: c(
            role = c("aut")),
     person("Valentin", "Lucet", email = "valentin.lucet@gmail.com", 
            role = c("aut")))
-Description: Takes a matrix of numeric data and a kernel, 
-    and convolves the data using the matrix.
+Description: Provides functions to create and apply convolution kernels to 
+    rectangular data (matrix, rasters). Implements calculations of convolutions
+    in parallel, emphasizing performance over convolution function diversity.
 License: GPL-3 + file LICENSE
 BugReports: https://github.com/LandSciTech/pfocal
 Depends: R (>= 4.0.0)
