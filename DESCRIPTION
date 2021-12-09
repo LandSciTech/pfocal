@@ -13,7 +13,7 @@ Authors@R: c(
 Description: Provides functions to create and apply convolution kernels to 
     rectangular data (matrix, rasters). Implements calculations of convolutions
     in parallel, emphasizing performance over convolution function diversity.
-License: GPL-3 + file LICENSE
+License: GPL-3
 BugReports: https://github.com/LandSciTech/pfocal
 Depends: R (>= 4.0.0)
 Imports: 
