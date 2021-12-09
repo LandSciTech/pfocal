@@ -13,7 +13,7 @@ Description: Provides functions to create and apply convolution kernels to
     rectangular data (matrix, raster). Implements calculations of convolutions
     in parallel, emphasizing performance over convolution function diversity.
 License: GPL-3
-BugReports: https://github.com/LandSciTech/pfocal
+BugReports: https://github.com/LandSciTech/pfocal/
 Depends: R (>= 4.0.0)
 Imports: 
     Rcpp,
@@ -32,6 +32,6 @@ Suggests:
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
 Encoding: UTF-8
-URL: https://landscitech.github.io/pfocal
+URL: https://landscitech.github.io/pfocal/
 Config/testthat/edition: 3
 VignetteBuilder: knitr

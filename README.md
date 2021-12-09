@@ -11,7 +11,7 @@ v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/
 WIP](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 [![R-CMD-check](https://github.com/LandSciTech/pfocal/workflows/R-CMD-check/badge.svg)](https://github.com/LandSciTech/pfocal/actions)
 [![Codecov test
-coverage](https://codecov.io/gh/LandSciTech/pfocal/branch/master/graph/badge.svg)](https://codecov.io/gh/LandSciTech/pfocal?branch=master)
+coverage](https://codecov.io/gh/LandSciTech/pfocal/branch/master/graph/badge.svg)](https://app.codecov.io/gh/LandSciTech/pfocal?branch=master)
 <!-- badges: end -->
 
 The goal of `pfocal` is to implement fast parallel convolution. R

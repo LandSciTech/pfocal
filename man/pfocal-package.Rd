@@ -8,13 +8,13 @@
 \description{
 \if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
 
-Provides functions to create and apply convolution kernels to rectangular data (matrix, rasters). Implements calculations of convolutions in parallel, emphasizing performance over convolution function diversity.
+Provides functions to create and apply convolution kernels to rectangular data (matrix, raster). Implements calculations of convolutions in parallel, emphasizing performance over convolution function diversity.
 }
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://landscitech.github.io/pfocal}
-  \item Report bugs at \url{https://github.com/LandSciTech/pfocal}
+  \item \url{https://landscitech.github.io/pfocal/}
+  \item Report bugs at \url{https://github.com/LandSciTech/pfocal/}
 }
 
 }
