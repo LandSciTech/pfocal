@@ -10,7 +10,7 @@ Authors@R: c(
     person("Valentin", "Lucet", email = "valentin.lucet@gmail.com", 
            role = c("aut")))
 Description: Provides functions to create and apply convolution kernels to 
-    rectangular data (matrix, rasters). Implements calculations of convolutions
+    rectangular data (matrix, raster). Implements calculations of convolutions
     in parallel, emphasizing performance over convolution function diversity.
 License: GPL-3
 BugReports: https://github.com/LandSciTech/pfocal
