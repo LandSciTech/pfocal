@@ -27,10 +27,13 @@ The goal of `pfocal` is to implement fast parallel convolution. R version >= 4.0
 
 ## Installation
 
-You can install the development version from [GitHub](https://github.com/) with:
+You can install the package as such:
 
 ```{r, eval=FALSE}
-# install.packages("devtools")
+# From CRAN
+install.packages("devtools")
+
+# Dev version from GitHub
 devtools::install_github("LandSciTech/pfocal")
 ```
 

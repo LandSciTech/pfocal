@@ -15,15 +15,17 @@ coverage](https://codecov.io/gh/LandSciTech/pfocal/branch/master/graph/badge.svg
 <!-- badges: end -->
 
 The goal of `pfocal` is to implement fast parallel convolution. R
-version &gt;= 4.0.0 is required.
+version \>= 4.0.0 is required.
 
 ## Installation
 
-You can install the development version from
-[GitHub](https://github.com/) with:
+You can install the package as such:
 
 ``` r
-# install.packages("devtools")
+# From CRAN
+install.packages("devtools")
+
+# Dev version from GitHub
 devtools::install_github("LandSciTech/pfocal")
 ```
 
