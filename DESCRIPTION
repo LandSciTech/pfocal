@@ -4,10 +4,10 @@ Title: Fast Convolution of Matrixes of Numbers
 Version: 0.0.0.1
 Date: 2021-02-26
 Authors@R: c(  
-    person("Griffin", "Barrett", email = "griffin-barrett@outlook.com", 
-           role = c("aut", "cre")), 
     person("Josie", "Hughes", email = "josie.hughes@canada.ca", 
-           role = c("aut")), 
+           role = c("aut", "cre")), 
+    person("Griffin", "Barrett", email = "griffin-barrett@outlook.com", 
+           role = c("aut")),
     person("Valentin", "Lucet", email = "valentin.lucet@gmail.com", 
            role = c("aut")))
 Description: Takes a matrix of numeric data and a kernel, 

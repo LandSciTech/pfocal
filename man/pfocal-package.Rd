@@ -19,11 +19,11 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Griffin Barrett \email{griffin-barrett@outlook.com}
+\strong{Maintainer}: Josie Hughes \email{josie.hughes@canada.ca}
 
 Authors:
 \itemize{
-  \item Josie Hughes \email{josie.hughes@canada.ca}
+  \item Griffin Barrett \email{griffin-barrett@outlook.com}
   \item Valentin Lucet \email{valentin.lucet@gmail.com}
 }
 
