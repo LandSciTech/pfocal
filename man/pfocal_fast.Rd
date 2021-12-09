@@ -99,7 +99,8 @@ dimension.}
 \item{horizontal_sd}{\strong{[numeric]} The kernel's standard deviation in the
 horizontal dimension.}
 
-\item{tail_included}{\strong{[logical]} TODO}
+\item{tail_included}{\strong{[logical]} Whether or not to include the kernel
+tail.}
 
 \item{na.rm}{\strong{[NA OR logical]} The behavior to adopt for dealing with
 missing values, default to \code{NA} (faster option). For possible values see
@@ -112,7 +113,8 @@ default to \code{TRUE}.}
 whether to use the slow R implementation instead of the fass C++ code.
 Default to \code{FALSE}.}
 
-\item{...}{None used at the moment.}
+\item{...}{None used at the moment
+.}
 
 \item{transform_function}{\strong{[character]} The function to apply to the
 cell values covered by the kernel. For possible values, see

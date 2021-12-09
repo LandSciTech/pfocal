@@ -15,7 +15,8 @@
 #'     horizontal dimension.
 #' @param horizontal_r0 **\[numeric\]** The kernel's r0 (exponential) in the
 #'     horizontal dimension.
-#' @param tail_included **\[logical\]** TODO
+#' @param tail_included **\[logical\]** Whether or not to include the kernel 
+#'     tail.
 #' @param height **\[numeric\]** For rectangular kernels, the height of the
 #'     rectangle.
 #' @param width **\[numeric\]** For rectangular kernels, the width of the

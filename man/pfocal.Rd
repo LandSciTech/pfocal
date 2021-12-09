@@ -58,7 +58,8 @@ default to \code{TRUE}.}
 whether to use the slow R implementation instead of the fass C++ code.
 Default to \code{FALSE}.}
 
-\item{...}{None used at the moment.}
+\item{...}{None used at the moment
+.}
 }
 \value{
 The updated, convoluted grid.

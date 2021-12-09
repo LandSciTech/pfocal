@@ -35,7 +35,8 @@ horizontal dimension.}
 \item{horizontal_sd}{\strong{[numeric]} The kernel's standard deviation in the
 horizontal dimension.}
 
-\item{tail_included}{\strong{[logical]} TODO}
+\item{tail_included}{\strong{[logical]} Whether or not to include the kernel
+tail.}
 
 \item{vertical_radius}{\strong{[numeric]} The kernel's radius in the vertical
 dimension.}
