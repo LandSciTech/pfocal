@@ -1,7 +1,7 @@
 Package: pfocal
 Type: Package
 Title: Fast Convolution of Matrixes of Numbers
-Version: 0.0.0.1
+Version: 1.0.0
 Authors@R: c(  
     person("Josie", "Hughes", email = "josie.hughes@canada.ca", 
            role = c("aut", "cre")), 
