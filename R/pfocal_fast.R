@@ -57,7 +57,7 @@ pfocal_fast_gaussian_radius <-
            mean_divider = "ONE", variance = FALSE) {
     if (length(list(...))) {
       stop(paste0(
-        "... must be empty. If you want to set the other paramiters, ",
+        "... must be empty. If you want to set the other parameters, ",
         "you must do that by name."
       ))
     }
@@ -87,7 +87,7 @@ pfocal_fast_gaussian_confidence <-
            mean_divider = "ONE", variance = FALSE) {
     if (length(list(...))) {
       stop(paste0(
-        "... must be empty. If you want to set the other paramiters, ",
+        "... must be empty. If you want to set the other parameters, ",
         "you must do that by name."
       ))
     }
@@ -113,7 +113,7 @@ pfocal_fast_binomial <-
            mean_divider = "ONE", variance = FALSE) {
     if (length(list(...))) {
       stop(paste0(
-        "... must be empty. If you want to set the other paramiters, ",
+        "... must be empty. If you want to set the other parameters, ",
         "you must do that by name."
       ))
     }
@@ -138,7 +138,7 @@ pfocal_fast_abs_rectangle <-
            mean_divider = "ONE", variance = FALSE) {
     if (length(list(...))) {
       stop(paste0(
-        "... must be empty. If you want to set the other paramiters, ",
+        "... must be empty. If you want to set the other parameters, ",
         "you must do that by name."
       ))
     }
@@ -167,7 +167,7 @@ pfocal_fast_separated <-
            variance = FALSE) {
     if (length(list(...))) {
       stop(paste0(
-        "... must be empty. If you want to set the other paramiters, ",
+        "... must be empty. If you want to set the other parameters, ",
         "you must do that by name. This function is not meant for that usecase"
       ))
     }
