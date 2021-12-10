@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# pfocal <img src='man/figures/logo.png' align="right" height="150" width="150" />
+# pfocal <img src='man/figures/logo.png' align="right" height="150" width="135" />
 
 <!-- badges: start -->
 
