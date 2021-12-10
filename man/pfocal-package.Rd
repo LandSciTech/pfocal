@@ -27,5 +27,10 @@ Authors:
   \item Valentin Lucet \email{valentin.lucet@gmail.com}
 }
 
+Other contributors:
+\itemize{
+  \item Her Majesty the Queen in Right of Canada, as represented by the Minister of Environment and Climate Change [copyright holder]
+}
+
 }
 \keyword{internal}

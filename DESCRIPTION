@@ -8,7 +8,10 @@ Authors@R: c(
     person("Griffin", "Barrett", email = "griffin-barrett@outlook.com", 
            role = c("aut")),
     person("Valentin", "Lucet", email = "valentin.lucet@gmail.com", 
-           role = c("aut")))
+           role = c("aut")),
+    person(paste0("Her Majesty the Queen in Right of Canada, as represented by",
+                  " the Minister of Environment and Climate Change"),    
+           role = "cph"))
 Description: Provides functions to create and apply convolution kernels to 
     rectangular data (matrix, raster). Implements calculations of convolutions
     in parallel, emphasizing performance over convolution function diversity.
