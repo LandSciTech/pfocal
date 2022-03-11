@@ -4,7 +4,7 @@
 \name{pfocal-package}
 \alias{pfocal-package}
 \alias{_PACKAGE}
-\title{pfocal: Fast Convolution of Matrixes of Numbers}
+\title{pfocal: Fast Convolution of Matrices}
 \description{
 \if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
 
@@ -19,7 +19,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Josie Hughes \email{josie.hughes@canada.ca}
+\strong{Maintainer}: Josie Hughes \email{josie.hughes@ec.gc.ca}
 
 Authors:
 \itemize{

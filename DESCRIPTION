@@ -7,7 +7,7 @@ Authors@R: c(
            role = c("aut")),
     person("Valentin", "Lucet", email = "valentin.lucet@gmail.com", 
            role = c("aut")),
-    person("Josie", "Hughes", email = "josie.hughes@canada.ca", 
+    person("Josie", "Hughes", email = "josie.hughes@ec.gc.ca", 
            role = c("aut", "cre")), 
     person(paste0("Her Majesty the Queen in Right of Canada, as represented by",
                   " the Minister of Environment and Climate Change"),    
@@ -31,7 +31,8 @@ Suggests:
     covr,
     knitr,
     rmarkdown,
-    microbenchmark
+    microbenchmark,
+    stars
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
 Encoding: UTF-8
