@@ -15,6 +15,12 @@ Authors@R: c(
 Description: Provides functions to create and apply convolution kernels to 
     rectangular data (matrix, raster). Implements calculations of convolutions
     in parallel, emphasizing performance over convolution function diversity.
+    Moving window calculations are common in many fields, from image processing
+    to raster data manipulation. The process of ingesting values in the
+    neighborhood of a each cell in a grid, passing them through a function,
+    and returning a reduced value, is embarrassingly parallel. This package
+    implements this with parallel C code. In doing so, it provides a much faster
+    option than other similarly aimed packages and functions.
 License: GPL-3
 BugReports: https://github.com/LandSciTech/pfocal/
 Depends: R (>= 4.0.0)
