@@ -61,6 +61,9 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
@@ -109,7 +112,7 @@
                data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">size</span><span class="op">*</span><span class="va">size</span>, min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">10</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/image.html" class="external-link">image</a></span><span class="op">(</span><span class="va">data</span>, asp <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <p><img src="Getting_started_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
-<p>The package contains two types of functions: <strong>kernel generation functions</strong> and <strong>kernel application functions</strong>. With the package’s kernel generation functions, it is easy to create distance, exponential, circular as well as Gaussian kernels. These kernels are returned under the form of a matrix. Here we generate a chebyshev distance kernel and show its shape.</p>
+<p>The package contains two types of functions: <strong>kernel generation functions</strong> and <strong>kernel application functions</strong>. With the package’s kernel generation functions, it is easy to create distance, exponential, circular as well as Gaussian kernels. These kernels are returned under the form of a matrix. Here we generate a Chebyshev distance kernel and show its shape.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">kernel</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/kernel-distance.html">chebyshev_distance_kernel</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/image.html" class="external-link">image</a></span><span class="op">(</span><span class="va">kernel</span>, asp <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
@@ -203,7 +206,7 @@
 <div class="section level3">
 <h3 id="comparison-with-rasterfocal">Comparison with raster::focal<a class="anchor" aria-label="anchor" href="#comparison-with-rasterfocal"></a>
 </h3>
-<p>To compare with <code><a href="https://rdrr.io/pkg/raster/man/focal.html" class="external-link">raster::focal</a></code>, we will make use of the <code>raster</code> amd <code>microbenchmark</code> packages:</p>
+<p>To compare with <code><a href="https://rdrr.io/pkg/raster/man/focal.html" class="external-link">raster::focal</a></code>, we will make use of the <code>raster</code> and <code>microbenchmark</code> packages:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/raster" class="external-link">raster</a></span><span class="op">)</span>
 <span class="co">#&gt; Loading required package: sp</span>
@@ -229,9 +232,9 @@
   unit <span class="op">=</span> <span class="st">"s"</span><span class="op">)</span>
 <span class="va">mbm</span>
 <span class="co">#&gt; Unit: seconds</span>
-<span class="co">#&gt;          expr       min        lq      mean    median        uq       max neval</span>
-<span class="co">#&gt;        pfocal 0.5711763 0.5812976 0.6000510 0.5866604 0.6030778 0.7506521   100</span>
-<span class="co">#&gt;  raster_focal 0.8195719 0.8432887 0.8867247 0.8556664 0.8965509 1.2773461   100</span></code></pre></div>
+<span class="co">#&gt;          expr       min        lq      mean    median        uq      max neval</span>
+<span class="co">#&gt;        pfocal 0.5783182 0.6167934 0.6719861 0.6419731 0.6673639 1.431097   100</span>
+<span class="co">#&gt;  raster_focal 0.8611214 0.9100801 0.9885775 0.9396446 0.9898670 2.141858   100</span></code></pre></div>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">mbm</span><span class="op">)</span></code></pre></div>
 <p><img src="Getting_started_files/figure-html/unnamed-chunk-11-1.png" width="700"></p>
