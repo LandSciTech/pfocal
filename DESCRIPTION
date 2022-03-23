@@ -21,7 +21,7 @@ Description: Provides functions to create and apply convolution kernels to
     and returning a reduced value, is embarrassingly parallel. This package
     implements this with parallel C code. In doing so, it provides a much faster
     option than other similarly aimed packages and functions.
-License: GPL-3
+License: GPL-3 + file LICENSE
 BugReports: https://github.com/LandSciTech/pfocal/
 Depends: R (>= 4.0.0)
 Imports: 

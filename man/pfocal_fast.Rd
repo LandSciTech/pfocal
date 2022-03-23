@@ -110,7 +110,7 @@ missing values, default to \code{NA} (faster option). For possible values see
 default to \code{TRUE}.}
 
 \item{debug_use_r_implementation}{\strong{[logical]} Used for debugging purposes
-whether to use the slow R implementation instead of the fass C++ code.
+whether to use the slow R implementation instead of the fast C++ code.
 Default to \code{FALSE}.}
 
 \item{...}{None used at the moment

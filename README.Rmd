@@ -18,7 +18,7 @@ set.seed(77)
 
 <!-- badges: start -->
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
-[![Project Status: WIP](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
+[![Project Status: Active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![R-CMD-check](https://github.com/LandSciTech/pfocal/workflows/R-CMD-check/badge.svg)](https://github.com/LandSciTech/pfocal/actions)
 [![Codecov test coverage](https://codecov.io/gh/LandSciTech/pfocal/branch/master/graph/badge.svg)](https://app.codecov.io/gh/LandSciTech/pfocal?branch=master)
 <!-- badges: end -->

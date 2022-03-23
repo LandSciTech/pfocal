@@ -3,7 +3,7 @@
 #' Functions to compute a distance kernel.
 #'
 #' @inheritParams pfocal_fast_gaussian_radius
-#' @param p **\[numeric\]** Exponent parameter for the minkowski distance.
+#' @param p **\[numeric\]** Exponent parameter for the Minkowski distance.
 #'
 #' @return
 #' A `matrix` corresponding to the kernel.

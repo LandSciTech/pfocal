@@ -1,3 +1,13 @@
+pfocal - Terms and Condition of Use
+
+Unless otherwise noted, source code of the `pfocal` R package is covered under
+Crown Copyright, Government of Canada, and distributed under the GPL3 license.
+
+Copyright (C) Her Majesty the Queen in Right of Canada as represented by the Minister of the Environment 2022/(C) Sa Majesté la Reine du chef du Canada représentée par le ministre de l'Environnement 2022.
+
+
+-------------------------------------------------------------------------------
+
                     GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
 

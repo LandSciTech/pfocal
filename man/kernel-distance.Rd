@@ -39,7 +39,7 @@ dimension.}
 \item{horizontal_radius}{\strong{[numeric]} The kernel's radius in the horizontal
 dimension.}
 
-\item{p}{\strong{[numeric]} Exponent parameter for the minkowski distance.}
+\item{p}{\strong{[numeric]} Exponent parameter for the Minkowski distance.}
 }
 \value{
 A \code{matrix} corresponding to the kernel.

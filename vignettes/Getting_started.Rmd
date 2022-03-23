@@ -33,7 +33,7 @@ data <- matrix(nrow = size, ncol = size,
 image(data, asp = 1)
 ```
 
-The package contains two types of functions: **kernel generation functions** and **kernel application functions**. With the package's kernel generation functions, it is easy to create distance, exponential, circular as well as Gaussian kernels. These kernels are returned under the form of a matrix. Here we generate a chebyshev distance kernel and show its shape.
+The package contains two types of functions: **kernel generation functions** and **kernel application functions**. With the package's kernel generation functions, it is easy to create distance, exponential, circular as well as Gaussian kernels. These kernels are returned under the form of a matrix. Here we generate a Chebyshev distance kernel and show its shape.
 
 ```{r}
 kernel <- chebyshev_distance_kernel(10)
@@ -78,7 +78,7 @@ image(fast_convoluted, asp = 1)
 
 ### Comparison with raster::focal
 
-To compare with `raster::focal`, we will make use of the `raster` amd `microbenchmark` packages:
+To compare with `raster::focal`, we will make use of the `raster` and `microbenchmark` packages:
 
 ```{r}
 library(raster)
