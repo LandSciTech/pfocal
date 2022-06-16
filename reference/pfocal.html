@@ -84,50 +84,73 @@ data (matrices, rasters and other grid based objects).</p>
     <h2>Arguments</h2>
     <dl><dt>data</dt>
 <dd><p><strong>[matrix-type]</strong> Grid to compute onto.</p></dd>
+
+
 <dt>kernel</dt>
 <dd><p><strong>[matrix]</strong> Computation kernel (neighborhood).</p></dd>
+
+
 <dt>edge_value</dt>
 <dd><p><strong>[numeric]</strong> Numeric value, <code>NA</code> or <code>NaN</code>.The value to
 give at the edge of the kernel matrix when the moving window overflows
 the data grid.</p></dd>
+
+
 <dt>transform_function</dt>
 <dd><p><strong>[character]</strong> The function to apply to the
 cell values covered by the kernel. For possible values, see
 <code><a href="pfocal-info.html">pfocal_info_transform()</a></code>. Default to <code>"MULTIPLY"</code>.</p></dd>
+
+
 <dt>reduce_function</dt>
 <dd><p><strong>[character]</strong> The function to apply to the kernel
 values after the function passed in <code>transform_function</code> has been applied
 (the function that summarize the data). For possible values, see
 <code><a href="pfocal-info.html">pfocal_info_reduce()</a></code>. Default to <code>"SUM"</code>.</p></dd>
+
+
 <dt>mean_divider</dt>
 <dd><p><strong>[character]</strong> Optional, allows to specify how the
 final value at each cell is divided by a value that can be function of
 the intermediate data resulting of applying <code>transform_function</code>. For
 possible values, see <code><a href="pfocal-info.html">pfocal_info_mean_divisor()</a></code>. Default to "ONE" (for
 no division).</p></dd>
+
+
 <dt>variance</dt>
 <dd><p><strong>[logical]</strong> Whether to return the "variance" of the
 intermediate values at each point (for more details please see
 <code><a href="pfocal-info.html">pfocal_info_variance()</a></code>). Default to <code>FALSE</code> (just returns the value
 at each point).</p></dd>
+
+
 <dt>na.rm</dt>
 <dd><p><strong>[NA OR logical]</strong> The behavior to adopt for dealing with
 missing values, default to <code>NA</code> (faster option). For possible values see
 <code><a href="pfocal-info.html">pfocal_info_nan_policy()</a></code>.</p></dd>
+
+
 <dt>mp</dt>
 <dd><p><strong>[logical]</strong> Whether to use the open_mp implementation,
 default to <code>TRUE</code>.</p></dd>
+
+
 <dt>debug_use_r_implementation</dt>
 <dd><p><strong>[logical]</strong> Used for debugging purposes
 whether to use the slow R implementation instead of the fast C++ code.
 Default to <code>FALSE</code>.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>None used at the moment
 .</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>The updated, convoluted grid.</p>
+    
+
+<p>The updated, convoluted grid.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -143,27 +166,27 @@ values, <code>sizeof(double) * (ncol + kernel_ncol) * (nrow + kernel_nrow/2)</co
 <span class="r-in"><span class="va">kernel</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">/</span> <span class="fl">9</span>, nrow <span class="op">=</span> <span class="fl">3</span>, ncol <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu">pfocal</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, kernel <span class="op">=</span> <span class="va">kernel</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]      [,2]      [,3]      [,4]      [,5]      [,6]      [,7]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.1958098 0.3206499 0.3487664 0.3235708 0.3011532 0.3132454 0.3215998</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.3013453 0.4390012 0.3963681 0.4579114 0.5296564 0.6161093 0.5751568</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.4112487 0.5862149 0.4653923 0.5201099 0.5787229 0.6879237 0.5946150</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.4163720 0.5418477 0.3148405 0.4216282 0.5144756 0.5921457 0.5612621</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.3663208 0.4815634 0.3361933 0.4323761 0.4602090 0.5050664 0.4614014</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.3059491 0.3787757 0.2984738 0.4736395 0.5696358 0.5502850 0.4609972</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.3133900 0.3728172 0.2908643 0.3670187 0.4900378 0.6048988 0.5768984</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.4121678 0.5154702 0.3779665 0.3218317 0.4294886 0.5061533 0.5666186</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.4147289 0.5626658 0.5010566 0.3492998 0.4180416 0.4577712 0.6261846</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.2651875 0.3856510 0.3754708 0.3000541 0.3024794 0.2627354 0.3727062</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.1062627 0.1725753 0.2110088 0.2970513 0.2860302 0.2721521 0.1743829</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.2488431 0.3391178 0.2950473 0.3379222 0.3712159 0.4506350 0.3743086</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.3207893 0.4100867 0.2461755 0.2296780 0.3181074 0.4965297 0.5426139</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.4819781 0.6445239 0.3956522 0.3604478 0.4235078 0.6420612 0.7092524</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.4638728 0.6857039 0.4852314 0.4849188 0.5145584 0.5951594 0.6472768</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.4786395 0.6804435 0.6054782 0.5484440 0.5669300 0.5535241 0.5227003</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.3625062 0.4959709 0.5194919 0.5086416 0.5491981 0.4949362 0.4239478</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.3524099 0.4630270 0.5645277 0.5579906 0.6039318 0.5959396 0.5376112</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.3327112 0.4331481 0.5353715 0.6050064 0.6287885 0.5998641 0.5710144</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.2534251 0.3240274 0.3949877 0.4194637 0.4470595 0.4183162 0.4227777</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            [,8]      [,9]     [,10]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.3884572 0.3381846 0.2379981</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.6329447 0.5875132 0.4354585</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.5493775 0.5826875 0.4350864</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.5406349 0.6485029 0.4648597</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.4205578 0.4525038 0.2817817</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.3850954 0.3908708 0.2372258</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.4338814 0.3223391 0.1427345</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.4618387 0.4420496 0.2644095</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.5078552 0.4911761 0.2666693</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.3260588 0.3477493 0.2002411</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.2483783 0.2741507 0.2328561</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.3819133 0.3292371 0.2505575</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.5033639 0.4565013 0.3069434</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.5834784 0.4452955 0.2204873</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.5131422 0.4834106 0.2673433</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.3932662 0.3619006 0.2236086</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.3354868 0.3043464 0.2090381</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.5184546 0.4021553 0.2328641</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.5689197 0.5301223 0.2743323</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.4433176 0.4203965 0.2251052</span>
 <span class="r-in"></span>
 </code></pre></div>
     </div>
@@ -179,7 +202,7 @@ values, <code>sizeof(double) * (ncol + kernel_ncol) * (nrow + kernel_nrow/2)</co
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer></div>
