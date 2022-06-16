@@ -25,3 +25,7 @@ Duration: 2m 56.4s
 0 errors ✓ | 0 warnings ✓ | 2 note x
 
 R CMD check succeeded
+
+## Resubmission
+
+* Re-built after a delay in confirming the submission
