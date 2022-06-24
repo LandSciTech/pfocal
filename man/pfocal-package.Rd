@@ -8,7 +8,7 @@
 \description{
 \if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
 
-Provides functions to create and apply convolution kernels to rectangular data (matrix, raster). Implements calculations of convolutions in parallel, emphasizing performance over convolution function diversity. Moving window calculations are common in many fields, from image processing to raster data manipulation. The process of ingesting values in the neighborhood of a each cell in a grid, passing them through a function, and returning a reduced value, is embarrassingly parallel. This package implements this with parallel C code. In doing so, it provides a much faster option than other similarly aimed packages and functions.
+Provides functions to create and apply discretized convolution kernels to rectangular data (matrix, raster). The calculations are implemented in parallel to reduce processing time. Moving window calculations are common in many fields, from image processing to raster data manipulation. This package provides a fast alternative to existing single thread implementations of focal moving window methods.
 }
 \seealso{
 Useful links:

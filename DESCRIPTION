@@ -14,7 +14,7 @@ Authors@R: c(
            role = "cph"))
 Description: Provides functions to create and apply discretized convolution kernels to 
     rectangular data (matrix, raster). The calculations are implemented
-    in parallel (C++) to reduce processing time. Moving window calculations are common in many fields, from image processing
+    in parallel to reduce processing time. Moving window calculations are common in many fields, from image processing
     to raster data manipulation. This package provides a fast alternative to
     existing single thread implementations of focal moving window methods.
 License: GPL-3
