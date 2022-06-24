@@ -20,7 +20,7 @@ library(pfocal)
 
 ### Introduction
 
-Moving window calculations are common in many fields, from image processing to raster data manipulation. The process of ingesting values in the neighborhood of a each cell in a grid, passing them through a function, and returning a reduced value, is "embarrassingly parallel". This package implements a this very process with parallel C code. In doing so, it provides a much faster option than other similarly aimed packages and functions.
+Moving window calculations are common in many fields, from image processing to raster data manipulation. This package provides functions to create and apply discretized convolution kernels to rectangular data (matrix, raster). The calculations are implemented in parallel to reduce processing time, providing a fast alternative to existing single thread implementations of focal moving window methods.
 
 ### A simple example
 
@@ -33,7 +33,7 @@ data <- matrix(nrow = size, ncol = size,
 image(data, asp = 1)
 ```
 
-The package contains two types of functions: **kernel generation functions** and **kernel application functions**. With the package's kernel generation functions, it is easy to create distance, exponential, circular as well as Gaussian kernels. These kernels are returned under the form of a matrix. Here we generate a Chebyshev distance kernel and show its shape.
+The package contains two types of functions: **kernel generation functions** and **kernel application functions**. With the package's kernel generation functions, it is easy to create distance, exponential, circular as well as Gaussian discretized kernels, returned in matrix form. Here we generate a Chebyshev distance kernel and show its shape.
 
 ```{r}
 kernel <- chebyshev_distance_kernel(10)
