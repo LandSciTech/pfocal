@@ -117,7 +117,7 @@
 <code class="sourceCode R"><span class="va">kernel</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/kernel-distance.html">chebyshev_distance_kernel</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/image.html" class="external-link">image</a></span><span class="op">(</span><span class="va">kernel</span>, asp <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <p><img src="Getting_started_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
-<p>The second type of functions in the package, kernel applications functions, can apply a kernel to a matrix, raster object or terra object (although the most efficient approach is to pass a matrix to the function). The main application function is <code>pfocal</code>.</p>
+<p>The second type of function in the package, kernel applications functions, apply a kernel to a matrix, raster object or terra object (although the most efficient approach is to pass a matrix to the function). The main application function is <code>pfocal</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">convoluted</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pfocal.html">pfocal</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, kernel <span class="op">=</span> <span class="va">kernel</span>, edge_value <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/image.html" class="external-link">image</a></span><span class="op">(</span><span class="va">convoluted</span>, asp <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
@@ -126,7 +126,7 @@
 <div class="section level3">
 <h3 id="convolution-functions">Convolution functions<a class="anchor" aria-label="anchor" href="#convolution-functions"></a>
 </h3>
-<p>The <code>pfocal</code> function is not as flexible as other focal calculations functions which can accommodate any functional treatment of the values covered by the kernel (for example <code><a href="https://rdrr.io/pkg/raster/man/focal.html" class="external-link">raster::focal</a></code> can take on any R function). However, it is optimized for a few common combinations of “transform” and “reduce” functions. The transform function dictates how the values <code>d</code> covered by the kernel <code>k</code> are treated with regard to the focal cell. To get the list of possible transform functions:</p>
+<p>The <code>pfocal</code> function is not as flexible as other existing focal calculation functions which can accommodate any functional treatment of the values covered by the kernel (for example <code><a href="https://rdrr.io/pkg/raster/man/focal.html" class="external-link">raster::focal</a></code> can take on any R function). However, it is optimized for a few common combinations of “transform” and “reduce” functions. The transform function dictates how the values <code>d</code> covered by the kernel <code>k</code> are treated with regard to the focal cell. To get the list of possible transform functions:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/pfocal-info.html">pfocal_info_transform</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt;      [,1]       [,2]</span>
@@ -232,9 +232,9 @@
   unit <span class="op">=</span> <span class="st">"s"</span><span class="op">)</span>
 <span class="va">mbm</span>
 <span class="co">#&gt; Unit: seconds</span>
-<span class="co">#&gt;          expr      min        lq      mean    median        uq       max neval</span>
-<span class="co">#&gt;        pfocal 0.540365 0.5463632 0.5521346 0.5504794 0.5565352 0.5741978   100</span>
-<span class="co">#&gt;  raster_focal 0.768405 0.7810231 0.7960376 0.7888338 0.7995497 1.0557816   100</span></code></pre></div>
+<span class="co">#&gt;          expr       min        lq      mean    median        uq       max neval</span>
+<span class="co">#&gt;        pfocal 0.5529194 0.5600493 0.5715685 0.5644304 0.5761822 0.6541509   100</span>
+<span class="co">#&gt;  raster_focal 0.8003498 0.8149397 0.8372148 0.8276041 0.8429603 1.0766560   100</span></code></pre></div>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">mbm</span><span class="op">)</span></code></pre></div>
 <p><img src="Getting_started_files/figure-html/unnamed-chunk-11-1.png" width="700"></p>
