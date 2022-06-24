@@ -40,7 +40,7 @@ kernel <- chebyshev_distance_kernel(10)
 image(kernel, asp = 1)
 ```
 
-The second type of functions in the package, kernel applications functions, can apply a kernel to a matrix, raster object or terra object (although the most efficient approach is to pass a matrix to the function). The main application function is `pfocal`. 
+The second type of function in the package, kernel applications functions, apply a kernel to a matrix, raster object or terra object (although the most efficient approach is to pass a matrix to the function). The main application function is `pfocal`. 
 
 ```{r}
 convoluted <- pfocal(data = data, kernel = kernel, edge_value = 0)
@@ -49,7 +49,7 @@ image(convoluted, asp = 1)
 
 ### Convolution functions
 
-The `pfocal` function is not as flexible as other focal calculations functions which can accommodate any functional treatment of the values covered by the kernel (for example `raster::focal` can take on any R function). However, it is optimized for a few common combinations of "transform" and "reduce" functions. The transform function dictates how the values `d` covered by the kernel `k` are treated with regard to the focal cell. To get the list of possible transform functions:
+The `pfocal` function is not as flexible as other existing focal calculation functions which can accommodate any functional treatment of the values covered by the kernel (for example `raster::focal` can take on any R function). However, it is optimized for a few common combinations of "transform" and "reduce" functions. The transform function dictates how the values `d` covered by the kernel `k` are treated with regard to the focal cell. To get the list of possible transform functions:
 
 ```{r}
 pfocal_info_transform()
