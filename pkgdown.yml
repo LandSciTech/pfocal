@@ -3,7 +3,7 @@ pkgdown: 2.0.4
 pkgdown_sha: ~
 articles:
   Getting_started: Getting_started.html
-last_built: 2022-06-24T20:17Z
+last_built: 2022-06-24T20:24Z
 urls:
   reference: https://landscitech.github.io/pfocal/reference
   article: https://landscitech.github.io/pfocal/articles
