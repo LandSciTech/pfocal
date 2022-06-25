@@ -6,7 +6,7 @@
 \alias{_PACKAGE}
 \title{pfocal: Fast Convolution of Matrices}
 \description{
-\if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
 Provides functions to create and apply discretized convolution kernels to rectangular data (matrix, raster). The calculations are implemented in parallel to reduce processing time. Moving window calculations are common in many fields, from image processing to raster data manipulation. This package provides a fast alternative to existing single thread implementations of focal moving window methods.
 }
