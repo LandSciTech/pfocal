@@ -154,11 +154,6 @@ Rcpp::NumericMatrix p_focal_cpp(
 
         Rcpp::NumericMatrix dest(data.nrow(), data.ncol());
         
-        //p_conv<
-        //  p_focal::TRANSFORM::MULTIPLY, 
-        //  p_focal::REDUCE::SUM, 
-        //  p_focal::NAN_POLICY::FAST, 
-        //  p_focal::MEAN_DIVISOR::ONE>(src, kernel, dest, true);
         p_conv(src, k, &dest[0], open_mp, tf, rf, nf, md, variance);
 
         return dest;
