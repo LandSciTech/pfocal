@@ -10,8 +10,8 @@ using namespace Rcpp;
 
 namespace p_focal{
 
-    template<TRANSFORM TRANSFORM_FUNCTION, REDUCE REDUCE_FUNCTION, NAN_POLICY NAN_P, MEAN_DIVISOR MEAN_D, size_t ALIGNMENT=_P_FOCAL_ALLIGNMENT>
-    void p_conv(const expanded_aligned_data<ALIGNMENT>& src, const expanded_aligned_data<ALIGNMENT>& kernel, double* dest, const bool open_mp_requested,
+    template<TRANSFORM TRANSFORM_FUNCTION, REDUCE REDUCE_FUNCTION, NAN_POLICY NAN_P, MEAN_DIVISOR MEAN_D>
+    void p_conv(const expanded_aligned_data& src, const expanded_aligned_data& kernel, double* dest, const bool open_mp_requested,
                 bool variance){
         if(variance){
             p_conv<TRANSFORM_FUNCTION, REDUCE_FUNCTION, NAN_P, MEAN_D, true> (src, kernel, dest, open_mp_requested);
@@ -21,8 +21,8 @@ namespace p_focal{
 
     }
 
-    template<TRANSFORM TRANSFORM_FUNCTION, REDUCE REDUCE_FUNCTION, NAN_POLICY NAN_P, size_t ALIGNMENT=_P_FOCAL_ALLIGNMENT>
-    void p_conv(const expanded_aligned_data<ALIGNMENT>& src, const expanded_aligned_data<ALIGNMENT>& kernel, double* dest, const bool open_mp_requested,
+    template<TRANSFORM TRANSFORM_FUNCTION, REDUCE REDUCE_FUNCTION, NAN_POLICY NAN_P>
+    void p_conv(const expanded_aligned_data& src, const expanded_aligned_data& kernel, double* dest, const bool open_mp_requested,
                 MEAN_DIVISOR mean_d, bool variance){
 
         switch(mean_d){
@@ -79,8 +79,8 @@ namespace p_focal{
         }
     }
 
-    template<TRANSFORM TRANSFORM_FUNCTION, REDUCE REDUCE_FUNCTION, size_t ALIGNMENT=_P_FOCAL_ALLIGNMENT>
-    void p_conv(const expanded_aligned_data<ALIGNMENT>& src, const expanded_aligned_data<ALIGNMENT>& kernel, double* dest, const bool open_mp_requested,
+    template<TRANSFORM TRANSFORM_FUNCTION, REDUCE REDUCE_FUNCTION>
+    void p_conv(const expanded_aligned_data& src, const expanded_aligned_data& kernel, double* dest, const bool open_mp_requested,
                 NAN_POLICY nan_p, MEAN_DIVISOR mean_d, bool variance){
 
         switch(nan_p){
@@ -98,8 +98,8 @@ namespace p_focal{
 
     }
 
-    template<TRANSFORM TRANSFORM_FUNCTION, size_t ALIGNMENT=_P_FOCAL_ALLIGNMENT>
-    void p_conv(const expanded_aligned_data<ALIGNMENT>& src, const expanded_aligned_data<ALIGNMENT>& kernel, double* dest, const bool open_mp_requested,
+    template<TRANSFORM TRANSFORM_FUNCTION>
+    void p_conv(const expanded_aligned_data& src, const expanded_aligned_data& kernel, double* dest, const bool open_mp_requested,
                 REDUCE reduce_function, NAN_POLICY nan_p, MEAN_DIVISOR mean_d, bool variance){
 
         switch(reduce_function){
@@ -125,8 +125,7 @@ namespace p_focal{
         }
     }
 
-    template<size_t ALIGNMENT=_P_FOCAL_ALLIGNMENT>
-    void p_conv(const expanded_aligned_data<ALIGNMENT>& src, const expanded_aligned_data<ALIGNMENT>& kernel, double* dest, const bool open_mp_requested,
+    void inline p_conv(const expanded_aligned_data& src, const expanded_aligned_data& kernel, double* dest, const bool open_mp_requested,
                 TRANSFORM transform_function, REDUCE reduce_function, NAN_POLICY nan_p, MEAN_DIVISOR mean_d, bool variance){
 
         switch(transform_function){

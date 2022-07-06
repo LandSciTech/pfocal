@@ -94,7 +94,7 @@ Rcpp::List p_focal_variance_info_cpp() {
     auto desc_list = Rcpp::CharacterVector::create(
         "Returns the value at each point",
 
-        "Returns something like the variance of the intermediate values at each point."
+        "Returns something like the variance of the intermediate values at each point. "
         "First calculate the value as normal. Then find the 'mean' by dividing the value by the mean_divisor. "
         "Then for each intermidiate value, calculate the square of the difference and 'reduce' them using the reduce_function. (ie: sum them if SUM, multiply them if PROD, take their max if MAX etc.)");
 
@@ -149,12 +149,12 @@ Rcpp::NumericMatrix p_focal_cpp(
     }else{
         //std::cout << ((size_t)tf) << ", " << ((size_t)rf) << ", " << ((size_t)nf) << ", " << ((size_t)md) << ", " << ((size_t)variance) << "\n";
 
-        expanded_aligned_data<> src(&data[0], data.ncol(), data.nrow(), kernel.ncol()/2, kernel.nrow()/2, edge_value);
-        expanded_aligned_data<> k(&kernel[0], kernel.ncol(), kernel.nrow(), 0, 0, 0);
+        expanded_aligned_data src(&data[0], data.ncol(), data.nrow(), kernel.ncol()/2, kernel.nrow()/2, edge_value);
+        expanded_aligned_data k(&kernel[0], kernel.ncol(), kernel.nrow(), 0, 0, 0);
 
         Rcpp::NumericMatrix dest(data.nrow(), data.ncol());
-
-        p_conv<>(src, k, &dest[0], open_mp, tf, rf, nf, md, variance);
+        
+        p_conv(src, k, &dest[0], open_mp, tf, rf, nf, md, variance);
 
         return dest;
     }

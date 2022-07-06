@@ -15,9 +15,7 @@
 #endif
 #endif
 
-
-#define _P_FOCAL_ALLIGNMENT 64
-
+#include <vector>
 #include <tuple>
 #include <array>
 #include <cstddef>
@@ -35,11 +33,7 @@ using namespace Rcpp;
 
 namespace p_focal{
 
-    template<size_t DATA_ALIGNMENT=_P_FOCAL_ALLIGNMENT>
     struct expanded_aligned_data{
-        static_assert(DATA_ALIGNMENT > 0);
-        static_assert(!(DATA_ALIGNMENT & (DATA_ALIGNMENT-1)));
-        static_assert(DATA_ALIGNMENT >= alignof(double));
 
         /**
          for erow=2, ecol=3 row=7 col=17 al=4
@@ -61,7 +55,7 @@ namespace p_focal{
          */
 
         double* data;
-        double* buffer;
+        std::vector<double> buffer;
         size_t data_size;
         size_t block_size;
         size_t n_col;
@@ -71,8 +65,6 @@ namespace p_focal{
         size_t left_cols;
         size_t right_cols;
         size_t extra_rows;
-
-        static constexpr size_t alignment(){return DATA_ALIGNMENT;}
 
         void copy_in(const double* const incomming_data){
             const size_t n_col = this->n_col;
@@ -94,7 +86,8 @@ namespace p_focal{
             this->n_col = n_col;
             this->n_row = n_row;
 
-            const size_t block_size = alignment()/sizeof(double);
+            //how many doubles fit in a cache line
+            const size_t block_size = 64/sizeof(double);
             this->block_size = block_size;
 
             this->left_cols  = extra_col +(size_t)(extra_row != 0);
@@ -123,25 +116,26 @@ namespace p_focal{
                         << "--------------------------------------------------------------------------\n";
              */
 
-            this->buffer = (double*)malloc(this->data_size*sizeof(double)+alignment());
-            if(!(this->buffer)){
+            try{
+                this->buffer.resize(this->data_size, default_value);
+
+                //take the first aligned pointer into the buffer
+                this->data = &this->buffer[0];
+
+                std::fill_n(data, data_size, default_value);
+            }catch(std::bad_alloc&){
                 Rcerr << "Out of memory\n";
                 stop("Out of memory");
             }
-            //take the first aligned pointer into the buffer
-            this->data = (double*)((((uintptr_t)(this->buffer))+alignment()-1) & ~(alignment()-1));
-
-            std::fill_n(data, data_size, default_value);
         }
 
         expanded_aligned_data(const double* const incomming_data, const size_t n_col, const size_t n_row, const size_t extra_col, const size_t extra_row, const double default_value)
             :expanded_aligned_data(n_col, n_row, extra_col, extra_row, default_value)
         {this->copy_in(incomming_data);}
 
+        expanded_aligned_data(expanded_aligned_data&&)=default;
 
-        expanded_aligned_data(expanded_aligned_data<DATA_ALIGNMENT>&&)=default;
-
-        expanded_aligned_data(const expanded_aligned_data<DATA_ALIGNMENT>& other){
+        expanded_aligned_data(const expanded_aligned_data& other){
             this->data_size      = other.data_size;
             this->block_size     = other.block_size;
             this->n_col          = other.n_col;
@@ -150,35 +144,21 @@ namespace p_focal{
             this->col_size       = other.col_size;
             this->left_cols      = other.left_cols;
             this->right_cols     = other.right_cols;
-            this->e_rows         = other.e_rows;
+            this->extra_rows     = other.extra_rows;
+            
+            try{
+                this->buffer = other.buffer;
 
-            this->buffer = (double*)malloc(this->data_size*sizeof(double)+alignment());
-            if(!(this->buffer)){
+                //take the first aligned pointer into the buffer
+                this->data = &this->buffer[0];
+
+            }catch(std::bad_alloc&){
                 Rcerr << "Out of memory\n";
-                throw "Out of memory";
+                stop("Out of memory");
             }
-            //take the first aligned pointer into the buffer
-            this->data = (((uintptr_t)(this->buffer))+alignment()-1) & ~(alignment()-1);
-
-            double* tdata = this->data;
-            const double* odata = other.data;
-            const size_t block_size = this->block_size;
-            const size_t data_size = this->data_size;
-
-            //#pragma omp parallel for simd aligned(tdata:block_size) aligned(odata:block_size)
-            //for(size_t i = 0; i< data_size; i++){
-            //    tdata[i] = odata[i];
-            //}
-            memcpy(this->data, other.data, this->data_size);
         }
 
-        ~expanded_aligned_data() noexcept{
-            std::free(this->buffer);
-            this->buffer = nullptr;
-            this->data = nullptr;
-        }
-
-        void swap(expanded_aligned_data<DATA_ALIGNMENT>& rhs) noexcept{
+        void swap(expanded_aligned_data& rhs) noexcept{
             std::swap(this->buffer, rhs.buffer);
             std::swap(this->data, rhs.data);
             std::swap(this->data_size, rhs.data_size);
@@ -189,7 +169,7 @@ namespace p_focal{
             std::swap(this->col_size, rhs.col_size);
             std::swap(this->left_cols, rhs.left_cols);
             std::swap(this->right_cols, rhs.right_cols);
-            std::swap(this->e_rows, rhs.e_rows);
+            std::swap(this->extra_rows, rhs.extra_rows);
         }
 
         void copy_out(double* output) const noexcept{
@@ -216,7 +196,7 @@ namespace p_focal{
     };
 
     template<size_t DATA_ALIGNMENT>
-    inline void swap(expanded_aligned_data<DATA_ALIGNMENT>& lhs, expanded_aligned_data<DATA_ALIGNMENT>& rhs) noexcept{
+    inline void swap(expanded_aligned_data& lhs, expanded_aligned_data& rhs) noexcept{
         lhs.swap(rhs);
     }
 
@@ -315,8 +295,8 @@ namespace p_focal{
     };
 
 
-    template<TRANSFORM TRANSFORM_FUNCTION, REDUCE REDUCE_FUNCTION, NAN_POLICY NAN_P, MEAN_DIVISOR MEAN_D, bool VARIANCE, size_t ALIGNMENT=_P_FOCAL_ALLIGNMENT>
-    void p_conv(const expanded_aligned_data<ALIGNMENT>& src, const expanded_aligned_data<ALIGNMENT>& kernel, double* dest, const bool open_mp_requested){
+    template<TRANSFORM TRANSFORM_FUNCTION, REDUCE REDUCE_FUNCTION, NAN_POLICY NAN_P, MEAN_DIVISOR MEAN_D, bool VARIANCE>
+    void p_conv(const expanded_aligned_data& src, const expanded_aligned_data& kernel, double* dest, const bool open_mp_requested){
 
         static_assert(TRANSFORM_FUNCTION < TRANSFORM::SIZE,    "TRANSFORM_FUNCTION out of range");
         static_assert(REDUCE_FUNCTION    < REDUCE::SIZE,       "REDUCE_FUNCTION out of range");
@@ -326,8 +306,6 @@ namespace p_focal{
         #ifndef _P_FOCAL_OPENMP_ENADLED
         if(open_mp_requested){Rcerr << "You are asking for open_mp, but it was not enabled at compile time\n";};
         #endif
-        //set up compile time values
-        static const size_t ALIGNMENT_BYTES = expanded_aligned_data<ALIGNMENT>::alignment();
 
         static const double ACC_INITIAL_VALUE =
             std::array<const double, static_cast<size_t>(REDUCE::SIZE)>({
