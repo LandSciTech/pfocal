@@ -65,81 +65,81 @@ default argument values.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">pfocal_fast_gaussian_radius</span><span class="op">(</span>
-  <span class="va">data</span>,
-  <span class="va">vertical_radius</span>,
-  vertical_sd <span class="op">=</span> <span class="fl">1</span>,
-  horizontal_radius <span class="op">=</span> <span class="va">vertical_radius</span>,
-  horizontal_sd <span class="op">=</span> <span class="va">vertical_sd</span>,
-  tail_included <span class="op">=</span> <span class="cn">TRUE</span>,
-  na.rm <span class="op">=</span> <span class="cn">NA</span>,
-  mp <span class="op">=</span> <span class="cn">TRUE</span>,
-  debug_use_r_implementation <span class="op">=</span> <span class="cn">FALSE</span>,
-  <span class="va">...</span>,
-  transform_function <span class="op">=</span> <span class="st">"MULTIPLY"</span>,
-  reduce_function <span class="op">=</span> <span class="st">"SUM"</span>,
-  mean_divider <span class="op">=</span> <span class="st">"ONE"</span>,
-  variance <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span>
-
-<span class="fu">pfocal_fast_gaussian_confidence</span><span class="op">(</span>
-  <span class="va">data</span>,
-  vertical_r0 <span class="op">=</span> <span class="fl">0.05</span>,
-  vertical_sd <span class="op">=</span> <span class="fl">1</span>,
-  horizontal_r0 <span class="op">=</span> <span class="va">vertical_r0</span>,
-  horizontal_sd <span class="op">=</span> <span class="va">vertical_sd</span>,
-  tail_included <span class="op">=</span> <span class="cn">TRUE</span>,
-  na.rm <span class="op">=</span> <span class="cn">NA</span>,
-  mp <span class="op">=</span> <span class="cn">TRUE</span>,
-  debug_use_r_implementation <span class="op">=</span> <span class="cn">FALSE</span>,
-  <span class="va">...</span>,
-  transform_function <span class="op">=</span> <span class="st">"MULTIPLY"</span>,
-  reduce_function <span class="op">=</span> <span class="st">"SUM"</span>,
-  mean_divider <span class="op">=</span> <span class="st">"ONE"</span>,
-  variance <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span>
-
-<span class="fu">pfocal_fast_binomial</span><span class="op">(</span>
-  <span class="va">data</span>,
-  <span class="va">vertical_radius</span>,
-  horizontal_radius <span class="op">=</span> <span class="va">vertical_radius</span>,
-  na.rm <span class="op">=</span> <span class="cn">NA</span>,
-  mp <span class="op">=</span> <span class="cn">TRUE</span>,
-  debug_use_r_implementation <span class="op">=</span> <span class="cn">FALSE</span>,
-  <span class="va">...</span>,
-  transform_function <span class="op">=</span> <span class="st">"MULTIPLY"</span>,
-  reduce_function <span class="op">=</span> <span class="st">"SUM"</span>,
-  mean_divider <span class="op">=</span> <span class="st">"ONE"</span>,
-  variance <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span>
-
-<span class="fu">pfocal_fast_abs_rectangle</span><span class="op">(</span>
-  <span class="va">data</span>,
-  <span class="va">height</span>,
-  width <span class="op">=</span> <span class="va">height</span>,
-  value <span class="op">=</span> <span class="fl">1</span>,
-  na.rm <span class="op">=</span> <span class="cn">NA</span>,
-  mp <span class="op">=</span> <span class="cn">TRUE</span>,
-  debug_use_r_implementation <span class="op">=</span> <span class="cn">FALSE</span>,
-  <span class="va">...</span>,
-  transform_function <span class="op">=</span> <span class="st">"MULTIPLY"</span>,
-  reduce_function <span class="op">=</span> <span class="st">"SUM"</span>,
-  mean_divider <span class="op">=</span> <span class="st">"ONE"</span>,
-  variance <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span>
-
-<span class="fu">pfocal_fast_separated</span><span class="op">(</span>
-  <span class="va">data</span>,
-  <span class="va">kernel_list</span>,
-  na.rm <span class="op">=</span> <span class="cn">NA</span>,
-  mp <span class="op">=</span> <span class="cn">TRUE</span>,
-  debug_use_r_implementation <span class="op">=</span> <span class="cn">FALSE</span>,
-  <span class="va">...</span>,
-  transform_function <span class="op">=</span> <span class="st">"MULTIPLY"</span>,
-  reduce_function <span class="op">=</span> <span class="st">"SUM"</span>,
-  mean_divider <span class="op">=</span> <span class="st">"ONE"</span>,
-  variance <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">pfocal_fast_gaussian_radius</span><span class="op">(</span></span>
+<span>  <span class="va">data</span>,</span>
+<span>  <span class="va">vertical_radius</span>,</span>
+<span>  vertical_sd <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  horizontal_radius <span class="op">=</span> <span class="va">vertical_radius</span>,</span>
+<span>  horizontal_sd <span class="op">=</span> <span class="va">vertical_sd</span>,</span>
+<span>  tail_included <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  na.rm <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  mp <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  debug_use_r_implementation <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  transform_function <span class="op">=</span> <span class="st">"MULTIPLY"</span>,</span>
+<span>  reduce_function <span class="op">=</span> <span class="st">"SUM"</span>,</span>
+<span>  mean_divider <span class="op">=</span> <span class="st">"ONE"</span>,</span>
+<span>  variance <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">pfocal_fast_gaussian_confidence</span><span class="op">(</span></span>
+<span>  <span class="va">data</span>,</span>
+<span>  vertical_r0 <span class="op">=</span> <span class="fl">0.05</span>,</span>
+<span>  vertical_sd <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  horizontal_r0 <span class="op">=</span> <span class="va">vertical_r0</span>,</span>
+<span>  horizontal_sd <span class="op">=</span> <span class="va">vertical_sd</span>,</span>
+<span>  tail_included <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  na.rm <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  mp <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  debug_use_r_implementation <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  transform_function <span class="op">=</span> <span class="st">"MULTIPLY"</span>,</span>
+<span>  reduce_function <span class="op">=</span> <span class="st">"SUM"</span>,</span>
+<span>  mean_divider <span class="op">=</span> <span class="st">"ONE"</span>,</span>
+<span>  variance <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">pfocal_fast_binomial</span><span class="op">(</span></span>
+<span>  <span class="va">data</span>,</span>
+<span>  <span class="va">vertical_radius</span>,</span>
+<span>  horizontal_radius <span class="op">=</span> <span class="va">vertical_radius</span>,</span>
+<span>  na.rm <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  mp <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  debug_use_r_implementation <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  transform_function <span class="op">=</span> <span class="st">"MULTIPLY"</span>,</span>
+<span>  reduce_function <span class="op">=</span> <span class="st">"SUM"</span>,</span>
+<span>  mean_divider <span class="op">=</span> <span class="st">"ONE"</span>,</span>
+<span>  variance <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">pfocal_fast_abs_rectangle</span><span class="op">(</span></span>
+<span>  <span class="va">data</span>,</span>
+<span>  <span class="va">height</span>,</span>
+<span>  width <span class="op">=</span> <span class="va">height</span>,</span>
+<span>  value <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  na.rm <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  mp <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  debug_use_r_implementation <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  transform_function <span class="op">=</span> <span class="st">"MULTIPLY"</span>,</span>
+<span>  reduce_function <span class="op">=</span> <span class="st">"SUM"</span>,</span>
+<span>  mean_divider <span class="op">=</span> <span class="st">"ONE"</span>,</span>
+<span>  variance <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">pfocal_fast_separated</span><span class="op">(</span></span>
+<span>  <span class="va">data</span>,</span>
+<span>  <span class="va">kernel_list</span>,</span>
+<span>  na.rm <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  mp <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  debug_use_r_implementation <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  transform_function <span class="op">=</span> <span class="st">"MULTIPLY"</span>,</span>
+<span>  reduce_function <span class="op">=</span> <span class="st">"SUM"</span>,</span>
+<span>  mean_divider <span class="op">=</span> <span class="st">"ONE"</span>,</span>
+<span>  variance <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -262,130 +262,130 @@ rectangle.</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
-<span class="r-in"><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span>nrow <span class="op">=</span> <span class="fl">10</span>, ncol <span class="op">=</span> <span class="fl">10</span>, data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">10</span> <span class="op">*</span> <span class="fl">10</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">pfocal_fast_gaussian_radius</span><span class="op">(</span><span class="va">data</span>, vertical_radius <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span>nrow <span class="op">=</span> <span class="fl">10</span>, ncol <span class="op">=</span> <span class="fl">10</span>, data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">10</span> <span class="op">*</span> <span class="fl">10</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">pfocal_fast_gaussian_radius</span><span class="op">(</span><span class="va">data</span>, vertical_radius <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]      [,2]      [,3]      [,4]      [,5]      [,6]      [,7]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.2073847 0.2710120 0.2536773 0.2325945 0.2606583 0.3052734 0.3292630</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.2721798 0.3484755 0.3242323 0.3050201 0.3554642 0.4139620 0.4296491</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.3206804 0.4232747 0.4167910 0.3979120 0.4342006 0.4777389 0.4851412</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.3818749 0.4987112 0.4757651 0.4447081 0.4735506 0.5104887 0.5230100</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.3866774 0.5065191 0.4977676 0.4730971 0.4927891 0.5075280 0.5068862</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.3652599 0.4968891 0.5040367 0.4872609 0.5024734 0.5054210 0.5070158</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.3875473 0.5127978 0.5066682 0.4797117 0.4621278 0.4391771 0.4566463</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.3257185 0.4315074 0.4364137 0.4281458 0.4257261 0.4054449 0.4166194</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.2663007 0.3630871 0.3870827 0.3855367 0.3619029 0.3310990 0.3489808</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.2057759 0.2722851 0.2799473 0.2764779 0.2556581 0.2365726 0.2618250</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.2830305 0.3564921 0.3408578 0.3259481 0.3222032 0.3035866 0.2962917</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.3325950 0.4289823 0.4384392 0.4417393 0.4360511 0.3986543 0.3750587</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.3752513 0.4881955 0.5146084 0.5160212 0.4998064 0.4612955 0.4359248</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.4175809 0.5456135 0.5792113 0.5867062 0.5616501 0.4971508 0.4630561</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.3749925 0.4997839 0.5575886 0.5845959 0.5737357 0.5161714 0.4679628</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.3830634 0.5048049 0.5507981 0.5760334 0.5672494 0.5066553 0.4665458</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.3722066 0.4974701 0.5366323 0.5633897 0.5691651 0.5107413 0.4610967</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.3240828 0.4291809 0.4601034 0.4979177 0.5240972 0.4760897 0.4250587</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.2933370 0.3871176 0.3974634 0.4124065 0.4406652 0.4188529 0.3862937</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.2279868 0.3074376 0.3093696 0.3171378 0.3410101 0.3203725 0.2961359</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            [,8]      [,9]     [,10]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.3238888 0.3054926 0.2395752</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.4272639 0.4146316 0.3204056</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.4886737 0.4791590 0.3664899</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.5409091 0.5393972 0.4091061</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.5335043 0.5290525 0.3941369</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.5394880 0.5362775 0.4020245</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.5041542 0.4992769 0.3801218</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.4555393 0.4471674 0.3455496</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.3829141 0.3771428 0.3036046</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.2932470 0.2997465 0.2505842</span>
-<span class="r-in"><span class="fu">pfocal_fast_gaussian_confidence</span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.3081050 0.3043337 0.2188925</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.3800499 0.3648993 0.2522887</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.4309301 0.4134842 0.2946543</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.4767233 0.4731422 0.3476182</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.4627504 0.4541688 0.3346118</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.4745532 0.4783096 0.3659562</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.4714131 0.4828513 0.3703392</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.4282309 0.4328547 0.3266719</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.3883098 0.3929411 0.2940551</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.3101014 0.3156529 0.2241443</span>
+<span class="r-in"><span><span class="fu">pfocal_fast_gaussian_confidence</span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]      [,2]      [,3]      [,4]      [,5]      [,6]      [,7]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.2609792 0.3190035 0.2677533 0.2383136 0.2842002 0.3359161 0.3663504</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.3176833 0.4060974 0.4040932 0.3950557 0.4536225 0.5302336 0.5500845</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.3009351 0.4209698 0.4549673 0.4549334 0.5078472 0.5813792 0.5895235</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.3536177 0.4785656 0.4571273 0.4178397 0.4526545 0.5089611 0.5269522</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.4301428 0.5446879 0.4907347 0.4442308 0.4670605 0.4802856 0.4766576</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.4478766 0.5754474 0.5609590 0.5350474 0.5230450 0.4844617 0.4652699</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.3961165 0.5322508 0.5462263 0.5303624 0.5117778 0.4716108 0.4725384</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.3076458 0.4386325 0.4696762 0.4648386 0.4723121 0.4622176 0.4865595</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.2746446 0.3860087 0.4167181 0.4161226 0.4060538 0.3984393 0.4415053</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.2448099 0.3115562 0.3193349 0.3209639 0.2774991 0.2392901 0.2705337</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.3391918 0.4080249 0.3744669 0.3813887 0.3970256 0.3585916 0.3280565</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.4431841 0.5425455 0.5231566 0.5200600 0.5379305 0.5194067 0.4943683</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.4416645 0.5746424 0.5849502 0.5501566 0.5316087 0.5234293 0.5273928</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.3742877 0.5327090 0.5960687 0.5807571 0.5233649 0.4670856 0.4559266</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.3333446 0.4711273 0.5751657 0.6291648 0.5851919 0.4810180 0.4129428</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.3857132 0.4895984 0.5589010 0.6209399 0.6114945 0.5177385 0.4379752</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.4100732 0.5096402 0.5262626 0.5579605 0.5823347 0.5259161 0.4714885</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.3605253 0.4760321 0.4824606 0.5022986 0.5488491 0.5285680 0.4969866</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.3298406 0.4559274 0.4644590 0.4778968 0.5167909 0.5002450 0.4752956</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.2546476 0.3559088 0.3664894 0.3761874 0.4031502 0.3808459 0.3460853</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            [,8]      [,9]     [,10]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.3537359 0.3050781 0.2336060</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.5239472 0.4910422 0.3900977</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.5778805 0.5894761 0.4719044</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.5587549 0.5862227 0.4454540</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.5240261 0.5285011 0.3747421</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.5022514 0.4849126 0.3451546</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.5078409 0.4882472 0.3663113</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.5265264 0.5070522 0.3945801</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.4872769 0.4843721 0.3969860</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.3120656 0.3305237 0.2906032</span>
-<span class="r-in"><span class="fu">pfocal_fast_binomial</span><span class="op">(</span><span class="va">data</span>, vertical_radius <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]      [,2]      [,3]      [,4]      [,5]      [,6]      [,7]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,]  66.49977  81.00566  68.86570  61.37254  72.18280  86.88745  94.10449</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,]  80.45417 104.54509 103.77438 102.06127 116.84362 136.43455 141.49475</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,]  78.09499 109.61814 116.62632 116.16319 129.50038 148.05915 151.41011</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,]  90.11974 121.91047 117.51024 107.84426 117.18261 131.04611 135.84180</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 110.04913 140.12082 127.82372 114.81170 119.01671 121.78859 122.74798</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 115.16659 148.33306 144.29476 136.14631 132.26051 122.89239 119.33943</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 100.42421 136.14998 140.90813 136.85466 131.21812 121.96765 121.60780</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,]  79.40979 113.65019 122.17082 120.99857 120.32537 119.40367 125.80105</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,]  70.62867  99.47387 107.61680 107.02441 103.37064 102.33931 112.23600</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,]  60.94437  78.87697  82.23114  80.76435  70.44757  62.09628  68.82918</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.3348742 0.3326059 0.2547826</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.4912520 0.4698497 0.3273237</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.5370220 0.5105676 0.3354386</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.4750453 0.4609344 0.3099806</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.3993016 0.3872596 0.2922507</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.4218682 0.4296470 0.3632864</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.4925302 0.5217936 0.4264188</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.5197248 0.5361128 0.4020403</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.4857831 0.4866191 0.3429776</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.3430588 0.3338488 0.2217933</span>
+<span class="r-in"><span><span class="fu">pfocal_fast_binomial</span><span class="op">(</span><span class="va">data</span>, vertical_radius <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]      [,2]      [,3]      [,4]     [,5]      [,6]      [,7]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,]  85.90097 103.57174  96.57368  97.23217 101.0219  92.57386  84.06030</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 113.98447 140.82752 135.74899 133.32406 137.0905 133.46618 127.23403</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 112.90168 149.01269 151.32118 142.11051 136.3598 134.29180 135.05426</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,]  94.61895 136.39056 153.11615 149.58226 134.6620 120.45670 116.81141</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,]  85.27089 122.63011 148.81656 161.23849 149.1918 122.85768 105.28395</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,]  96.97069 126.08832 143.79178 159.68505 156.7579 132.52455 110.97281</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 103.32737 130.07185 134.77786 143.36036 148.6838 135.51697 121.13917</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,]  93.91605 123.87139 125.78311 130.29573 140.2267 136.12300 128.14852</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,]  84.41941 116.48161 120.15984 123.36903 132.1505 129.37740 122.06475</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,]  64.56326  90.07144  93.80455  96.11021 101.6621  97.13778  88.30818</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            [,8]      [,9]     [,10]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,]  90.57188  79.00096  58.92286</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 135.54421 127.10167  99.38381</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 150.77651 151.98289 120.58312</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 145.17422 150.34048 114.24111</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 134.72072 135.36448  96.28901</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 128.39017 124.67259  88.13415</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 130.12135 125.72912  92.64667</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 136.05119 132.70496 101.41213</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 124.68883 125.62775 100.67728</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,]  80.44552  86.01815  73.35481</span>
-<span class="r-in"><span class="fu">pfocal_fast_abs_rectangle</span><span class="op">(</span><span class="va">data</span>, height <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]     [,2]      [,3]       [,4]      [,5]      [,6]      [,7]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.3656397 1.284014 0.9892596 0.07177262 0.6622355 0.8217164 0.6713449</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 1.3061913 2.472699 1.9176937 1.11897303 1.2515097 1.8060576 2.0557748</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 1.0580267 1.341453 1.7235725 2.19182798 1.8873763 2.8667520 3.1013217</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.4722258 1.481883 2.1244915 1.87268664 1.7438984 2.0846076 2.5814900</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 1.1070979 2.865310 2.1969131 0.90112762 1.0556395 1.6004013 1.7979937</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 1.4419539 2.769779 2.2596624 1.85846782 2.1138794 2.6602137 1.6255135</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 1.3854535 2.750630 2.6270652 2.68732279 2.5532516 1.8904565 1.6380575</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.9558631 2.077849 2.1607874 1.68256757 2.0164887 1.9922467 1.4962000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.4564595 1.117777 1.9149226 1.52606718 1.6149897 2.2113098 1.8224565</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.9672261 2.009390 1.7459519 1.90618250 1.9175684 1.1433008 1.4828841</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           [,8]      [,9]     [,10]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 1.127405 0.7486429 0.5923658</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 2.468823 1.8390977 1.6845115</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 2.371887 2.2614392 2.9028686</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 2.015594 2.3519817 3.2634848</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 1.738691 2.6537343 2.5815806</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 1.669669 2.4721292 1.7054947</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 2.001275 2.0654482 1.9950283</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 2.078650 2.0830669 2.0829911</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 2.508985 2.3629755 2.2338131</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 2.110216 1.8991210 2.4975598</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">pfocal_fast_separated</span><span class="op">(</span><span class="va">data</span>, </span>
-<span class="r-in">                      kernel_list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="kernel-binomial.html">binomial_kernel</a></span><span class="op">(</span>vertical_radius <span class="op">=</span> <span class="fl">2</span>, </span>
-<span class="r-in">                                                         horizontal_radius <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>, </span>
-<span class="r-in">                                         <span class="fu"><a href="kernel-distance.html">distance_kernel</a></span><span class="op">(</span>vertical_radius <span class="op">=</span> <span class="fl">2</span>,</span>
-<span class="r-in">                                                         horizontal_radius <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,]  85.71089  85.04564  64.34104</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 127.90794 121.16441  84.58422</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 139.91282 131.03321  86.70759</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 122.58430 116.57972  78.37503</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 102.98117 100.21906  75.37189</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 107.59536 110.80733  91.91035</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 125.92059 133.46639 107.96493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 135.63485 139.42692 104.65554</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 126.14918 124.31474  87.63926</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,]  88.45091  84.54565  56.76815</span>
+<span class="r-in"><span><span class="fu">pfocal_fast_abs_rectangle</span><span class="op">(</span><span class="va">data</span>, height <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]     [,2]     [,3]      [,4]     [,5]     [,6]      [,7]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.7124518 1.674245 1.131312 0.7593575 1.313131 1.017938 0.5567656</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 1.4622444 2.929693 2.127446 1.8342458 2.640661 2.454112 1.8262239</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 1.7018963 2.564628 2.317420 2.1545347 2.248753 2.585908 2.6010521</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 1.3106323 2.519248 2.942671 2.3311981 1.694720 1.578508 2.0172080</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.5909398 1.640401 2.256489 2.6726797 2.643370 1.763207 1.2395955</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 1.1483516 1.452999 1.549433 2.7867027 3.104935 2.544383 1.7675051</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 1.8508166 2.733025 2.175061 2.3375255 2.597339 2.450179 1.6411020</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 1.1654617 2.210336 2.052566 1.6150077 2.204046 2.611793 1.6932999</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.7124929 1.844654 1.982799 1.4893142 2.094844 2.202301 2.1698675</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.9645162 2.395859 2.405735 1.8294572 2.494724 2.310343 1.9415138</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            [,8]      [,9]    [,10]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.8719176 0.8982772 1.035914</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 1.7876030 2.0302359 2.150845</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 2.2289368 2.4001487 2.221034</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 2.1516229 2.5412108 2.489183</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 1.3545631 1.8760450 1.668112</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 1.4580281 0.9705895 1.268333</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 1.8381021 1.9300442 2.687070</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 1.7751473 2.5057244 2.597008</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 1.9957280 2.2264304 2.465953</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 1.8587715 2.2743595 2.355674</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">pfocal_fast_separated</span><span class="op">(</span><span class="va">data</span>, </span></span>
+<span class="r-in"><span>                      kernel_list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="kernel-binomial.html">binomial_kernel</a></span><span class="op">(</span>vertical_radius <span class="op">=</span> <span class="fl">2</span>, </span></span>
+<span class="r-in"><span>                                                         horizontal_radius <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>, </span></span>
+<span class="r-in"><span>                                         <span class="fu"><a href="kernel-distance.html">distance_kernel</a></span><span class="op">(</span>vertical_radius <span class="op">=</span> <span class="fl">2</span>,</span></span>
+<span class="r-in"><span>                                                         horizontal_radius <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           [,1]     [,2]     [,3]     [,4]     [,5]     [,6]     [,7]     [,8]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 1410.260 1834.616 2582.158 2941.248 3084.708 3182.531 3318.628 3247.224</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 1926.253 2455.895 3416.758 3835.213 3962.944 4081.099 4292.440 4206.245</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 2732.382 3452.201 4706.020 5155.148 5237.044 5367.847 5609.287 5425.805</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 3103.206 3972.943 5397.157 5867.436 5912.150 6002.133 6177.445 5882.646</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 3203.660 4126.111 5591.652 6033.543 6039.010 6109.369 6240.027 5898.110</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 3182.714 4081.876 5493.932 5866.776 5849.179 5938.559 6056.631 5711.998</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 3141.910 4041.136 5379.510 5686.171 5659.284 5731.405 5786.466 5436.193</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 2918.977 3786.164 4985.404 5223.637 5188.683 5210.296 5185.764 4864.511</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 2088.230 2722.555 3604.389 3823.857 3857.809 3905.226 3891.829 3661.926</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 1453.784 1915.853 2545.117 2734.710 2815.620 2903.285 2939.326 2815.488</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 1900.415 2459.859 3318.160 3451.205 3354.277 3315.545 3264.319 2949.604</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 2449.941 3185.694 4289.416 4488.267 4370.341 4271.962 4138.582 3700.050</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 3240.441 4276.717 5711.155 5991.970 5861.441 5690.059 5419.711 4791.644</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 3505.498 4660.937 6178.385 6490.970 6398.721 6234.665 5933.672 5252.198</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 3512.681 4690.268 6190.711 6483.436 6397.669 6285.586 6060.287 5432.027</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 3341.661 4519.073 6029.104 6347.411 6267.244 6192.625 6022.037 5417.980</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 3181.629 4338.497 5886.271 6255.001 6182.116 6122.505 5974.279 5360.296</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 2960.361 3997.620 5469.386 5835.748 5758.856 5727.079 5643.687 5084.039</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 2187.568 2904.234 4004.340 4294.797 4248.975 4278.059 4298.309 3919.728</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 1616.101 2139.787 2944.414 3190.615 3183.103 3230.441 3269.858 2991.123</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           [,9]    [,10]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 2452.432 1849.834</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 3158.037 2419.296</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 4063.789 3114.212</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 4392.717 3386.862</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 4427.740 3449.759</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 4321.615 3391.476</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 4120.654 3242.064</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 3678.744 2908.150</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 2750.639 2177.666</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 2138.983 1688.436</span>
-<span class="r-in"></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 2175.146 1660.562</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 2718.600 2102.272</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 3505.296 2697.549</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 3834.915 2931.793</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 3975.338 3045.413</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 3935.957 3020.519</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 3852.017 2955.811</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 3656.481 2823.186</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 2843.645 2226.380</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 2200.056 1711.685</span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -400,7 +400,7 @@ rectangle.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

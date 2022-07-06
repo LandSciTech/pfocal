@@ -65,15 +65,15 @@ is available to provide all possible values for these arguments.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">pfocal_info_transform</span><span class="op">(</span><span class="op">)</span>
-
-<span class="fu">pfocal_info_reduce</span><span class="op">(</span><span class="op">)</span>
-
-<span class="fu">pfocal_info_nan_policy</span><span class="op">(</span><span class="op">)</span>
-
-<span class="fu">pfocal_info_mean_divisor</span><span class="op">(</span><span class="op">)</span>
-
-<span class="fu">pfocal_info_variance</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">pfocal_info_transform</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">pfocal_info_reduce</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">pfocal_info_nan_policy</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">pfocal_info_mean_divisor</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">pfocal_info_variance</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="value">
@@ -86,10 +86,10 @@ second column is used internally and third column describe the argument.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
-<span class="r-in"><span class="co"># Retrieve info on different arguments</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">pfocal_info_transform</span><span class="op">(</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Retrieve info on different arguments</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">pfocal_info_transform</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      [,1]       [,2]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1,] "MULTIPLY" "0" </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2,] "ADD"      "1" </span>
@@ -100,7 +100,7 @@ second column is used internally and third column describe the argument.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2,] "For data value 'd' and kernal value 'k', intermediate_value = (d + k)"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [3,] "For data value 'd' and kernal value 'k', intermediate_value = (d ^ k)"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [4,] "For data value 'd' and kernal value 'k', intermediate_value = (k ^ d)"</span>
-<span class="r-in"><span class="fu">pfocal_info_reduce</span><span class="op">(</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">pfocal_info_reduce</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      [,1]          [,2]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1,] "SUM"         "0" </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2,] "ABS_SUM"     "1" </span>
@@ -115,7 +115,7 @@ second column is used internally and third column describe the argument.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [4,] "Accumulator starts at 1. For each intermediate value, in no particular order, acc = ( acc * abs(iv) )"                       </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [5,] "Accumulator starts at the highest possible value. For each intermediate value, in no particular order, acc = min( acc , iv )"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [6,] "Accumulator starts at the lowest possible value. For each intermediate value, in no particular order, acc = max( acc , iv )" </span>
-<span class="r-in"><span class="fu">pfocal_info_nan_policy</span><span class="op">(</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">pfocal_info_nan_policy</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      [,1]    [,2]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1,] "NA"    "0" </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2,] "FALSE" "1" </span>
@@ -124,7 +124,7 @@ second column is used internally and third column describe the argument.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1,] "Fastest. Assume that there will be no NAN values. Will not crash if it is given a NAN, but makes no guarantee other than that."</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2,] "Will propagate NANs aggressively."                                                                                             </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [3,] "Will discard NAN values early."                                                                                                </span>
-<span class="r-in"><span class="fu">pfocal_info_mean_divisor</span><span class="op">(</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">pfocal_info_mean_divisor</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       [,1]                    [,2]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] "ONE"                   "0" </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] "KERNEL_SIZE"           "1" </span>
@@ -159,14 +159,14 @@ second column is used internally and third column describe the argument.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [14,] "Divide the final value at each point by sum(abs(local_data[!is.na( intermediate_data )])), recalculated at every point"        </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [15,] "Divide the final value at each point by prod(local_data[!is.na( intermediate_data )]), recalculated at every point"            </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [16,] "Divide the final value at each point by prod(abs(local_data[!is.na( intermediate_data )])), recalculated at every point"       </span>
-<span class="r-in"><span class="fu">pfocal_info_variance</span><span class="op">(</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">pfocal_info_variance</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      [,1]    [,2]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1,] "FALSE" "0" </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2,] "TRUE"  "1" </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      [,3]                                                                                                                                                                                                                                                                                                                                                                              </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1,] "Returns the value at each point"                                                                                                                                                                                                                                                                                                                                                 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2,] "Returns something like the variance of the intermediate values at each point.First calculate the value as normal. Then find the 'mean' by dividing the value by the mean_divisor. Then for each intermidiate value, calculate the square of the difference and 'reduce' them using the reduce_function. (ie: sum them if SUM, multiply them if PROD, take their max if MAX etc.)"</span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -181,7 +181,7 @@ second column is used internally and third column describe the argument.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

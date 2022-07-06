@@ -63,21 +63,21 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">gaussian_kernel_confidence</span><span class="op">(</span>
-  vertical_r0 <span class="op">=</span> <span class="fl">0.05</span>,
-  vertical_sd <span class="op">=</span> <span class="fl">1</span>,
-  horizontal_r0 <span class="op">=</span> <span class="va">vertical_r0</span>,
-  horizontal_sd <span class="op">=</span> <span class="va">vertical_sd</span>,
-  tail_included <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span>
-
-<span class="fu">gaussian_kernel_radius</span><span class="op">(</span>
-  <span class="va">vertical_radius</span>,
-  vertical_sd <span class="op">=</span> <span class="fl">1</span>,
-  horizontal_radius <span class="op">=</span> <span class="va">vertical_radius</span>,
-  horizontal_sd <span class="op">=</span> <span class="va">vertical_sd</span>,
-  tail_included <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">gaussian_kernel_confidence</span><span class="op">(</span></span>
+<span>  vertical_r0 <span class="op">=</span> <span class="fl">0.05</span>,</span>
+<span>  vertical_sd <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  horizontal_r0 <span class="op">=</span> <span class="va">vertical_r0</span>,</span>
+<span>  horizontal_sd <span class="op">=</span> <span class="va">vertical_sd</span>,</span>
+<span>  tail_included <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">gaussian_kernel_radius</span><span class="op">(</span></span>
+<span>  <span class="va">vertical_radius</span>,</span>
+<span>  vertical_sd <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  horizontal_radius <span class="op">=</span> <span class="va">vertical_radius</span>,</span>
+<span>  horizontal_sd <span class="op">=</span> <span class="va">vertical_sd</span>,</span>
+<span>  tail_included <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -126,24 +126,24 @@ dimension.</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
-<span class="r-in"><span class="fu">gaussian_kernel_confidence</span><span class="op">(</span>vertical_r0 <span class="op">=</span> <span class="fl">0.4</span>, vertical_sd <span class="op">=</span> <span class="fl">1</span>, </span>
-<span class="r-in">                           horizontal_r0 <span class="op">=</span> <span class="fl">0.5</span>, horizontal_sd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">gaussian_kernel_confidence</span><span class="op">(</span>vertical_r0 <span class="op">=</span> <span class="fl">0.4</span>, vertical_sd <span class="op">=</span> <span class="fl">1</span>, </span></span>
+<span class="r-in"><span>                           horizontal_r0 <span class="op">=</span> <span class="fl">0.5</span>, horizontal_sd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]       [,2]       [,3]       [,4]       [,5]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 0.01514034 0.01166897 0.01318859 0.01166897 0.01514034</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 0.05478271 0.04222215 0.04772063 0.04222215 0.05478271</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [3,] 0.08678126 0.06688409 0.07559422 0.06688409 0.08678126</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [4,] 0.05478271 0.04222215 0.04772063 0.04222215 0.05478271</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [5,] 0.01514034 0.01166897 0.01318859 0.01166897 0.01514034</span>
-<span class="r-in"><span class="fu">gaussian_kernel_confidence</span><span class="op">(</span>vertical_r0 <span class="op">=</span> <span class="fl">0.4</span>, vertical_sd <span class="op">=</span> <span class="fl">1</span>, </span>
-<span class="r-in">                           horizontal_r0 <span class="op">=</span> <span class="fl">0.5</span>, horizontal_sd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">gaussian_kernel_confidence</span><span class="op">(</span>vertical_r0 <span class="op">=</span> <span class="fl">0.4</span>, vertical_sd <span class="op">=</span> <span class="fl">1</span>, </span></span>
+<span class="r-in"><span>                           horizontal_r0 <span class="op">=</span> <span class="fl">0.5</span>, horizontal_sd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]       [,2]       [,3]       [,4]       [,5]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 0.01514034 0.01166897 0.01318859 0.01166897 0.01514034</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 0.05478271 0.04222215 0.04772063 0.04222215 0.05478271</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [3,] 0.08678126 0.06688409 0.07559422 0.06688409 0.08678126</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [4,] 0.05478271 0.04222215 0.04772063 0.04222215 0.05478271</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [5,] 0.01514034 0.01166897 0.01318859 0.01166897 0.01514034</span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -158,7 +158,7 @@ dimension.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>
