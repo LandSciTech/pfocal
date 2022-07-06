@@ -123,7 +123,7 @@ namespace p_focal{
                 this->data = &this->buffer[0];
 
                 std::fill_n(data, data_size, default_value);
-            }catch(std::bad_alloc){
+            }catch(std::bad_alloc&){
                 Rcerr << "Out of memory\n";
                 stop("Out of memory");
             }
@@ -152,7 +152,7 @@ namespace p_focal{
                 //take the first aligned pointer into the buffer
                 this->data = &this->buffer[0];
 
-            }catch(std::bad_alloc){
+            }catch(std::bad_alloc&){
                 Rcerr << "Out of memory\n";
                 stop("Out of memory");
             }
