@@ -166,27 +166,27 @@ values, <code>sizeof(double) * (ncol + kernel_ncol) * (nrow + kernel_nrow/2)</co
 <span class="r-in"><span><span class="va">kernel</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">/</span> <span class="fl">9</span>, nrow <span class="op">=</span> <span class="fl">3</span>, ncol <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">pfocal</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, kernel <span class="op">=</span> <span class="va">kernel</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]      [,2]      [,3]      [,4]      [,5]      [,6]      [,7]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.2533098 0.3084419 0.3185849 0.2401917 0.3411557 0.2806674 0.3648612</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.3164349 0.3805883 0.4082054 0.3271450 0.4362716 0.3505900 0.4640531</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.3175922 0.4292610 0.5222930 0.3948508 0.4605427 0.3966614 0.4671038</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.3206128 0.3970048 0.4726342 0.3686938 0.4459701 0.4614853 0.5265974</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.3331641 0.4115058 0.4830221 0.3881504 0.4697357 0.4429280 0.5074521</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.3617782 0.4360711 0.4556576 0.4388206 0.5320050 0.4890340 0.5066934</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.3903083 0.4747682 0.4230336 0.4291086 0.4770323 0.4179326 0.4340502</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.4901454 0.6627977 0.5795527 0.5727733 0.5785116 0.5580233 0.4502386</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.4727276 0.6642159 0.5586605 0.5218522 0.5288282 0.5333116 0.4732406</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.3191731 0.4909455 0.4371620 0.4321864 0.4331412 0.4004498 0.2888696</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.2285926 0.2951474 0.2763311 0.2372036 0.2985669 0.2820163 0.3574262</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.3027311 0.3843756 0.3394490 0.3145925 0.3897613 0.4031863 0.4949989</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.3687406 0.4543967 0.2874890 0.3156626 0.3555754 0.4911681 0.4091207</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.4773641 0.5965926 0.4031947 0.3954769 0.3529333 0.4722018 0.4303290</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.5000832 0.6907276 0.5679706 0.5279750 0.4893596 0.5271352 0.5360728</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.3974991 0.6391141 0.6899843 0.6067384 0.5473578 0.4899447 0.6583965</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.2924307 0.4767984 0.5583493 0.4510320 0.4555969 0.3713118 0.5743569</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.2777646 0.4330394 0.4395382 0.4289817 0.4110808 0.4182516 0.5503627</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.2972601 0.4757979 0.3589176 0.4791076 0.4618566 0.4816549 0.4401215</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.1888714 0.3337978 0.2574628 0.4190167 0.3984089 0.4372688 0.3455227</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            [,8]      [,9]     [,10]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.4205809 0.4806399 0.3384026</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.5058110 0.6162341 0.4070726</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.4697774 0.5813912 0.4147547</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.5529982 0.5383365 0.3492440</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.6320822 0.5832406 0.4087580</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.6581145 0.5811060 0.3831643</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.5579984 0.5332295 0.3711589</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.4981883 0.5471225 0.4291281</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.4363904 0.5120504 0.3946519</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.2358503 0.3370835 0.2907867</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.3156938 0.3350045 0.2082362</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.4864994 0.5086019 0.3316020</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.4915868 0.4460993 0.3679924</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.5858833 0.5601644 0.3975677</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.5878059 0.5781569 0.3807547</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.6287471 0.6136441 0.3189849</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.5520795 0.5290815 0.2866641</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.6058640 0.5902536 0.3294094</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.4451678 0.5354335 0.3608133</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.2825306 0.3493058 0.2254005</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
@@ -202,7 +202,7 @@ values, <code>sizeof(double) * (ncol + kernel_ncol) * (nrow + kernel_nrow/2)</co
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>
