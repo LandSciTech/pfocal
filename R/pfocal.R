@@ -69,7 +69,7 @@ pfocal <- function(data, kernel, edge_value = 0, transform_function = "MULTIPLY"
     raster::values(data) <- data_transformed
     return(data)
   }  else if (methods::is(data, "SpatRaster")){
-    data_matrix <- terra::as.matrix(data)
+    data_matrix <- terra::as.matrix(data, wide = TRUE)
     data_transformed <- pfocal.matrix(
       data_matrix, kernel, edge_value, transform_function,
       reduce_function, mean_divider, variance,
@@ -84,7 +84,7 @@ pfocal <- function(data, kernel, edge_value = 0, transform_function = "MULTIPLY"
       na.rm, mp, debug_use_r_implementation, ...
     ))
   } else {
-    stop('unsupported type, x must be a "matrix", "RasterLayer" or a "stars"')
+    stop('unsupported type, x must be a "matrix", "RasterLayer", "SpatRaster", or "stars"')
   }
 }
 
